@@ -6,13 +6,13 @@ Este repositorio es creado con un propósito único: compartir los trabajos real
 
 ## **📁 Contenido del Repositorio**
 
-   ** - 📝 Ejercicios prácticos de Python.**
+   **- 📝 -Ejercicios prácticos de Python.**
 
-   ** - 🔧 Soluciones a problemas cotidianos con código.**
+   **- 🔧 Soluciones a problemas cotidianos con código.**
 
-   ** - 🚀 Proyectos educativos para entender conceptos avanzados.**
+   **- 🚀 Proyectos educativos para entender conceptos avanzados.**
 
-   ** - 📖 Documentación y notas sobre el aprendizaje.**
+   **- 📖 Documentación y notas sobre el aprendizaje.**
 
 ## **🎯 Objetivo**
 
