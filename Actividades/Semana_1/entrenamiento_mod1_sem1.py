@@ -41,11 +41,9 @@ while True:
         discount = float(multi * percent / 100)
         # A data type is created to perform a subtraction and show the total amount that the person should pay.
         total = float(multi - discount)
-        # Python statement to display a number with 2 decimal places.
-        numRed = round(total, 2)
 
         # Message to show the total result of the product with its name.
-        print(f"The discount of {percent}% on <{name}> is: {discount} and total price is: {numRed}")
+        print(f"The discount of {percent}% on <{name}> is: {discount:.2f} and total price is: {total:.2f}")
         print("Thanks for you purcharse!!!")
 
         break
