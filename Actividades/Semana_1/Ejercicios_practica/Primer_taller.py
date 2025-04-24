@@ -134,3 +134,18 @@ if not (n1==n2):
 else:
     print("first number is same than second number")
 """
+# Exercise 19: Create a program that ask the user for three numbers, calculate the average and display the result.
+"""
+n1=int(input("Enter the first number: "))
+n2=int(input("Enter the second number: "))
+n3=int(input("Enter the third number: "))
+print(f"Result is: {((n1 + n2 + n3)/3):.2f}")
+"""
+# Exercise 20: Create a program that ask the user for integer one and displays whether the number is divisible by 5(Using the module % and comparison operators).
+"""
+n1=int(input("Enter the first number: "))
+if n1 % 5 == 0:
+    print("Number is divisible by 5")
+else:
+    print("ERROR! Number is not divisible by 5")
+"""
