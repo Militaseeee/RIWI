@@ -107,3 +107,30 @@ n1=int(input("Enter the first number: "))
 n2=int(input("Enter the second number: "))
 print("The first number is less than or equal to the second" * (n1 <= n2))
 print("The second number is less than or equal to the second" * (n2 > n1))
+# Exercise 16: Create a program that ask the user for two numbers and display whether(if) both are greater than 10 (Use the logical operator and).
+"""
+n1=int(input("Enter the first number: "))
+n2=int(input("Enter the second number: "))
+if n1>=10 and n2>=10:
+    print(f"{n1} {n2} numbers are greater than 10")
+else:
+    print("The numbers are diferents")
+"""
+# Exercise 17: Create a program that ask the user for two numbers and display if at least one is greater than 10 (Use the logical operator or).
+"""
+n1=int(input("Enter the first number: "))
+n2=int(input("Enter the second number: "))
+if n1>=10 or n2>=10:
+    print("first number is greater than 10" * (n1>=10) + "Second number is greater than 10" *(n2>=10))
+else:
+    print("NO numbers are same than 10")
+"""
+# Exercise 18: Create a program that ask the user for two numbers and display if the first number is NOT equal to the second number (Use the logical operator not combined with comparison).
+"""
+n1=int(input("Enter the first number: "))
+n2=int(input("Enter the second number: "))
+if not (n1==n2):
+    print("first number is different than second number" )
+else:
+    print("first number is same than second number")
+"""
