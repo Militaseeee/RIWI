@@ -42,3 +42,39 @@ print(f"The amount of area of triangle is greater than 12 is: {cont}")
 # 3. Points on the Cartesian Plane
 # Write a program that prompts you for coordinates (x, y) and determines how many points are in each quadrant (I, II, III, IV).
 # Note: At startup, the program should prompt you for the number of points to process.
+
+n = int(input("Enter the number of points to process: "))
+
+quadrant_I = 0
+quadrant_II = 0
+quadrant_III = 0
+quadrant_IV = 0
+
+for i in range(n):
+    print(f"\nPoint #{i + 1}")
+    x = float(input("Enter x coordinate: "))
+    y = float(input("Enter y coordinate: "))
+    
+    print(f"You entered the coordinate ({x},{y})\n")
+    
+    if x != 0 and y != 0:
+        if x > 0 and y > 0:
+            quadrant_I += 1
+            print("The coordinate is in quadrant I")
+        elif x < 0 and y > 0:
+            quadrant_II += 1
+            print("The coordinate is in quadrant II")
+        elif x < 0 and y < 0:
+            quadrant_III += 1
+            print("The coordinate is in quadrant III")
+        elif x > 0 and y < 0:
+            quadrant_IV += 1
+            print("The coordinate is in quadrant IV")
+    else:
+        print("The coordinate is on an (AXIS) or at the (CENTER) of the cartesian plane")
+
+print("\n--- Results ---")
+print(f"Quadrant I: {quadrant_I}")
+print(f"Quadrant II: {quadrant_II}")
+print(f"Quadrant III: {quadrant_III}")
+print(f"Quadrant IV: {quadrant_IV}")
