@@ -2,16 +2,13 @@
 opc: int = 0
 intentos = 3  # Cantidad de números máximos que permite hacer el programa
 i = 0  # Contador de intentos para finalizar el programa
-
 comprobar: bool = True
-
 
 print("-----------------------------------------------------------------")
 print("- - - Actividad: Desafío de calificaciones y estadísticas - - -")
 print("-----------------------------------------------------------------")
 print("\n Bienvenido al programa de calificaciones y estadísticas \n")
 print("-----------------------------------------------------------------")
-
 
 while comprobar:
     print("\n Menú: \n")
@@ -35,14 +32,14 @@ while comprobar:
         while intentos_cal > 0 and opc1:
             cal_num = float(input("Ingresa una calificación númerica (0 al 100): "))
 
-            if cal_num >= 0 or cal_num <= 100:
+            if cal_num >= 0 and cal_num <= 100:
                 if cal_num >= 60:
                     print("Aprobaste la materia, FELICIDADES")
                     break
                 else:
                     print("Reprobaste la materia, debes RECUPERARLA")
-                    break
                     opc1 = True
+                    break
             else:
                 intentos_cal -= 1
 
@@ -72,7 +69,7 @@ while comprobar:
         print("  Elegiste la opción 2: Calcular el promedio")
         print("************************************************************\n")
 
-        notas = str(input("Ingresa las calificaciones para calcular el promedio. Sepáralas por comas (ejemplo: 2, 25,57,80,5):\n "))
+        notas = str(input("Ingresa las calificaciones para calcular el promedio. Sepáralas por comas (ejemplo: 2,25,57,80,5):\n "))
         print("")
 
         for i in notas:
@@ -86,7 +83,7 @@ while comprobar:
                 concatenar = ""
         cal_pro.append(concatenar)
 
-        prom_int: list[float] = [float(x) for x in cal_pro]
+        prom_int: list[float] = [float(x) for x in cal_pro] # Convertir cada texto a float
 
         print(f"Las notas que ingresaste son: {prom_int}")
 
@@ -94,7 +91,7 @@ while comprobar:
             suma += i
         
         print(suma)
-        promedio = suma/ len(prom_int)
+        promedio = suma/ len(prom_int) # len() -> Cuenta cuántos datos hay
 
         print(promedio)
 
@@ -107,28 +104,83 @@ while comprobar:
         cal_pro: list[float] = [12.4, 20.3, 45.3, 39, 58, 64.3, 99.99, 70.1, 80]
         contador: int = 0
         x = 0
+        intentos_cal = 3
+        opc2: bool = True
 
         print("\n************************************************************")
         print("Elegiste la opción 3: Contar calificaciones mayores que un valor específico (0 al 100)")
         print("************************************************************\n")
+        
+        while intentos_cal > 0 and opc2:
+            
+            val_num = float(input("Ingresa una nota para comparar tú nota con las notas del sistema: "))
 
-        val_num = float(input("Ingresa una nota para comparar tú nota con las notas del sistema: "))
+            if val_num >= 0 and val_num <= 100:
+                
+                contador = 0
+                
+                for i in cal_pro:
+                    if i >= val_num:
+                        print(f"\n{contador + 1}. La nota {i} es mayor que -> {val_num}")
+                        contador += 1
 
-        for i in cal_pro:
-            if i >= val_num:
-                print(f"\n{contador + 1}. La nota {i} es mayor que -> {val_num}")
-                contador += 1
+                print("\n________________________________________________")
+                print(f"\n     Hay {contador} notas mayores a la nota de: {val_num}")
+                print("________________________________________________\n")
+                opc2 = True
+                break
+            else:
+                intentos_cal -= 1
 
-        print("\n________________________________________________")
-        print(f"\n     Hay {contador} notas mayores a la nota de: {val_num}")
-        print("________________________________________________\n")
+                if intentos_cal > 0:
+                    print("\n Error, la calificación debe estar entre 0 y 100")
+                    print(f"\n Tienes {intentos_cal} intentos")
+                else:
+                    print("\n**********************************************")
+                    print("   ¡¡¡ Se agotó la cantidad de intentos !!!")
+                    print("********************************************** \n")
 
         comprobar = False
         break
+
     elif opc == "4":
-        print(
-            "\n Elegiste la opción 4: Verificar y contar calificaciones específicas \n"
-        )
+        print("\n************************************************************")
+        print("Elegiste la opción 4: Verificar y contar calificaciones específicas \n")
+        print("************************************************************\n")
+        
+        calificaciones: list[float] = []
+        # cal_especifica:float = 0.0
+        notas_ing = 0.0
+        i = 0
+        concatenar_ing = ""
+        nota_esp:int = 0
+        contador: int = 0
+        x:int = 0
+        
+        notas_ing = str(input("Ingresa las calificaciones para calcular el promedio. Sepáralas por comas (ejemplo: 2,25,57,80,5):\n "))
+        print("")
+        
+        for i in notas_ing:
+            if i  != ",":
+                concatenar_ing = concatenar_ing.__add__(i)
+                continue
+            else:
+                calificaciones.append(concatenar_ing)
+                concatenar_ing = ""
+        calificaciones.append(concatenar_ing)
+        
+        # print(f"Las notas que ingresaste son: {calificaciones}")
+        
+        comparar: list[float] = [float(x) for x in calificaciones] # Convertir cada texto a float
+        
+        nota_esp = int(input("Ingresa una calificación específica que deseas verificar: "))
+        
+        for i in comparar:
+            if nota_esp == i:
+                contador += 1
+                
+        print(f"\n La calificación {nota_esp} se repitió {contador} veces")    
+                
         comprobar = False
         break
     elif opc == "5":
