@@ -257,3 +257,77 @@ else:
 # - Si hay descuentos
 # - Presupuesto del usuario
 #  💡 Luego indica si la compra es recomendable o no.
+"""   
+# Opcion 1
+print("Welcome, this is a system where I recommend a product for you to buy \n")
+product = str(input("Which product would you like to buy?: "))
+price = float(input("What is you price?: "))
+discount = int(input("How much is the discount?: "))
+budget = float(input("Please enter your budget: "))
+
+final_price = price - (price * discount / 100)
+
+if final_price >= 200000 and discount >= 30:
+    print(f"{product} is a good deal \n")
+    if budget >= final_price:
+        print(f"You can buy {product}!")
+    else:
+        print("You can't buy this product, your budget is too low.")
+else:
+    print("This product is not a good deal.")
+# Opcion 2
+print("Welcome! This system helps you decide if you should buy a product.\n")
+product = input("Which product would you like to buy?: ")
+price = float(input("What is the price?: "))
+discount = int(input("How much is the discount (in %)? : "))
+budget = float(input("Please enter your budget: "))
+
+final_price = price - (price * discount / 100)
+print(f"\nThe final price of {product} after a {discount}% discount is: {final_price}")
+if final_price <= budget:
+    print(f"Good news! You can buy the {product}.")
+    if discount >= 20:
+        print("This is a good deal!")
+    else:
+        print("But the discount is small.")
+else:
+    print(f"Sorry, you can't buy the {product}. Your budget is too low.")
+"""   
+# 🔹 🔟 Evaluador de contraseñas seguras 🔑
+# Diseña un programa que verifique si una contraseña es segura.
+# Debe cumplir con:
+# 
+# Al menos 8 caracteres
+# Incluir números y letras
+# No contener espacios
+# 🛡️ Dale retroalimentación al usuario sobre cómo mejorar su contraseña.
+"""   
+password = input("Input a password: ")
+# Verificar si la contraseña tiene al menos 8 caracteres
+if len(password) >= 8:
+    letter = False  # Variable para verificar si tiene letras
+    number = False  # Variable para verificar si tiene números
+    spaces = False  # Variable para verificar si tiene espacios
+
+    # Recorrer cada carácter de la contraseña
+    for char in password:
+        if char.isalpha():  # Si el carácter es una letra
+            letter = True
+        if char.isdigit():  # Si el carácter es un número
+            number = True
+        if char == " ":  # Si el carácter es un espacio
+            spaces = True
+    # Verificar las condiciones
+    if letter and number and not spaces:
+        print("Password is secure!")
+    else:
+        # Dar retroalimentación sobre lo que falta
+        if not letter:
+            print("The password must contain at least one letter")
+        if not number:
+            print("The password must contain at least one number")
+        if spaces:
+            print("The password must not contain spaces")
+else:
+    print("The password must be at least 8 characters long")
+"""   
