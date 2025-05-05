@@ -267,26 +267,35 @@ def main():
 main() """
 # 9. Function to generate the Fibonacci sequence
 # Create a function called fibonacci that generates the first n terms of the Fibonacci sequence.
-
+"""
 def fibonacci():
-
     num:int = 0
     fibo: int = 0
     num2:int = 1
 
-
     for i in range(0, 10):
-
+        print(num)
 
         num = num2 + fibo
-        
-        
-
-    print(num)
-
-    
+        fibo = num2  # Actualizar fibo
+        num2 = num   # Actualizar num2    
 
 def main():
-    print(fibonacci())
+    fibonacci()
+    
+main()
+"""
+# 10. Function to convert Celsius to Fahrenheit
+# Define a function called celsius_to_fahrenheit that converts degrees Celsius to Fahrenheit (formula: (C × 9/5) + 32).
 
+def celsius_to_fahrenheit(celsius:float):
+    
+    formula:float = 0.0
+    formula = (celsius * (9/5) + 32) 
+    return formula
+    
+def main():
+    celsius = float(input("Enter degrees Celsius for converts a Fahrenheit: "))
+    print(celsius_to_fahrenheit(celsius))
+    
 main()
