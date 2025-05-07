@@ -267,59 +267,5 @@ def main():
     print(show_disctionary())
 main()
 
-"""
-def show_disctionary():
-    dic1 = {
-        "persona": {"nombre": "Ana"}
-    }
-
-    # Diccionario vacío para almacenar el resultado
-    concatenate = {}
-
-    # Recorremos el diccionario original
-    for key in dic1:
-        value = dic1[key]  # Obtenemos el valor correspondiente a cada clave
-
-        # Intentamos recorrer el "valor" del diccionario
-        if type(value) == dict:  # Sin usar isinstance o in, simplemente lo comparamos con un diccionario
-            for sub_key in value:
-                sub_value = value[sub_key]  # Obtenemos el valor asociado a esa subclave
-                # Unimos la clave principal con la subclave para formar la nueva clave
-                concatenate[key + "_" + sub_key] = sub_value
-        else:
-            # Si el valor no es un diccionario, lo agregamos directamente
-            concatenate[key] = value
-
-    return concatenate
-
-def main():
-    print(show_disctionary())
-
-main()
-"""
 
 
-# MIRARRRR
-
-"""
-def show_dictionary():
-    dic1 = {"persona": {"nombre": "Ana", "edad": 30}, "ciudad": "Madrid"}
-    
-    concatenate = {}
-
-    for key, value in dic1.items():
-        nueva_clave = f'{key}'  # Mantener la clave original si no hay anidamiento
-        if isinstance(value, dict):  # Comprobamos si el valor es un diccionario
-            for sub_key, sub_value in value.items():
-                concatenate[key + "_" + sub_key] = sub_value  # Concatenamos las claves con "_"
-        else:
-            concatenate[key] = value  # Si no es un diccionario, agregamos el valor directamente
-
-    return concatenate
-
-def main():
-    print(show_dictionary())
-
-main()
-
-"""
