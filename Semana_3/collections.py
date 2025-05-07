@@ -263,3 +263,45 @@ main()
 # 9. Dictionary from list of tuples
 # Convert a list of (key, value) tuples into a dictionary.
 # Example: [(“a”, 1), (“b”, 2), (“c”, 3)] → {“a”: 1, “b”: 2, “c”: 3}
+"""
+def show_list():
+    tuple_list = [("a", 1), ("b", 2), ("c", 3)]
+    dictionary = {}
+    i:int = 0
+    key:str = ""
+
+    # Opcion 1
+    for key, i in tuple_list:
+        dictionary[key] = i
+    print(dictionary)
+    
+    # Opcion 2
+    # Convertir la lista de tuplas en un diccionario
+    dictionary = dict(tuple_list)
+    print(dictionary)
+
+def main():
+    show_list()
+
+main()
+"""
+# 10. Sort list of tuples by element
+# Sort a list of tuples in ascending order based on the second element of each tuple.
+# Example: [(1, 4), (3, 2), (5, 1)] → [(5, 1), (3, 2), (1, 4)]
+
+def show_list():
+    list_tuple = [(1,4),(3,2),(5,1)]
+    i:int = 0
+    tupla_new = [ ]
+
+
+    for i in range(len(list_tuple)- 1, -1, -1):
+        tupla_new.append(list_tuple[i]) 
+
+    print(tupla_new)
+    
+
+def main():
+    show_list()
+
+main()
