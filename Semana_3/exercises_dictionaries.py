@@ -244,28 +244,85 @@ main()
 # 8. Aplanar diccionario anidado​
 # Convierte un diccionario anidado en uno plano con claves compuestas.​
 # Ejemplo: {"persona": {"nombre": "Ana"}} → {"persona_nombre": "Ana"}.​
-
+"""
 def show_disctionary():
 
-    dic1 = {
-        "persona": {"nombre": "Ana"}
-    }
-
+    dic1 = {"persona": {"nombre": "Ana"}}
     concatenate = { }
 
-    for key, value in dic1.items():
-        # el dict (abreviatura de diccionario) es una estructura de datos que permite almacenar pares de clave-valor. 
-        if type(value) == dict: # Comprobamos si el valor es un diccionario sin usar isinstance
-            for sub_key, sub_value in value.items():
-                concatenate[key + "_" + sub_key] = sub_value  # Unimos las claves con "_"
-        else:
-            concatenate[key] = value  # Si no es un diccionario, agregamos normalmente
-
+    for key1 in dic1:
+        value1 = dic1[key1]
+        for key2 in value1: # Aquí asumimos que valor1 es un diccionario
+            value2 = value1[key2]
+            new_class = key1 + "_" + key2
+            concatenate[new_class] = value2 
     return concatenate
         
 def main():
     print(show_disctionary())
 main()
+"""
+# 9. Ordenar diccionario por valor​
+# Ordena las claves de un diccionario por sus valores (ascendente o descendente).​
+# Ejemplo: {"A": 150, "B": 80} → {"B": 80, "A": 150} (ascendente).​
+"""
+# Opcion 1
+def show_disctionary():
+    dic1 = {"A": 150, "B": 80, "C": 200, "D": 500}
 
+    # Convertimos a lista de tuplas (clave, valor)
+    items = list(dic1.items())
 
+    # Ordenamiento tipo burbuja
+    for i in range(len(items)):
+        for j in range(0, len(items) - i - 1):
+            if items[j][1] > items[j + 1][1]:
+                # Intercambiamos
+                items[j], items[j + 1] = items[j + 1], items[j]
 
+    # Volvemos a convertir a diccionario
+    finish = {}
+    for key, value in items:
+        finish[key] = value
+    
+    return finish
+
+def main():
+    print(show_disctionary())
+main()
+"""
+# Opcion 2
+"""
+dic1 = {"A": 150, "B": 80, 'C':180, 'E':500, 'D' : 100}
+dic_line = {}
+save_list = []
+for i in dic1.values():
+    save_list.append(i)
+longitud = len(save_list)
+for i in range(longitud):
+    numeroMayor = max(save_list)
+    for key,value in dic1.items():
+        if value == numeroMayor:
+            dic_line[key] = value
+            save_list.remove(numeroMayor)
+            break
+print(dic_line)
+"""
+# Opcion 3
+"""
+dic1 = {"A": 150, "B": 80, 'C':180, 'E':500, 'D' : 100}
+dic_line = {}
+save_list = list(dic1.values())
+longitud = len(save_list)
+for i in range(longitud):
+    numeroMayor = max(save_list)
+    for key,value in dic1.items():
+        if value == numeroMayor:
+            dic_line[key] = value
+            save_list.remove(numeroMayor)
+            break
+print(dic_line)
+"""
+# 10. Validar claves comunes entre diccionarios​
+# Verifica si dos diccionarios tienen al menos una clave en común.​
+# Ejemplo: {"a": 1} y {"b": 2} → False; {"a": 1} y {"a": 2} → True.
