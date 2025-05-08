@@ -326,3 +326,18 @@ print(dic_line)
 # 10. Validar claves comunes entre diccionarios​
 # Verifica si dos diccionarios tienen al menos una clave en común.​
 # Ejemplo: {"a": 1} y {"b": 2} → False; {"a": 1} y {"a": 2} → True.
+
+def show_disctionary():
+    dic1 = {"a": 1}
+    dic2 = {"b": 2}
+    
+    for key1 in dic1:
+        if key1 in dic2:
+            return True 
+    
+    return False
+
+
+def main():
+    print(show_disctionary())
+main()
