@@ -38,14 +38,9 @@ def evaluar_tipo_numerico(numero_ingresado: str, tipo: type):
 # Función para agregar los productos
 def agregar_productos(inventario_productos, nombre, precio, cantidad):
 
-    productos = {
-        "nombre": nombre,
-        "precio": precio,
-        "cantidad": cantidad
-    }
-    inv = {"nombre":(precio, cantidad)}
-    inventario_productos.append(productos)
-    print(f"\nEl producto '{nombre}' ha sido agregado con éxito.\n")
+    inventario_productos[nombre] = (precio, cantidad)
+    
+    print(f"\nEl producto '{inventario_productos[nombre]}' ha sido agregado con éxito.\n")
     
 
 
@@ -55,7 +50,7 @@ def menu():
     intentos = 3  # Cantidad de números máximos que permite hacer el programa
     i = 0         # Contador de intentos para finalizar el programa
     comprobar: bool = True
-    inventario_productos = [] # Los poductos que tendre en el inventario
+    inventario_productos = {} # Los poductos que tendre en el inventario
         
     print("-----------------------------------------------------------------")
     print("- - - Actividad: Gestión de inventarios con funciones y colecciones - - -")
