@@ -91,6 +91,28 @@ def eliminar_producto(inventario_productos, nombre):
     else:
         print(f"\nEl producto '{nombre}', no existe en el inventario")
 
+
+def Calcular_valor_total(inventario_productos):
+
+    total_inventario:float = 0.0
+    
+    if not inventario_productos:
+
+        print("\n__________ ¡¡¡ ADVERTENCIA !!! __________\n")
+        print("El inventario se encuentra vacío :c")
+
+    else:
+
+        for i, (precio, cantidad) in inventario_productos.items():
+
+            precio, cantidad = inventario_productos[i]
+
+            multiplicar_cantidad = lambda canti, pre: canti * pre
+
+            total_inventario += multiplicar_cantidad(cantidad, precio)
+        print(f"EL total de todo el inventario es: {total_inventario}")
+    
+
 def menu():
     
     opc: int = 0
@@ -167,9 +189,15 @@ def menu():
             continue
         
         elif opc == "5":
-            print("5")
-            comprobar = False
-            break
+
+            print("\n*****************************************")
+            print("  Elegiste la opción 5: Calcular el valor total del inventario ")
+            print("*****************************************\n")
+
+            Calcular_valor_total(inventario_productos)
+            
+            continue
+
         elif opc == "6":
             print("\n . . . Saliendo del programa . . . \n")
             comprobar = False
