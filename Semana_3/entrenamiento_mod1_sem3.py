@@ -5,7 +5,7 @@ def evaluar_producto_vacio(valor_ingresado: str, tipo: type):
 
     while not validar_producto:
 
-        valor = tipo(input(valor_ingresado)) # Mostrar mensaje del userio que ingresó
+        valor = tipo(input(valor_ingresado)) # Mostrar mensaje del usuario que ingresó
         valor = valor.strip().lower()
         if valor == "":
             print("\n__________ ¡¡¡ ADVERTENCIA !!! __________")
@@ -35,14 +35,63 @@ def evaluar_tipo_numerico(numero_ingresado: str, tipo: type):
             print("--------------------------------------------\n")
 
 
+def ver_lista_productos(inventario_productos):
+    
+    print("------------------------------------------------------------")
+    print("-> PRODUCTOS EN EL INVENTARIO: \n")
+    for nombre, (precio, cantidad) in inventario_productos.items():
+        precio, cantidad = inventario_productos[nombre]
+        print(f" - {nombre} | Precio = {precio} | Cantidad = {cantidad}")
+    print("------------------------------------------------------------")
+    
+    
 # Función para agregar los productos
 def agregar_productos(inventario_productos, nombre, precio, cantidad):
 
     inventario_productos[nombre] = (precio, cantidad)
+    print("\n------------------------------------------------------------------------------------")
+    print("-> AGREGAR: ")
+    print(f"\nEl producto '{nombre}' con precio '{precio}' y con una cantidad de '{cantidad}' ha sido agregado con éxito")
+    print("------------------------------------------------------------------------------------")
+     
+     
+def consultar_productos(inventario_productos, nombre):
     
-    print(f"\nEl producto '{inventario_productos[nombre]}' ha sido agregado con éxito.\n")
+    print("\n------------------------------------------------------------------------------------")
+    print("-> BUSCADOR: ")
+    if nombre in inventario_productos:
+        print(f"\nEl nombre del producto '{nombre}', tiene un precio de '{inventario_productos[nombre][0]}' y con una cantidad de '{inventario_productos[nombre][1]}'")
+    else:
+        print(f"\nEl producto '{nombre}' no existe en el inventario")   
+    print("------------------------------------------------------------------------------------")
+    # return precio, cantidad
     
+    
+def actualizar_precio(inventario_productos, nombre):  
+    
+    nuevo_precio:float = 0
+    operacion = 0
+    
+    
+    if nombre in inventario_productos.items():
+        nuevo_precio = evaluar_tipo_numerico("Ingresa el nuevo precio que desees cambiar para el producto: ", float)
+        operacion = inventario_productos[nombre][nuevo_precio][1]
+        nuevo_precio = operacion
+        print("\n------------------------------------------------------------------------------------")
+        print("-> ACTUALIZAR: ")
+        print(f"\nEl producto '{nombre}' ahora tiene un nuevo precio de '{nuevo_precio}'") #y con una cantidad de '{cantidad}'
+        print("------------------------------------------------------------------------------------")
+    else:
+        print(f"\nEl producto '{nombre}' no existe en el inventario")
 
+
+def eliminar_producto(inventario_productos, nombre):
+    
+    if nombre in inventario_productos:
+        del inventario_productos[nombre]
+        print("\nEl producto fue eliminado correctamente!")
+    else:
+        print(f"\nEl producto '{nombre}', no existe en el inventario")
 
 def menu():
     
@@ -59,7 +108,7 @@ def menu():
     print("-----------------------------------------------------------------")
 
     while comprobar:
-        print("\n Menú: \n")
+        print("\n ****** MENÚ: ****** \n")
         print("1. Añadir productos:")
         print("2. Consultar productos")
         print("3. Actualizar precios")
@@ -80,21 +129,45 @@ def menu():
             cantidad = evaluar_tipo_numerico("Ingresa cuantos productos quiere llevar: ", int)
             agregar_productos(inventario_productos,nombre, precio, cantidad)
                 
-            print(inventario_productos)
             continue
                     
         elif opc == "2":
-            print("2")
-            comprobar = False
-            break
+            
+            print("\n*****************************************")
+            print("  Elegiste la opción 2: Consultar productos ")
+            print("*****************************************\n")
+            
+            nombre = evaluar_producto_vacio("Ingresa el nombre del producto que desees buscar: ", str)
+            consultar_productos(inventario_productos, nombre)
+            
+            continue
+        
         elif opc == "3":
-            print("3")
-            comprobar = False
-            break
+            
+            print("\n*****************************************")
+            print("  Elegiste la opción 3: Actualizar precios ")
+            print("*****************************************\n")
+            
+            ver_lista_productos(inventario_productos)
+            
+            nombre = evaluar_producto_vacio("\nIngresa el nombre del producto que deseas actualizar: ", str)
+            actualizar_precio(inventario_productos, nombre)
+            
+            continue
+        
         elif opc == "4":
-            print("4")
-            comprobar = False
-            break
+            
+            print("\n*****************************************")
+            print("  Elegiste la opción 4: Eliminar productos ")
+            print("*****************************************\n")
+            
+            ver_lista_productos(inventario_productos)
+            
+            nombre = evaluar_producto_vacio("\nIngresa el nombre del producto que deseas eliminar: ", str)
+            eliminar_producto(inventario_productos, nombre)
+            
+            continue
+        
         elif opc == "5":
             print("5")
             comprobar = False
