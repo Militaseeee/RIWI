@@ -70,16 +70,14 @@ def consultar_productos(inventario_productos, nombre):
 def actualizar_precio(inventario_productos, nombre):  
     
     nuevo_precio:float = 0
-    operacion = 0
     
-    
-    if nombre in inventario_productos.items():
+    if nombre in inventario_productos:
         nuevo_precio = evaluar_tipo_numerico("Ingresa el nuevo precio que desees cambiar para el producto: ", float)
-        operacion = inventario_productos[nombre][nuevo_precio][1]
-        nuevo_precio = operacion
+        cantidad_existente = inventario_productos[nombre][1]
+        inventario_productos[nombre] = (nuevo_precio, cantidad_existente)
         print("\n------------------------------------------------------------------------------------")
         print("-> ACTUALIZAR: ")
-        print(f"\nEl producto '{nombre}' ahora tiene un nuevo precio de '{nuevo_precio}'") #y con una cantidad de '{cantidad}'
+        print(f"\nEl producto '{nombre}' ahora tiene un nuevo precio de '{nuevo_precio}' y con una cantidad de '{cantidad_existente}'") 
         print("------------------------------------------------------------------------------------")
     else:
         print(f"\nEl producto '{nombre}' no existe en el inventario")
