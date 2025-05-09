@@ -1,223 +1,223 @@
-# Función para evaluar si el nompre del producto no esté vacío
-def evaluar_producto_vacio(valor_ingresado: str, tipo: type):
+# Function to evaluate if the product name is not empty
+def evaluate_empty_product(value_input: str, type: type):
 
-    validar_producto = False 
+    validate_product = False # Initialize the control variable as False 
 
-    while not validar_producto:
+    while not validate_product:
 
-        valor = tipo(input(valor_ingresado)) # Mostrar mensaje del usuario que ingresó
-        valor = valor.strip().lower()
-        if valor == "":
-            print("\n__________ ¡¡¡ ADVERTENCIA !!! __________")
-            print(f"\nEl nombre del producto no debe quedar vacío {valor}\n")
+        value = type(input(value_input)) # Show user input message
+        value = value.strip().lower()  # Remove whitespace and convert to lowercase
+        if value == "":
+            print("\n__________ ¡¡¡ WARNING !!! __________")
+            print(f"\nThe product name must not be empty {value}\n")
         else:
-            return valor # Retorna la función aquí si esta vacio
+            return value # Return the value here if it is not empty
 
+# Function to evaluate the price and quantity where the user cannot enter a letter or a negative number
+def evaluate_numeric_type(input_prompt: str, data_type: type):
 
-# Función para evaluar el precio y la cantidad donde el usuario no puede ingresar una letra
-def evaluar_tipo_numerico(numero_ingresado: str, tipo: type):
+    validate_num = False 
 
-    validar_num = False 
-
-    while not validar_num:
+    while not validate_num:
 
         try:
-            valor = tipo(input(numero_ingresado)) # Convertir la entrada al tipo que se necesite
-            
-            if valor < 0:
-                print("\n_____________ ¡¡¡ ADVERTENCIA !!! _____________")
-                print(f"\nEl valor debe ser mayor que cero y pusiste: {valor}\n")
+            value = data_type(input(input_prompt))  # Requests the input of a value of the specified type (float or int)
+            if value < 0:
+                print("\n_____________ !!! WARNING !!! _____________")
+                print(f"\nThe value must be greater than zero, but you entered: {value}\n")
             else:
-                return valor  # Retorna el valor solo si es válido
+                return value  # Return the value only if it is valid
         except ValueError:
             print("\n--------------------------------------------")
-            print("Por favor, ingresa un valor numérico válido")
+            print("Please enter a valid numeric value")
             print("--------------------------------------------\n")
 
-
-def ver_lista_productos(inventario_productos):
+# Function to display all the products entered in a list
+def view_product_list(product_inventory):
     
     print("------------------------------------------------------------")
-    print("-> PRODUCTOS EN EL INVENTARIO: \n")
-    for nombre, (precio, cantidad) in inventario_productos.items():
-        precio, cantidad = inventario_productos[nombre]
-        print(f" - {nombre} | Precio = {precio} | Cantidad = {cantidad}")
+    print("-> PRODUCTS IN THE INVENTORY: \n")
+    for name, (price, quantity) in product_inventory.items():
+        price, quantity = product_inventory[name]  # Unpack the price and quantity of the product
+        print(f" - {name} | Price = {price} | Quantity = {quantity}")
     print("------------------------------------------------------------")
-    
-    
-# Función para agregar los productos
-def agregar_productos(inventario_productos, nombre, precio, cantidad):
+        
+# Function to add products
+def add_products(product_inventory, name, price, quantity):
 
-    inventario_productos[nombre] = (precio, cantidad)
+    product_inventory[name] = (price, quantity)  # Adds the product to the inventory with name as the key
     print("\n------------------------------------------------------------------------------------")
-    print("-> AGREGAR: ")
-    print(f"\nEl producto '{nombre}' con precio '{precio}' y con una cantidad de '{cantidad}' ha sido agregado con éxito")
+    print("-> ADD: ")
+    print(f"\nThe product '{name}' with price '{price}' and a quantity of '{quantity}' has been successfully added.")
     print("------------------------------------------------------------------------------------")
-     
-     
-def consultar_productos(inventario_productos, nombre):
+
+# Function to query product information by its name
+def search_products(product_inventory, name):
     
     print("\n------------------------------------------------------------------------------------")
-    print("-> BUSCADOR: ")
-    if nombre in inventario_productos:
-        print(f"\nEl nombre del producto '{nombre}', tiene un precio de '{inventario_productos[nombre][0]}' y con una cantidad de '{inventario_productos[nombre][1]}'")
+    print("-> SEARCHER: ")
+    # If the product exists in the inventory, show the product details, otherwise show a message
+    if name in product_inventory:
+        print(f"\nThe product '{name}' has a price of '{product_inventory[name][0]}' and a quantity of '{product_inventory[name][1]}'")
     else:
-        print(f"\nEl producto '{nombre}' no existe en el inventario")   
+        print(f"\nThe product '{name}' does not exist in the inventory")
     print("------------------------------------------------------------------------------------")
-    # return precio, cantidad
+   
+# Function to update the price of a product that already exists in the inventory
+def update_price(product_inventory, name):  
     
+    new_price: float = 0
     
-def actualizar_precio(inventario_productos, nombre):  
-    
-    nuevo_precio:float = 0
-    
-    if nombre in inventario_productos:
-        nuevo_precio = evaluar_tipo_numerico("Ingresa el nuevo precio que desees cambiar para el producto: ", float)
-        cantidad_existente = inventario_productos[nombre][1]
-        inventario_productos[nombre] = (nuevo_precio, cantidad_existente)
+    if name in product_inventory:
+        new_price = evaluate_numeric_type("Enter the new price you want to change for the product: ", float)  # Requests a new price
+        existing_quantity = product_inventory[name][1]  # Gets the existing quantity of the product
+        product_inventory[name] = (new_price, existing_quantity)  # Updates the product price
         print("\n------------------------------------------------------------------------------------")
-        print("-> ACTUALIZAR: ")
-        print(f"\nEl producto '{nombre}' ahora tiene un nuevo precio de '{nuevo_precio}' y con una cantidad de '{cantidad_existente}'") 
+        print("-> UPDATE: ")
+        print(f"\nThe product '{name}' now has a new price of '{new_price}' and a quantity of '{existing_quantity}'")  # Shows the update message
         print("------------------------------------------------------------------------------------")
     else:
-        print(f"\nEl producto '{nombre}' no existe en el inventario")
+        print(f"\nThe product '{name}' does not exist in the inventory")
 
-
-def eliminar_producto(inventario_productos, nombre):
+# Function to remove a product from the inventory
+def remove_product(product_inventory, name):
     
-    if nombre in inventario_productos:
-        del inventario_productos[nombre]
-        print("\nEl producto fue eliminado correctamente!")
+    if name in product_inventory:
+        del product_inventory[name]  # Removes the product from the inventory
+        print("\nThe product was successfully removed!")
     else:
-        print(f"\nEl producto '{nombre}', no existe en el inventario")
+        print(f"\nThe product '{name}' does not exist in the inventory")
 
+# Function to calculate the total value of the entire inventory
+def calculate_total_value(product_inventory):
 
-def Calcular_valor_total(inventario_productos):
-
-    total_inventario:float = 0.0
+    total_inventory: float = 0.0
     
-    if not inventario_productos:
+    if not product_inventory:
 
-        print("\n__________ ¡¡¡ ADVERTENCIA !!! __________\n")
-        print("El inventario se encuentra vacío :c")
+        print("\n__________ !!! WARNING !!! __________\n")
+        print("The inventory is empty :c")
 
     else:
 
-        for i, (precio, cantidad) in inventario_productos.items():
+        for i, (price, quantity) in product_inventory.items():
 
-            precio, cantidad = inventario_productos[i]
+            price, quantity = product_inventory[i]  # Gets the price and quantity of each product
 
-            multiplicar_cantidad = lambda canti, pre: canti * pre
+            multiply_quantity = lambda qty, pr: qty * pr  # Defines a lambda function that multiplies quantity by price
 
-            total_inventario += multiplicar_cantidad(cantidad, precio)
-        print(f"EL total de todo el inventario es: {total_inventario}")
+            total_inventory += multiply_quantity(quantity, price)  # Adds the value of the product to the total
+        print(f"The total value of the inventory is: {total_inventory}")
     
-
+# Function that shows the menu and allows the user to interact with the program
 def menu():
     
     opc: int = 0
-    intentos = 3  # Cantidad de números máximos que permite hacer el programa
-    i = 0         # Contador de intentos para finalizar el programa
-    comprobar: bool = True
-    inventario_productos = {} # Los poductos que tendre en el inventario
+    attempts = 3  # Maximum number of attempts allowed by the program
+    i = 0         # Counter for attempts to exit the program
+    check: bool = True # Control variable for the loop
+    product_inventory = {} # Empty dictionary to store products
         
     print("-----------------------------------------------------------------")
-    print("- - - Actividad: Gestión de inventarios con funciones y colecciones - - -")
+    print("- - - Activity: Inventory Management with functions and collections - - -")
     print("-----------------------------------------------------------------")
-    print("\n Bienvenido al programa de la tienda RIWI EXPRESS \n")
+    print("\n Welcome to the RIWI EXPRESS store program \n")
     print("-----------------------------------------------------------------")
 
-    while comprobar:
-        print("\n ****** MENÚ: ****** \n")
-        print("1. Añadir productos:")
-        print("2. Consultar productos")
-        print("3. Actualizar precios")
-        print("4. Eliminar productos")
-        print("5. Calcular el valor total del inventario")
-        print("6. Salir")
+    while check:
+        print("\n ****** MENU: ****** \n")
+        print("1. Add products:")
+        print("2. Search products")
+        print("3. Update prices")
+        print("4. Remove products")
+        print("5. Calculate total inventory value")
+        print("6. Exit")
         
-        opc = input("\nIngresa que función deseas realizar: (1-6) ")
+        opc = input("\nEnter the function you wish to perform: (1-6) ")
         
         if opc == "1":
             
             print("\n*****************************************")
-            print("  Elegiste la opción 1: Añadir productos ")
+            print("  You chose option 1: Add products ")
             print("*****************************************\n")
             
-            nombre = evaluar_producto_vacio("Ingresa el nombre del producto: ", str)
-            precio = evaluar_tipo_numerico("Ingresa el precio del producto: ", float)
-            cantidad = evaluar_tipo_numerico("Ingresa cuantos productos quiere llevar: ", int)
-            agregar_productos(inventario_productos,nombre, precio, cantidad)
+            # Calls functions to ensure no issues when entering values
+            name = evaluate_empty_product("Enter the product name: ", str)
+            price = evaluate_numeric_type("Enter the product price: ", float)
+            quantity = evaluate_numeric_type("Enter how many products you want: ", int)
+            # Calls the function to add products
+            add_products(product_inventory, name, price, quantity)
                 
             continue
                     
         elif opc == "2":
             
             print("\n*****************************************")
-            print("  Elegiste la opción 2: Consultar productos ")
+            print("  You chose option 2: Search products ")
             print("*****************************************\n")
             
-            nombre = evaluar_producto_vacio("Ingresa el nombre del producto que desees buscar: ", str)
-            consultar_productos(inventario_productos, nombre)
+            name = evaluate_empty_product("Enter the name of the product you want to search for: ", str)
+            search_products(product_inventory, name)
             
             continue
         
         elif opc == "3":
             
             print("\n*****************************************")
-            print("  Elegiste la opción 3: Actualizar precios ")
+            print("  You chose option 3: Update prices ")
             print("*****************************************\n")
             
-            ver_lista_productos(inventario_productos)
+            # Calls the function to display the inventory list
+            view_product_list(product_inventory)
             
-            nombre = evaluar_producto_vacio("\nIngresa el nombre del producto que deseas actualizar: ", str)
-            actualizar_precio(inventario_productos, nombre)
+            name = evaluate_empty_product("\nEnter the name of the product you want to update: ", str)
+            update_price(product_inventory, name)
             
             continue
         
         elif opc == "4":
             
             print("\n*****************************************")
-            print("  Elegiste la opción 4: Eliminar productos ")
+            print("  You chose option 4: Remove products ")
             print("*****************************************\n")
             
-            ver_lista_productos(inventario_productos)
+            view_product_list(product_inventory)
             
-            nombre = evaluar_producto_vacio("\nIngresa el nombre del producto que deseas eliminar: ", str)
-            eliminar_producto(inventario_productos, nombre)
+            name = evaluate_empty_product("\nEnter the name of the product you want to remove: ", str)
+            remove_product(product_inventory, name)
             
             continue
         
         elif opc == "5":
 
             print("\n*****************************************")
-            print("  Elegiste la opción 5: Calcular el valor total del inventario ")
+            print("  You chose option 5: Calculate total inventory value ")
             print("*****************************************\n")
 
-            Calcular_valor_total(inventario_productos)
+            calculate_total_value(product_inventory)
             
             continue
 
         elif opc == "6":
-            print("\n . . . Saliendo del programa . . . \n")
-            comprobar = False
+            print("\n . . . Exiting the program . . . \n")
+            check = False
             break
         else:
             i += 1
             if i < 3:
                 print("\n**********************************************")
-                print(f"      Opción inválida, tienes {intentos - i} intentos")
+                print(f"      Invalid option, you have {attempts - i} attempts left")
                 print("**********************************************")
             else:
                 print("\n**********************************************")
-                print("   ¡¡¡ Se agotó la cantidad de intentos !!! ")
+                print("   !!! You have run out of attempts !!! ")
                 print("********************************************** \n")
 
                 print("**************************************************")
-                print("\n    S A L I E N D O   D E L   P R O G R A M A  \n")
+                print("\n    E X I T I N G   T H E   P R O G R A M  \n")
                 print("**************************************************")
 
-                comprobar = False
+                check = False
                 break
 
 menu()
