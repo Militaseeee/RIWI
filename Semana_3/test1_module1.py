@@ -42,6 +42,7 @@ def evaluate_numeric_type(input_prompt: str, data_type: type):
             print("     Please enter a valid numeric value")
             print("--------------------------------------------\n")
 
+# Function to check if the product name exists
 def check_product_exists(product_inventory, name):
 
     name_lower = name.lower()  # This part converts the product name that the user enters to lowercase
@@ -51,6 +52,7 @@ def check_product_exists(product_inventory, name):
             return True
     return False
 
+# Function to validate only two options
 def evaluate_option(number: str):
     
     evaluate_num = False 
@@ -66,6 +68,7 @@ def evaluate_option(number: str):
             print("    Invalid search option. Please select 1 or 2")
             print("---------------------------------------------------\n")
 
+# Function to give a recommendation of which would be preferable to eliminate
 def recommend_remove_product(product_inventory):
 
     recommended = False  # This part is to know if there are products with quantity 0
@@ -134,7 +137,6 @@ def search_products(product_inventory, name):
             else: 
                 print("\nOk, you can continue browsing the menu")
     print("------------------------------------------------------------------------------------\n")
-
 
 # Function to update the price of a product that already exists in the inventory
 def update_price(product_inventory, name):  
