@@ -8,6 +8,15 @@ product_inventory = {
     "soda": (2000, 0),
 }
 
+def evaluate_before_info_products(product_inventory):
+    val: bool = False
+    for name, (price, quantity) in product_inventory.items():
+        if price <=0 or quantity < 0:
+            print("\n__________ ¡¡¡ WARNING !!! __________")
+            print(f"Product '{name}' has invalid data. Price and quantitymust be positive numbers greater than zero")
+            val = True
+    return val
+
 # Function to evaluate if the product name is not empty
 def evaluate_empty_product(value_input: str, type: type):
 
@@ -334,5 +343,7 @@ def menu():
                 check = False
                 break
 
-
-menu()
+if evaluate_before_info_products(product_inventory):
+    print('Bye bye, xoxo')
+else:
+    menu()
