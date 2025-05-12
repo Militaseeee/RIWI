@@ -80,7 +80,6 @@ To show this action, the system counts all the inventory in the store and shows 
 ![Captura desde 2025-05-12 11-09-36](https://github.com/user-attachments/assets/e0cc4ad2-0a26-4803-8b87-960452005194)
 
 ---
----
 
 ##  📌 To run this program you need:
 - Python 3 or higher
