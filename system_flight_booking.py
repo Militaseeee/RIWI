@@ -1,48 +1,64 @@
 import random
 import string
 import os
+from datetime import time
 
 flight = {
     "AA-100": {
-    "Descent": "lima",
-    "Destination": "bogota",
-    "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
-    "Occupaied" : [],
-    "Calendar": (15, 30)
+        "Descent": "lima",
+        "Destination": "bogota",
+        "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
+        "Occupaied" : [],
+        "Calendar": (15, 30)
     },
     
     "XY-123": {
-    "Descent": "medellin",
-    "Destination": "berlin",
-    "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
-    "Occupaied" : [],
-    "Calendar": (9, 15)
+        "Descent": "medellin",
+        "Destination": "berlin",
+        "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
+        "Occupaied" : [],
+        "Calendar": (9, 15)
     },
 
     "WO-820": {
-    "Descent": "cartagena",
-    "Destination": "roma",
-    "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
-    "Occupaied" : [],
-    "Calendar": (18, 1)
+        "Descent": "cartagena",
+        "Destination": "roma",
+        "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
+        "Occupaied" : [],
+        "Calendar": (18, 1)
     },
 
     "JK-954": {
-    "Descent": "bogota",
-    "Destination": "budapest",
-    "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
-    "Occupaied" : [],
-    "Calendar": (23, 40)
+        "Descent": "bogota",
+        "Destination": "budapest",
+        "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
+        "Occupaied" : [],
+        "Calendar": (23, 40)
     },
 
     "FG-354": {
-    "Descent": "cali",
-    "Destination": "tokio",
-    "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
-    "Occupaied" : [],
-    "Calendar": (8, 22)
+        "Descent": "cali",
+        "Destination": "tokio",
+        "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
+        "Occupaied" : [],
+        "Calendar": (8, 22)
     }
 }
+
+# Validación de horarios al inicio
+def is_valid_time(hours, minute):
+    try:
+        time(hours, minute)
+        return True
+    except ValueError:
+        return False
+
+# OJO: Queda afuera porque quiero que se ejecute automáticamente
+# Validar todos los horarios al inicio
+for code_flight, values in flight.items():
+    hours, minutes = values["Calendar"]
+    if not is_valid_time(hours, minutes):
+        print(f"Invalid time in flight {code_flight}: {hours}:{minutes}")
 
 def view_flight_list(flight):
     
@@ -54,7 +70,7 @@ def view_flight_list(flight):
         print(f"{'Descent:':20} {values['Descent']}")
         print(f"{'Destination:':20} {values['Destination']}")
         print(f"{'Seat:':20} {values['Seat']}")
-        print(f"{'Calendar:':20} {values['Calendar']}")
+        print(f"{'Calendar:':20} {values['Calendar'][0]:02d}:{values['Calendar'][1]:02d}")
         print("-" * 45) 
 
 def reserve_seat():
@@ -104,7 +120,7 @@ def calculate_percentage(code_flight):
 
 
 
-def generate_reports(ruta_archivo, contenido):
+def generate_with_txt(file_path, content):
     """
     Genera un reporte en un archivo de texto.
 
@@ -114,21 +130,46 @@ def generate_reports(ruta_archivo, contenido):
     """
     try:
         # Crear la carpeta si no existe
-        carpeta = os.path.dirname(ruta_archivo)
-        if carpeta and not os.path.exists(carpeta):
-            os.makedirs(carpeta)
+        folder  = os.path.dirname(file_path)
+        if folder  and not os.path.exists(folder ):
+            os.makedirs(folder )
 
         # Escribir el archivo
-        with open(ruta_archivo, "w", encoding="utf-8") as archivo:
-            archivo.write(contenido)
-        print(f"Reporte generado exitosamente en: {ruta_archivo}")
+        with open(file_path, "w", encoding="utf-8") as file:
+            file.write(content)
+        print(f"Report successfully generated at: {file_path}")
     except Exception as e:
-        print(f"Error al generar el reporte: {e}")
+        print(f"Error generating the report: {e}")
 
-# Ejemplo de uso:
-ruta_del_reporte = "../Documentos/training_exercise/report.txt"  # Asegúrate de poner una extensión como .txt
-contenido_del_reporte = f"Este es el contenido del reporte.{flight}\nAquí puedes agregar más información."
-generate_reports(ruta_del_reporte, contenido_del_reporte)
+
+
+def generate_reports():
+    
+    flight_list = []
+    
+    for code_flight, values in flight.items():
+        hours, minutes = values["Calendar"]
+        flight_time = time(hours, minutes)
+        flight_list.append((flight_time, code_flight, values))
+
+    # Ordena la lista de vuelos por su horario de salida
+    flight_list.sort()
+
+    # Empieza a crear el reporte para guararlo en el txt
+    report_lines = []
+    
+    for time_dt, code_flight, values in flight_list:
+        line = (
+            f"{code_flight} - {values['Descent']} to {values['Destination']} at {time_dt.strftime('%H:%M')}, "
+            f"Available: {values['Seat']}, Occupied: {values['Occupaied']}"
+        )
+        report_lines.append(line)
+
+    # Une todos los elementos de la lista report_lines (que contiene las líneas del reporte de vuelos)
+    content = "\n".join(report_lines)
+    # Crea un archivo de texto en la ruta
+    generate_with_txt("../training_exercise/flight_report.txt", content)
+
 
 def menu():
 
@@ -139,8 +180,8 @@ def menu():
 
     while check:
 
-        print("------------------------------------------------------------")
-        print("\n\nExercise 1: Flight Reservation System\n")
+        print("\n\n------------------------------------------------------------")
+        print("Exercise 1: Flight Reservation System")
         print("------------------------------------------------------------")
 
         print("\nMenu\n")
@@ -163,10 +204,11 @@ def menu():
             continue
         elif option == "3":
             print("\nYou chose option 3: Generation of a report in a text file with flights sorted by schedule\n")
-            generate_reports("../Documentos/training_exercise/report.txt", "Este es el contenido del reporte.")
+            #generate_reports("report.txt", "Este es el contenido del reporte.")
+            generate_reports()
             continue
         elif option == "4":
-            print("\n  ... Exit of program ... ")
+            print("\n  ... Exit of program ... \n")
             check = False
             break
         else: 
