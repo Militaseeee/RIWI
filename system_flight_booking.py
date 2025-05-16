@@ -151,13 +151,7 @@ def calculate_percentage(code_flight):
 
 # Generates a text file with the provided content
 def generate_with_txt(file_path, content):
-    """
-    Genera un reporte en un archivo de texto.
 
-    Args:
-        ruta_archivo: La ruta completa al archivo donde se guardará el reporte.
-        contenido: El contenido del reporte (una cadena de texto).
-    """
     try:
         # Crear la carpeta si no existe
         folder  = os.path.dirname(file_path)
