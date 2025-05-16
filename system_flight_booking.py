@@ -2,45 +2,45 @@ import random
 import string
 import os
 from datetime import time
+import re # Regular expressions -> Este módulo permite trabajar con patrones de texto para buscar, validar o extraer partes de cadenas (strings)
 
 flight = {
     "AA-100": {
         "Descent": "lima",
         "Destination": "bogota",
-        "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
-        "Occupaied" : [],
+        "Seat": {"A1", "A2", "B1", "B2", "C1", "C2"},
+        "Occupaied" : set(),
         "Calendar": (15, 30)
     },
     
     "XY-123": {
         "Descent": "medellin",
         "Destination": "berlin",
-        "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
-        "Occupaied" : [],
+        "Seat": {"A1", "A2", "B1", "B2", "C1", "C2"},
+        "Occupaied" : set(),
         "Calendar": (9, 15)
     },
 
     "WO-820": {
         "Descent": "cartagena",
         "Destination": "roma",
-        "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
-        "Occupaied" : [],
+        "Seat": {"A1", "A2", "B1", "B2", "C1", "C2"},
+        "Occupaied" : set(),
         "Calendar": (18, 1)
     },
 
     "JK-954": {
         "Descent": "bogota",
         "Destination": "budapest",
-        "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
-        "Occupaied" : [],
+        "Seat": {"A1", "A2", "B1", "B2", "C1", "C2"},
+        "Occupaied" : set(),
         "Calendar": (23, 40)
     },
 
     "FG-354": {
         "Descent": "cali",
-        "Destination": "tokio",
-        "Seat": ["A1", "A2", "B1", "B2", "C1", "C2"],
-        "Occupaied" : [],
+        "Destination": "tokio","Seat": {"A1", "A2", "B1", "B2", "C1", "C2"},
+        "Occupaied" : set(),
         "Calendar": (8, 22)
     }
 }
@@ -59,6 +59,21 @@ for code_flight, values in flight.items():
     hours, minutes = values["Calendar"]
     if not is_valid_time(hours, minutes):
         print(f"Invalid time in flight {code_flight}: {hours}:{minutes}")
+        
+# Function to evaluate if the product name is not empty
+def evaluate_empty_code_flight(value_input: str, type: type):
+
+    validate_code_flight = False # Initialize the control variable as False 
+
+    while not validate_code_flight:
+
+        value = type(input(value_input)) # Show user input message
+        value = value.strip().lower()  # Remove whitespace and convert to lowercase
+        if value == "":
+            print("\n__________ ¡¡¡ WARNING !!! __________")
+            print(f"\nThe product name must not be empty {value}\n")
+        else:
+            return value # Return the value here if it is not empty
 
 def view_flight_list(flight):
     
@@ -69,23 +84,46 @@ def view_flight_list(flight):
         print(f"{'Code flight:':20} {code_flight}")
         print(f"{'Descent:':20} {values['Descent']}")
         print(f"{'Destination:':20} {values['Destination']}")
-        print(f"{'Seat:':20} {values['Seat']}")
+        print(f"{'Seat:':20} {sorted(values['Seat'])}") # para mostrar en orden
         print(f"{'Calendar:':20} {values['Calendar'][0]:02d}:{values['Calendar'][1]:02d}")
         print("-" * 45) 
+
+# Validación código vuelo (patrón "XX-999")
+def valid_flight_code(code_flight):
+    pattern = r'^[A-Z]{2}-\d{3}$'
+    return bool(re.match(pattern, code_flight))
+
+# Validación formato asiento (letra + número)
+def valid_seat(seat):
+    pattern = r'^[A-Z]\d+$'
+    return bool(re.match(pattern, seat))
+
 
 def reserve_seat():
 
     view_flight_list(flight)
 
-    code_flight = input("\nEnter the flight code you want to book: ").upper()
-    seat = input("\nEnter the seat you want to reserve: ").upper()
+    code_flight = evaluate_empty_code_flight("\nEnter the flight code you want to book: ", str).upper()
+    
+    if not valid_flight_code(code_flight):
+        print("\n       __________ ¡¡¡ WARNING !!! __________")
+        print("\nInvalid flight code format. It should be like (XX-999)")
+        return
 
+    seat = evaluate_empty_code_flight("\nEnter the seat you want to reserve: ", str).upper()
+    if not valid_seat(seat): 
+        print("\n              __________ ¡¡¡ WARNING !!! __________")
+        print("\nInvalid seat format. It should be a letter followed by a number (A1)")
+        return
+    
     if code_flight in flight:
         info_flight = flight[code_flight]
-        if seat in info_flight["Seat"]:
-            info_flight["Seat"].remove(seat)
-            info_flight["Occupaied"].append(seat)
+        if seat in info_flight["Seat"]: # acceso O(1)
+            info_flight["Seat"].remove(seat) # eliminar en set O(1)
+            info_flight["Occupaied"].add(seat) # añadir en set O(1)
             print(f"\nSeat {seat} successfully booked on flight {code_flight}.")
+        elif seat in info_flight["Occupaied"]:
+            print(f"\nSeat {seat} is already reserved on flight {code_flight}.")
         else:
             print(f"\nSeat {seat} is not available on flight {code_flight}.")
     else:
@@ -98,16 +136,9 @@ def calculate_percentage(code_flight):
     multiply: int = 100 
     percent_occupaied:float = 0.0
 
-    """ if code_flight in flight:
-        occupaied = len(flight[code_flight]["Occupaied"])
-        percent_occupaied = (occupaied * multiply)/divider
-        print(percent_occupaied)
-    return(percent_occupaied) """
-
-
     print("\nOCCUPANCY PERCENTAGE PER FLIGHT")
+    
     print("-" * 40)
-
     for code_flight, values in flight.items():
         occupaied = len(flight[code_flight]["Occupaied"])
         if occupaied == 0:
@@ -115,7 +146,6 @@ def calculate_percentage(code_flight):
         else:
             percent_occupaied = (occupaied * multiply)/divider
         print(f"Flight {code_flight}: {percent_occupaied:.2f}% occupied")
-
     print("-" * 40)
 
 
@@ -161,7 +191,7 @@ def generate_reports():
     for time_dt, code_flight, values in flight_list:
         line = (
             f"{code_flight} - {values['Descent']} to {values['Destination']} at {time_dt.strftime('%H:%M')}, "
-            f"Available: {values['Seat']}, Occupied: {values['Occupaied']}"
+            f"Available: {sorted(values['Seat'])}, Occupied: {sorted(values['Occupaied'])}"
         )
         report_lines.append(line)
 
