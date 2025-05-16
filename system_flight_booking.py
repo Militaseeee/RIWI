@@ -1,9 +1,10 @@
 import random
 import string
-import os
-from datetime import time
-import re # Regular expressions -> Este módulo permite trabajar con patrones de texto para buscar, validar o extraer partes de cadenas (strings)
+import os # Provides functions to interact with the operating system, sush as file and directory management
+from datetime import time # From datetime import time  # Imports the 'time' class to represent specific times of day (hours and minutes)
+import re # Regular expressions -> This module allows working with text patterns to search, validate, or extract parts of strings
 
+# Dictionary containing flight information
 flight = {
     "AA-100": {
         "Descent": "lima",
@@ -45,7 +46,7 @@ flight = {
     }
 }
 
-# Validación de horarios al inicio
+# Validates if a given hour and minute form a valid time
 def is_valid_time(hours, minute):
     try:
         time(hours, minute)
@@ -53,8 +54,7 @@ def is_valid_time(hours, minute):
     except ValueError:
         return False
 
-# OJO: Queda afuera porque quiero que se ejecute automáticamente
-# Validar todos los horarios al inicio
+# Check and print any invalid time in the initial data
 for code_flight, values in flight.items():
     hours, minutes = values["Calendar"]
     if not is_valid_time(hours, minutes):
@@ -75,6 +75,7 @@ def evaluate_empty_code_flight(value_input: str, type: type):
         else:
             return value # Return the value here if it is not empty
 
+# Displays the list of flights with their details
 def view_flight_list(flight):
     
     print("------------------------------------------------------------")
@@ -84,21 +85,21 @@ def view_flight_list(flight):
         print(f"{'Code flight:':20} {code_flight}")
         print(f"{'Descent:':20} {values['Descent']}")
         print(f"{'Destination:':20} {values['Destination']}")
-        print(f"{'Seat:':20} {sorted(values['Seat'])}") # para mostrar en orden
+        print(f"{'Seat:':20} {sorted(values['Seat'])}") # to show in order
         print(f"{'Calendar:':20} {values['Calendar'][0]:02d}:{values['Calendar'][1]:02d}")
         print("-" * 45) 
 
-# Validación código vuelo (patrón "XX-999")
+# Validates flight code format (e.g. "AA-123")
 def valid_flight_code(code_flight):
     pattern = r'^[A-Z]{2}-\d{3}$'
     return bool(re.match(pattern, code_flight))
 
-# Validación formato asiento (letra + número)
+# Validates seat format (e.g. "A1")
 def valid_seat(seat):
     pattern = r'^[A-Z]\d+$'
     return bool(re.match(pattern, seat))
 
-
+# Handles seat reservation with all necessary validations
 def reserve_seat():
 
     view_flight_list(flight)
@@ -118,9 +119,9 @@ def reserve_seat():
     
     if code_flight in flight:
         info_flight = flight[code_flight]
-        if seat in info_flight["Seat"]: # acceso O(1)
-            info_flight["Seat"].remove(seat) # eliminar en set O(1)
-            info_flight["Occupaied"].add(seat) # añadir en set O(1)
+        if seat in info_flight["Seat"]: # access O(1)
+            info_flight["Seat"].remove(seat) # delete in set O(1)
+            info_flight["Occupaied"].add(seat) # add in set O(1)
             print(f"\nSeat {seat} successfully booked on flight {code_flight}.")
         elif seat in info_flight["Occupaied"]:
             print(f"\nSeat {seat} is already reserved on flight {code_flight}.")
@@ -129,7 +130,7 @@ def reserve_seat():
     else:
         print(f"\nFlight {code_flight} does not exist.")
 
-
+# Calculates and displays the occupancy percentage for each flight
 def calculate_percentage(code_flight):
 
     divider:int = 6
@@ -148,8 +149,7 @@ def calculate_percentage(code_flight):
         print(f"Flight {code_flight}: {percent_occupaied:.2f}% occupied")
     print("-" * 40)
 
-
-
+# Generates a text file with the provided content
 def generate_with_txt(file_path, content):
     """
     Genera un reporte en un archivo de texto.
@@ -171,8 +171,7 @@ def generate_with_txt(file_path, content):
     except Exception as e:
         print(f"Error generating the report: {e}")
 
-
-
+# Generates and writes a sorted report of flights
 def generate_reports():
     
     flight_list = []
@@ -182,10 +181,10 @@ def generate_reports():
         flight_time = time(hours, minutes)
         flight_list.append((flight_time, code_flight, values))
 
-    # Ordena la lista de vuelos por su horario de salida
+    # Sort the list of flights by their departure time
     flight_list.sort()
 
-    # Empieza a crear el reporte para guararlo en el txt
+    # Start creating the report to save it in the txt
     report_lines = []
     
     for time_dt, code_flight, values in flight_list:
@@ -195,12 +194,12 @@ def generate_reports():
         )
         report_lines.append(line)
 
-    # Une todos los elementos de la lista report_lines (que contiene las líneas del reporte de vuelos)
+    # Join all the elements of the list report_lines (which contains the lines of the flight report)
     content = "\n".join(report_lines)
-    # Crea un archivo de texto en la ruta
+    # Create a text file at the path
     generate_with_txt("../training_exercise/flight_report.txt", content)
 
-
+# Displays the main menu and handles user input
 def menu():
 
     check:bool = True
@@ -234,7 +233,6 @@ def menu():
             continue
         elif option == "3":
             print("\nYou chose option 3: Generation of a report in a text file with flights sorted by schedule\n")
-            #generate_reports("report.txt", "Este es el contenido del reporte.")
             generate_reports()
             continue
         elif option == "4":
