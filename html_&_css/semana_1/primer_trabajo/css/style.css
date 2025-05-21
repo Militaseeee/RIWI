@@ -18,7 +18,7 @@ body {
 
 .title h1 {
     font-size: 40px;
-    color: #464a4e;
+    color: #454a4e;
     font-weight: bold;
     letter-spacing: 10px;
     text-align: center;
@@ -28,9 +28,10 @@ body {
 .title h5 {
     font-size: 15px;
     font-weight: 600;
-    color: #464a4e;
+    color: #454a4e;
     text-align: center;
     margin: 3px;
+    letter-spacing: 2px;
 }
 
 .complete_container {
@@ -40,8 +41,8 @@ body {
 
 .left_container {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: chocolate;
-    color: #464a4e;
+    background-color: #f4e9e8;
+    color: #454a4e;
     letter-spacing: 5px;
     padding: 20px;
     margin: 20px 10px;
@@ -104,5 +105,82 @@ body {
     margin: 0px;
     align-self: center;
     font-weight: lighter;
+    font-size: 13px;
 }
 
+.education {
+    letter-spacing: 0px;
+    margin-bottom: 7px;
+    margin-top: 20px;
+}
+
+.title_ed {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.uni_ed {
+    font-weight: normal;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.course_ed {
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 40px;
+}
+
+.abilities h5 {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 0px;
+    margin-bottom: 10px;
+    
+}
+
+/* Selecciona el último h5 que sea hijo directo dentro de .abilities */
+.abilities h5:last-child {
+    margin-bottom: 40px;
+}
+
+.language {
+    letter-spacing: 0px;
+    margin-bottom: 7px;
+    margin-top: 20px;
+}
+
+.especifi_spanish {
+    display: flex;
+    font-size: 13px;
+    gap: 5px; /* Genera un espacio entre los dos textos */
+    margin-bottom: 20px;
+}
+
+.description_len {
+    font-weight: normal;
+}
+
+.especifi_english {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.content_title {    
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 100px;
+    margin-bottom: 10px;
+}
+
+.category {
+    font-weight: normal;
+}
+
+.level  {
+    font-weight: normal;
+}
