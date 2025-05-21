@@ -1,19 +1,35 @@
 # **RIWI**
 
-## **RIWI Learning Projects Repository 🐍📚**
+## **RIWI Learning Projects Repository 🧠💻**
 
-Este repositorio es creado con un propósito único: compartir los trabajos realizados en RIWI, enfocados en el aprendizaje práctico de Python. 🧠✨ Aquí encontrarás ejemplos, experimentos y proyectos diseñados para desarrollar habilidades en programación y resolver problemas reales mediante el uso de Python.
+Este repositorio es un espacio donde se guarda y documenta todo el proceso de aprendizaje llevado a cabo en **[RIWI](https://riwi.io/)**, una academia de entrenamiento intensivo para formar programadores y profesionales en tecnología.
+
+Aquí se encuentran ejercicios, proyectos, retos y documentación que hacen parte de nuestra formación como *coders*, con el objetivo de aprender y dominar diferentes temas relacionados con la programación y el desarrollo de software.
+
+---
 
 ## **📁 Contenido del Repositorio**
 
-  - 📝 **Ejercicios prácticos de Python.**
+- 📝 **Ejercicios prácticos de programación y lógica.**
+- 🔧 **Soluciones a problemas reales usando tecnología.**
+- 🚀 **Proyectos educativos y colaborativos.**
+- 📖 **Notas, documentación y buenas prácticas aprendidas en clase.**
 
-  - 🔧 **Soluciones a problemas cotidianos con código.**
+---
 
-  - 🚀 **Proyectos educativos para entender conceptos avanzados.**
+## **🎯 Objetivo del Repositorio**
 
-  - 📖 **Documentación y notas sobre el aprendizaje.**
+Este repositorio tiene como propósito:
 
-## **🎯 Objetivo**
+- Servir como registro del proceso de formación en RIWI.
+- Consolidar conocimientos a través de la práctica constante.
+- Compartir el avance y los logros obtenidos durante la formación.
+- Ayudar a otros estudiantes a encontrar ejemplos útiles para su aprendizaje.
 
-El objetivo principal de este repositorio es servir como una herramienta de aprendizaje y crecimiento para quienes exploran Python como su lenguaje de programación. 🐍💻 Los proyectos aquí presentes son el resultado de la participación activa en RIWI.
+---
+
+## 🌐 **¿Qué es RIWI?**
+
+**RIWI** es una academia que entrena a sus estudiantes para convertirse en desarrolladores de software, usando una metodología intensiva y basada en la práctica. A través de retos reales, clases dinámicas y proyectos colaborativos, busca que cada persona desarrolle habilidades técnicas, lógicas y de trabajo en equipo.
+
+🔗 Conoce más sobre el programa: [https://riwi.io/curso](https://riwi.io/curso)
