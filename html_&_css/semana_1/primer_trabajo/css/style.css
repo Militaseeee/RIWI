@@ -6,7 +6,9 @@ body {
 
 .container {
     width: 800px;
-    background-color: rgb(250, 124, 124);
+    box-shadow: 
+        2px -2px 9px rgb(151, 151, 151),
+        -2px -2px 9px rgb(151, 151, 151);
 }
 
 .head {
@@ -36,7 +38,8 @@ body {
 
 .complete_container {
     display: flex;
-    background-color: aqua;
+    gap: 20px;
+    padding: 0px 20px 0px 20px;
 }
 
 .left_container {
@@ -45,7 +48,7 @@ body {
     color: #454a4e;
     letter-spacing: 5px;
     padding: 20px;
-    margin: 20px 10px;
+    /* margin: 20px 10px; */
     font-weight: bold;
 }
 
@@ -174,7 +177,7 @@ body {
     display: flex;
     /* justify-content: space-between; */
     gap: 100px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .category {
@@ -183,4 +186,120 @@ body {
 
 .level  {
     font-weight: normal;
+    margin-top: 2px;
+}
+
+/* Estilo base de la barra */
+.percent {
+    width: 166px;
+    height: 6px;
+    appearance: none; 
+    -webkit-appearance: none;
+}
+
+/* Estilo para Chrome, Safari y Edge */
+.percent::-webkit-progress-bar {
+    background-color: white;
+    border-radius: 5px;
+    border-color: black;
+}
+
+.percent::-webkit-progress-value {
+    background-color: #454a4e; /* Color de la barra llena */
+    border-radius: 5px;
+}
+
+/* Estilo para Firefox */
+.percent::-moz-progress-bar {
+    background-color: #454a4e;
+}
+
+.right_container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+    color: #454a4e;
+    letter-spacing: 5px;
+    /* padding: 20px;
+    margin: 20px 10px; */
+    font-weight: bold;
+}
+
+.professional_h4 {
+margin-top: 40px;
+}
+.info_summary {
+    margin: 0px;
+    align-self: center;
+    font-weight: lighter;
+    font-size: 13px;
+    letter-spacing: 0px;
+    text-align: justify;
+    line-height: 20px;
+    margin-bottom: 40px
+}
+
+.social_h4 {
+    line-height: 18px;
+}
+
+.social {
+    letter-spacing: 0px;
+    text-align: justify;
+}
+
+.title_social {
+    font-weight: lighter;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.year {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.info_social {
+    font-weight: lighter;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.reference_h4 {
+    margin-top: 40px
+}
+
+.references {
+    margin: 0px;
+    align-self: center;
+    font-size: 13px;
+    letter-spacing: 0px;
+    text-align: justify;
+    line-height: 20px;
+}
+
+.names_part {
+    display: flex;
+    gap: 5px
+}
+
+.names {
+    font-weight: lighter;
+}
+
+.profession_part {
+    display: flex;
+    gap: 5px
+}
+
+.profession {
+    font-weight: lighter;
+}
+
+.phone_part {
+    display: flex;
+    gap: 5px
+}
+
+.phone {
+    font-weight: lighter;
 }
