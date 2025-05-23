@@ -1,0 +1,305 @@
+body {
+    justify-content: center;
+    display: flex;
+    margin: 0;
+}
+
+.container {
+    width: 800px;
+    box-shadow: 
+        2px -2px 9px rgb(151, 151, 151),
+        -2px -2px 9px rgb(151, 151, 151);
+}
+
+.head {
+    background-color: #fefeff ;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.title h1 {
+    font-size: 40px;
+    color: #454a4e;
+    font-weight: bold;
+    letter-spacing: 10px;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.title h5 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #454a4e;
+    text-align: center;
+    margin: 3px;
+    letter-spacing: 2px;
+}
+
+.complete_container {
+    display: flex;
+    gap: 20px;
+    padding: 0px 20px 0px 20px;
+}
+
+.left_container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4e9e8;
+    color: #454a4e;
+    letter-spacing: 5px;
+    padding: 20px;
+    /* margin: 20px 10px; */
+    font-weight: bold;
+}
+
+.telephone {
+    display: flex;
+    letter-spacing: 0px;
+    margin-bottom: 7px;
+    margin-top: 20px;
+}
+
+.tel_img {
+    display: flex;
+    width: 20px;
+    align-items: center;
+    margin-right: 15px;
+
+    & img {
+        width: 100%;
+    }
+}
+
+.mail {
+    display: flex;
+    letter-spacing: 0px;
+    margin-bottom: 7px;
+}
+
+.mail_img {
+    display: flex;
+    width: 20px;
+    align-items: center;
+    margin-right: 15px;
+
+    & img {
+        width: 100%;
+    }
+}
+
+.location {
+    display: flex;
+    letter-spacing: 0px;
+    margin-bottom: 40px;
+}
+
+.location_img {
+    display: flex;
+    width: 20px;
+    align-items: center;
+    margin-right: 15px;
+
+    & img {
+        width: 100%;
+    }
+}
+
+.left_container h5 {
+    margin: 0px;
+    align-self: center;
+    font-weight: lighter;
+    font-size: 13px;
+}
+
+.education {
+    letter-spacing: 0px;
+    margin-bottom: 7px;
+    margin-top: 20px;
+}
+
+.title_ed {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.uni_ed {
+    font-weight: normal;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.course_ed {
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 40px;
+}
+
+.abilities h5 {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 0px;
+    margin-bottom: 10px;
+    
+}
+
+/* Selecciona el último h5 que sea hijo directo dentro de .abilities */
+.abilities h5:last-child {
+    margin-bottom: 40px;
+}
+
+.language {
+    letter-spacing: 0px;
+    margin-bottom: 7px;
+    margin-top: 20px;
+}
+
+.especifi_spanish {
+    display: flex;
+    font-size: 13px;
+    gap: 5px; /* Genera un espacio entre los dos textos */
+    margin-bottom: 20px;
+}
+
+.description_len {
+    font-weight: normal;
+}
+
+.especifi_english {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.content_title {    
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 100px;
+    margin-bottom: 5px;
+}
+
+.category {
+    font-weight: normal;
+}
+
+.level  {
+    font-weight: normal;
+    margin-top: 2px;
+}
+
+/* Estilo base de la barra */
+.percent {
+    width: 166px;
+    height: 6px;
+    appearance: none; 
+    -webkit-appearance: none;
+}
+
+/* Estilo para Chrome, Safari y Edge */
+.percent::-webkit-progress-bar {
+    background-color: white;
+    border-radius: 5px;
+    border-color: black;
+}
+
+.percent::-webkit-progress-value {
+    background-color: #454a4e; /* Color de la barra llena */
+    border-radius: 5px;
+}
+
+/* Estilo para Firefox */
+.percent::-moz-progress-bar {
+    background-color: #454a4e;
+}
+
+.right_container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+    color: #454a4e;
+    letter-spacing: 5px;
+    /* padding: 20px;
+    margin: 20px 10px; */
+    font-weight: bold;
+}
+
+.professional_h4 {
+margin-top: 40px;
+}
+.info_summary {
+    margin: 0px;
+    align-self: center;
+    font-weight: lighter;
+    font-size: 13px;
+    letter-spacing: 0px;
+    text-align: justify;
+    line-height: 20px;
+    margin-bottom: 40px
+}
+
+.social_h4 {
+    line-height: 18px;
+}
+
+.social {
+    letter-spacing: 0px;
+    text-align: justify;
+}
+
+.title_social {
+    font-weight: lighter;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.year {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.info_social {
+    font-weight: lighter;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.reference_h4 {
+    margin-top: 40px
+}
+
+.references {
+    margin: 0px;
+    align-self: center;
+    font-size: 13px;
+    letter-spacing: 0px;
+    text-align: justify;
+    line-height: 20px;
+}
+
+.names_part {
+    display: flex;
+    gap: 5px
+}
+
+.names {
+    font-weight: lighter;
+}
+
+.profession_part {
+    display: flex;
+    gap: 5px
+}
+
+.profession {
+    font-weight: lighter;
+}
+
+.phone_part {
+    display: flex;
+    gap: 5px
+}
+
+.phone {
+    font-weight: lighter;
+}
