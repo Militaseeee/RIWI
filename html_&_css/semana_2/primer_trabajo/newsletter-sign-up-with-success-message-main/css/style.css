@@ -1,0 +1,132 @@
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --red: hsl(4, 100%, 67%);
+    --Blue-800: hsl(234, 29%, 20%);
+    --Blue-700: hsl(235, 18%, 26%);
+    --Grey: hsl(0, 0%,58%);
+    --White: hsl(0, 0%, 100%);
+}
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--Blue-800);
+    color: var(--Blue-700);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.card {
+    display: flex;
+    background-color: var(--White);
+    border-radius: 30px;
+    overflow: hidden;
+    max-width: 900px;
+    width: 90%;
+    padding: 1.5rem;
+    justify-content: center;
+}
+
+
+
+.position {
+    flex-direction: column;
+    flex-direction: row;
+    margin-right: 50px;
+    margin-left: 30px;
+    margin-top: 20px;
+    
+}
+  
+.card h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.img {
+    height: 15px;
+    width: 15px;
+}
+
+.card p {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.card ul {
+    list-style: none; /* We remove the default list styles */
+    padding-left: 0;
+    
+}
+  
+.card ul li {
+  display: flex;
+  align-items: center; /* Center vertically */
+  gap: 10px; /* Space between the icon and the text */
+  line-height: 30px;
+  color: var(--Blue-800);
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.card ul li::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 22px;
+  background-image: url("../assets/images/icon-list.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  flex-shrink: 0; /* Evita que el ícono se deforme */
+}
+
+
+figure {
+  display: flex;
+  justify-content: flex-start;
+  margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start:0;
+    margin-inline-end: 0;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2rem;
+}
+.form_control{
+    border-radius: 5px;
+    border: 1px solid var(--Grey);
+    width: 40vh;
+    height: 5vh;
+    text-justify: center;
+    font-size: 18px;
+}
+.button_container{
+    width: 40.6vh;
+    height: 6vh;
+    border-radius: 10px;
+    background-color: var(--Blue-800);
+    color: var(--White);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3vh;
+    font-weight: bold;
+}
+#email-text{
+    margin-bottom: 10px;
+}
+
+
