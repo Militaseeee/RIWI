@@ -1,0 +1,107 @@
+/* ============================= */
+/* VARIABLES GLOBALES           */
+/* ============================= */
+:root {
+    --primary-color: #4a90e2;
+    --background: #f5f5f5;
+    --text-color: #333;
+    --max-width: 1200px;
+}
+
+/* ============================= */
+/* RESET BÁSICO                 */
+/* ============================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+/* ============================= */
+/* ESTILOS GENERALES DEL BODY   */
+/* ============================= */
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    background-color: var(--background);
+    color: var(--text-color);
+}
+
+/* ============================= */
+/* HEADER Y NAVEGACIÓN          */
+/* ============================= */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem;
+    width: 100%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.menu {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.menu li a:hover {
+    text-decoration: underline;
+}
+
+/* ============================= */
+/* MAIN                         */
+/* ============================= */
+main {
+    flex: 1; /* Hace que ocupe el espacio restante */
+    padding: 2rem 1rem;
+}
+
+/* ============================= */
+/* FOOTER                       */
+/* ============================= */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* ============================= */
+/* MEDIA QUERIES                */
+/* ============================= */
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+}
