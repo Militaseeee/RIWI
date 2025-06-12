@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="items first"></div>
+        <div class="items second"></div>
+        <div class="items third"></div>
+        <div class="items fourth"></div>
+        <div class="items fifth"></div>
+        <div class="items sixth"></div>
+        <div class="items seventh"></div>
+        <div class="items eighth"></div>
+    </div>
+</body>
+
+<style>
+    .container {
+        display: grid;
+        /* grid-template-columns: 1fr 1fr 250px;  1 fracción */
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .items {
+        height: 300px;
+        margin: 8px;
+    }
+    .first {
+        background-color: #ff4944;
+        grid-column: 1/5;
+    }
+    .second {
+        background-color: #ff4944;
+        grid-column: 5/8;
+    }
+    .third {
+        background-color: #ffa930;
+        grid-column: 1/4;
+        grid-row: 2/4;
+        height: 615px;
+    }
+    .fourth {
+        background-color: #9c0579;
+        grid-column: 4/8;
+    }
+    .fifth {
+        background-color: #9c0579;
+        grid-column: 4/8;
+    }
+    .sixth {
+        background-color: #01748f;
+        grid-column: 1/3;
+    }
+    .seventh {
+        background-color: #01748f;
+        grid-column: 3/6;
+    }
+    .eighth {
+        background-color: #01748f;
+        grid-column: 6/8;
+    }
+</style>
+
+</html>
