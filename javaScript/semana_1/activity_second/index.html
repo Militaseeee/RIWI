@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Average Grade Calculator</title>
+</head>
+<body>
+
+    <section class="container">
+
+        <h1>Average Grade Calculator</h1>
+        <div class="form">
+            <input type="text" id="note1" class="style-form" placeholder="Note 1">
+            <input type="text" id="note2" class="style-form" placeholder="Note 2">
+            <input type="text" id="note3" class="style-form" placeholder="Note 3">
+            <input type="text" id="note4" class="style-form" placeholder="Note 4">
+            <input type="text" id="note5" class="style-form" placeholder="Note 5">
+        </div>
+        <div class="buttons">
+            <a onclick="calculateAverage()" class="button button-average" role="button">Calculate Average</a>
+
+            <a onclick="deleteInfo()" class="button button-info" role="button">Delete Data</a>
+        </div>
+
+        <div>
+            <span id="average">The average is:</span>
+
+            <span id="message"></span>
+        </div>
+
+    </section>
+    
+    <script src="js/main.js"></script>
+
+</body>
+</html>
