@@ -222,3 +222,158 @@ const sumar3 = (value1, value2) => {
 
 sumar3(11,5)
 sumar3(2,5)
+
+
+/* BUCLES */
+
+for (let i = 0; i < 5; i++) {
+    console.log(i);
+    continue;
+}
+
+// For decremento
+// for (let i = 100; i >= 10; i--) {
+//     console.log(`EL número es ${i}`);
+// }
+
+let i = 0;
+while (i<4) {
+    console.log(i);
+    i++
+}
+
+let opc
+do {
+    console.log("1. Say Hello!");
+    console.log("2. Bye!");
+
+    opc = 1 // Simulate user input
+
+    if (opc === 1) {
+        console.log("Hello!")
+    }
+    break;
+
+} while (opc !==2);
+
+/* SWITCH */
+
+let dia = "Miercoles"
+
+switch (dia) {
+    case "Lunes":
+        console.log("Primer dia");
+        break;
+    case "Martes":
+        console.log("Segundo dia");
+        break;
+    case "Miercoles":
+        console.log("Mitad de la semana");
+        break;
+    case "Jueves":
+        console.log("Cuarto dia");
+        break;
+    case "Viernes":
+        console.log("Happy day");
+        break;
+    default:
+        console.log("Es otro dia");
+}
+
+/* EXAMPLE 2 */
+let user = "Admin";
+let permision = 2;
+
+switch (user) {
+    case "admin":
+        console.log("Tiene permisos de administrar");
+        permision = 1;
+        break;
+    case "superAdmin":
+        console.log("Tiene todos los permisos y puede eliminar");
+        permision = 2;
+        break;
+    case "user":
+        console.log("Solo ver");
+        permision = 3;
+        break;
+    default:
+        console.log("Error");
+}
+
+if (permision === 2) {
+    console.log("Entro al sistema y puede eliminar")
+}
+
+/* Valores Truthy y Falsy */
+
+/* Los 7 valores falsy en JS:
+
+1. false
+2. 0
+3. -0
+4. "" (Cadena vacía)
+5. null
+6. undefined
+7. Nan  */
+
+let data = 3453
+
+if (data) {
+    console.log("La validación es verdadera");
+} else {
+    console.log("La validación es falsa");
+}
+
+/* Estructura de Datos */
+
+/* Listas o arreglos (Arrays) */
+const example = ["value1", "value2"];
+console.log(example);
+
+/* Acceder a los elementos */
+const skillsList = ["HTML", "CSS"];
+console.log(skillsList[1]);
+
+/* Modificar un elemento */
+const skillsMod = ["HTML", "CSS", "python"];
+skillsMod[2] = "js";
+console.log(skillsMod);
+
+/* Recorrer una lista */
+const skillsrRec = ["HTML", "CSS", "js"];
+
+for (let index = 0; index < skillsrRec.length; index++) {
+    console.log(skillsList[index]);
+    skillsrRec[index] += ": ";
+}
+console.log(skillsrRec)
+
+/* Objeto */
+const example1 = {key: "value1", key: "value2"};
+console.log(example1);
+
+/* Acceder a una propiedad de un objeto */
+const module = ["HTML", "CSS", "python"]
+
+const coderA = {
+    nameA: "Camila",
+    AgeA: "23",
+    companyA: "RIWI",
+    skillsA: module
+};
+console.log(coderA.nameA);
+
+console.log(coderA["skillsA"][1]);
+
+/* Modificar una propiedad de un objeto */
+coderA.nameA = "Camila Acosta"
+console.log(coderA);
+
+/* Acceder a una propiedad que no existe */
+console.log(coderA["country"]);
+
+/* Agregar una nueva propiedad a un objeto */
+// --> Si intentas asignar un valor a una propiedad que no existe, JavaScript creará esa propiedad en el objeto.
+coderA.country = "Colombia";
+console.log(coderA);
