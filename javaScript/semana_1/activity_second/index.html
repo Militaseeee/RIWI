@@ -7,9 +7,8 @@
     <title>Average Grade Calculator</title>
 </head>
 <body>
-
+    <!-- This section includes input fields, buttons, and two span elements that display the message about your final grade -->
     <section class="container">
-
         <h1>Average Grade Calculator</h1>
         <div class="form">
             <input type="text" id="note1" class="style-form" placeholder="Note 1">
@@ -20,19 +19,13 @@
         </div>
         <div class="buttons">
             <a onclick="calculateAverage()" class="button button-average" role="button">Calculate Average</a>
-
             <a onclick="deleteInfo()" class="button button-info" role="button">Delete Data</a>
         </div>
-
         <div>
             <span id="average">The average is:</span>
-
             <span id="message"></span>
         </div>
-
     </section>
-    
     <script src="js/main.js"></script>
-
 </body>
 </html>
