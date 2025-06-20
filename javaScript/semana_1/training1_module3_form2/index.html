@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Sistema interactivo</title>
+</head>
+<body>
+    <div class="background-img"></div>
+    <section class="container">
+
+        <h1>Welcome to the interactive messaging system!</h1>
+        <p>
+            In this program, please enter your age to find out if you are ready to start learning 
+            different programming languages. Based on your age, you will receive a helpful suggestion 
+            to guide you on your path to becoming a great programmer.
+        </p>
+
+        <div class="form">
+            <input type="text" id="nameUser" class="style-form" placeholder="Name">
+            <input type="number" id="age" class="style-form" placeholder="Age">
+        </div>
+        <div class="buttons">
+            <a onclick="verifyAge()" class="button button-message" role="button">Verify your age</a>
+            <a onclick="deleteInfo()" class="button button-delete" role="button">Delete Data</a>
+        </div>
+
+        <p id="alert-message" class="alert-message"></p>
+
+    </section>
+    
+    <script src="js/sistema_interactivo.js"></script>
+</body>
+</html>
