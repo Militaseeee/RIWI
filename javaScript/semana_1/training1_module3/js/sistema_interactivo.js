@@ -51,7 +51,7 @@ const consoleCode = () => {
         console.log(`Hi ${nameConsole}, you are in a great stage of life! If you are curious about programming, it can be a fun and rewarding hobby. 🎯`);
     } else if (ageCon > 50) {
         alert(`Hi ${nameConsole}, youare enjoying the golden years! Relax, enjoy your pension, and keep smiling. 🌞`);
-        console.log(`Hi ${nameConsole}, youare enjoying the golden years! Relax, enjoy your pension, and keep smiling. 🌞`);
+        console.log(`Hi ${nameConsole}, you are enjoying the golden years! Relax, enjoy your pension, and keep smiling. 🌞`);
     }
 }
 
@@ -80,7 +80,7 @@ const verifyAge = () => {
     } else if (ageCheck >= 31 && age < 50) {
         showToast(`Hi ${nameUser}, you are in a great stage of life! If you are curious about programming, it can be a fun and rewarding hobby. 🎯`, "#80cbc4");
     } else {
-        showToast(`Hi ${nameUser}, youare enjoying the golden years! Relax, enjoy your pension, and keep smiling. 🌞`, "#ffcc80");
+        showToast(`Hi ${nameUser}, you are enjoying the golden years! Relax, enjoy your pension, and keep smiling. 🌞`, "#ffcc80");
     }
 
     deleteInfo();
