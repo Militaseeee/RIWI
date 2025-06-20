@@ -1,10 +1,18 @@
+<!-- This is the main index of the page
+You have two navigation options:
+
+1. The first is the DOM tab.
+   It shows a visual interface for the user
+
+2. The second is the ConsoleCode tab
+   It runs JavaScript and shows the internal logic of the program in the browser console -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Sistema interactivo</title>
 </head>
 <body>
@@ -13,22 +21,25 @@
 
         <h1>Welcome to the interactive messaging system!</h1>
         <p>
-            In this program, please enter your age to find out if you are ready to start learning 
-            different programming languages. Based on your age, you will receive a helpful suggestion 
-            to guide you on your path to becoming a great programmer.
+            This is a simple system. You can enter your age and see a message just for you. 
+            There are two ways to use it:
         </p>
+        <ul>
+            <li>
+            <strong>DOM system (on the screen): </strong> You type your age and see a message on the page.
+            </li>
+            <li>
+                <strong>Console mode</strong>: You can see the message in the browser console. This helps you understand how the code works.
+            </li>
+        </ul>
 
-        <div class="form">
-            <input type="text" id="nameUser" class="style-form" placeholder="Name">
-            <input type="number" id="age" class="style-form" placeholder="Age">
-        </div>
         <div class="buttons">
-            <a onclick="verifyAge()" class="button button-message" role="button">Verify your age</a>
-            <a onclick="deleteInfo()" class="button button-delete" role="button">Delete Data</a>
+            <!-- This button gives the option to search in the JavaScript file and execute that part of the code -->
+            <a href="html/interactive_system_dom.html" onclick="consoleDom()" class="button button-dom" role="button">Graphic mode</a>
+            <a href="html/interactive_system_console.html" class="button button-console" role="button">Console mode</a>
         </div>
     </section>
-    
-    <script src="js/sistema_interactivo.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- This line conected with js -->
+    <script src="../js/sistema_interactivo.js"></script>
 </body>
 </html>
