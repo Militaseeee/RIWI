@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>To Do List</title>
+</head>
+<body>
+    <section class="container">
+        <div class="form">
+            <input type="text" id="newTasks" class="style-form" placeholder="New Tasks">
+            <a href="#" onclick="addTask()" class="button-ask" role="button">Add Task</a>
+        </div>
+        <ul></ul>
+        <div class="counter-message">
+            <span id="total">The total number of tasks is:</span>
+            <span id="message"></span>
+        </div>
+    </section>
+</body>
+<!-- This line conected with js -->
+<script src="js/main.js"></script>
+<!-- This line connects the Toastify JavaScript library to the page -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</html>
