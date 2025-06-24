@@ -26,12 +26,6 @@ Welcome to the **Interactive Message System**, a simple and interactive web appl
 
 ---
 
-## 📸 Preview
-
-![preview](https://i.imgur.com/HgkSm0R.png) <!-- You can replace this with your own screenshot -->
-
----
-
 ## 🛠️ How to Use
 
 1. Visit the site: [interactive-message-system-camila.netlify.app](https://interactive-message-system-camila.netlify.app/)
