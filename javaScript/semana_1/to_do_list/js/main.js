@@ -36,15 +36,20 @@ function addTask() {
     // Clear the input field after adding the task
     document.getElementById('newTasks').value = '';
     taskCounter();
+
+
+    saveTaskLocalStorage();
 }
 
-function completeTaskButton(spanElement) {
+function completeTaskButton(spanElement, completed = false) {
     const button = document.createElement('button');
-    button.textContent = '✅';
+    button.textContent = completed ? '❌' : '✅';
     
     button.onclick = () => {
-        spanElement.classList.add('complete-button');
+        const taskNecessary = spanElement.classList.toggle('complete-button');
+        button.textContent = taskNecessary ? '❌' : '✅';
         taskCounter();
+        saveTaskLocalStorage();
     };
     return button;
 }
@@ -56,6 +61,7 @@ function deleteTaskButton(taskElement) {
     button.onclick = () => {
         taskElement.remove();
         taskCounter();
+        saveTaskLocalStorage();
     };
     return button;
 }
@@ -105,3 +111,43 @@ document.getElementById('newTasks').addEventListener('keydown', function(event) 
         addTask();
     }
 });
+
+
+function saveTaskLocalStorage () {
+    const tasks = []
+    document.querySelectorAll('ul li').forEach(li => {
+        const text = li.querySelector('span').textContent;
+        const completed = li.querySelector('span').classList.contains('complete-button');
+        tasks.push({ text, completed }); // It is added if the task is completed (the text and the button)
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks)); // It converts it into a text string in JSON format and saves it in the browser with that key
+    
+    console.log(tasks)
+}
+
+// Load tasks when opening the page
+function loadTasksFromLocalStorage() {
+    const savedTasks = JSON.parse(localStorage.getItem('tasks')) || []; // We use this to get the saved tasks
+    savedTasks.forEach(task => {
+        const newElement = document.createElement('li');
+        const span = document.createElement('span');
+        span.textContent = task.text;
+        if (task.completed) {
+            span.classList.add('complete-button');
+        }
+
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.classList.add('task-buttons');
+
+        buttonsContainer.appendChild(completeTaskButton(span, task.completed));
+        buttonsContainer.appendChild(deleteTaskButton(newElement));
+
+        newElement.appendChild(span);
+        newElement.appendChild(buttonsContainer);
+        document.querySelector('ul').appendChild(newElement);
+    });
+    taskCounter();
+}
+
+// Load saved tasks on startup
+window.addEventListener('DOMContentLoaded', loadTasksFromLocalStorage);
