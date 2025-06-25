@@ -1,64 +1,94 @@
-// Inicialización del proyecto
-console.log("¡Gestión de Datos con Objetos, Sets y Maps!");
+// Project initialization
+console.log("Data Management with Objects, Sets, and Maps!");
 
-// Definir el objeto productos
-const productos = {
-    1: { id: 1, nombre: "Laptop", precio: 1500 },
-    2: { id: 2, nombre: "Mouse", precio: 25 },
-    3: { id: 3, nombre: "Teclado", precio: 50 },
+// Define the object products
+const products = {
+    1: { id: 1, nameProduct: "laptop", price: 1500 },
+    2: { id: 2, nameProduct: "mouse", price: 25 },
+    3: { id: 3, nameProduct: "keyboard", price: 50 },
 };
 
-// Crear un Set con los nombres de los productos
-const setProductos = new Set(
-    Object.values(productos).map((producto) => producto.nombre)
+// Create a Set with the names of the products
+const setProducts = new Set(
+    Object.values(products).map((product) => product.nameProduct)
 );
-// console.log("Set de productos únicos: ", setProductos);
 
-// Crear un Map para agregar categorías a los productos
-const mapProductos = new Map([
-    ["Electrónica", ["Laptop"]],
-    ["Accesorios", ["Mouse", "Teclado"]]
+// Create a Map to add categories to products
+const mapProducts = new Map([
+    ["electronics", ["laptop"]],
+    ["accessories", ["mouse", "keyboard"]]
 ]);
 
-// Pedir nueva categoría
-let nuevaCategoria = prompt("Ingresa el nombre de una nueva categoría:");
+// Get next available product ID
+let nextId = Math.max(...Object.keys(products).map(Number)) + 1;
 
-// Validar si ya existe (has -> Método para verificar)
-if (mapProductos.has(nuevaCategoria)) {
-    alert("¡Esa categoría ya existe!");
-} else {
-    // Pedir productos separados por coma
-    let productosIngresados = prompt("Ingresa productos para esa categoría, separados por coma (ej: Tablet, Monitor):");
+// Ask the user if they want to add a new category
+let userChoice 
 
-    // Convertir a array eliminando espacios
-    let listaProductos = productosIngresados.split(",").map(producto => producto.trim());
+while (userChoice !== 1 && userChoice !== 2) {
+    userChoice = prompt("Do you want to add a new category? Enter 1 for YES or 2 for NO:");
+    if (userChoice === "1") {
+        // Request new category
+        let newCategory = prompt("Enter the name of a new category:");
+        console.log("New category entered:", newCategory);
+    
+        // Validate if it already exists
+        if (mapProducts.has(newCategory)) {
+            alert("That category already exists!");
+            console.log("Category already exists in Map.");
+        } else {
+            let enteredProducts = prompt("Enter products for that category, separated by commas (e.g.: Tablet, Monitor):");
+            let productList = enteredProducts.split(",").map(p => p.trim());
 
-    // Agregar al Map
-    mapProductos.set(nuevaCategoria, listaProductos);
+            // Add to map
+            mapProducts.set(newCategory, productList);
+            console.log(`Category ${newCategory} added with products:, productList`);
 
-    console.log(`Categoría '${nuevaCategoria}' añadida con los productos:`, listaProductos);
+            // Add each product to the 'products' object
+            productList.forEach(productName => {
+                products[nextId] = {
+                    id: nextId,
+                    nameProduct: productName,
+                    price: Math.floor(Math.random() * 500 + 50) // Fake random price
+                };
+                setProducts.add(productName); // Add to set
+                nextId++;
+            });
+
+            break;
+        }
+    } else if (userChoice === "2") {
+        console.log("No new category was added");
+        break;
+    } else {
+        alert("Invalid option. Please enter 1 (YES) or 2 (NO). The program will now stop");
+    }
 }
 
-// console.log("Map de productos y categorías: ", mapProductos);
 
-// Recorrer el objeto productos
-for (const id in productos) {
-    console.log(`Producto ID: ${id}, Detalles: `, productos[id]);
+// Traverse the products object
+console.log("\n--- Object: products ---");
+for (const id in products) {
+    console.log(`Product ID: ${id}, Details:, products[id]`);
 }
 
-// Recorrer el Set de productos
-for (const producto of setProductos) {
-    console.log("Producto único: ", producto);
+// Traverse the Set of products
+console.log("\n--- Set: unique product names ---");
+for (const product of setProducts) {
+    console.log("Unique product:", product);
 }
-
-// Recorrer el Map de productos
-mapProductos.forEach((productos, categoria) => {
-    productos.forEach(producto => {
-        console.log(`Categoría: ${categoria}, Producto: ${producto}`);
+// Traverse the product Map
+console.log("\n--- Map: categories and products ---");
+mapProducts.forEach((products, category) => {
+    products.forEach(product => {
+        console.log(`Category: ${category}, Product: ${product}`);
     });
 });
 
-console.log("Pruebas completas de gestión de datos:");
-console.log("Listas de productos (Objeto): ", productos);
-console.log("Lista de productos únicos (Set): ", setProductos);
-console.log("Categorías y productos (Map): ", mapProductos);
+// Final summary
+console.log("\n Complete data management test:");
+console.log("Product list (Object):", products);
+console.table(products)
+console.log("Unique product names (Set):", setProducts);
+console.log("Categories and products (Map):", mapProducts);
+console.table(Array.from(mapProducts.entries()));
