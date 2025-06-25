@@ -1,6 +1,6 @@
 function addTask() {
 
-    let addNewTasks = document.getElementById('newTasks').value;
+    let addNewTasks = document.getElementById('newTasks').value.trim();
 
     if (addNewTasks.trim() === '') {
         showToast('Please enter valid information');
