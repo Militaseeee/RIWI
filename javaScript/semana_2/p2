@@ -1,0 +1,97 @@
+// Project initialization
+console.log("Data Management with Objects, Sets, and Maps!");
+
+// Initial products object
+const products = {
+    1: { id: 1, nameProduct: "laptop", price: 1500 },
+    2: { id: 2, nameProduct: "mouse", price: 25 },
+    3: { id: 3, nameProduct: "keyboard", price: 50 },
+};
+
+// Set with unique product names
+const setProducts = new Set(Object.values(products).map(p => p.nameProduct));
+
+// Map for categories
+const mapProducts = new Map([
+    ["electronics", ["laptop"]],
+    ["accessories", ["mouse", "keyboard"]]
+]);
+
+// Get next product ID
+let nextId = Math.max(...Object.keys(products).map(Number)) + 1;
+
+// Función principal para agregar una categoría y sus productos
+function addNewCategory() {
+    const newCategory = prompt("Enter the name of a new category:");
+
+    if (mapProducts.has(newCategory)) {
+        alert("That category already exists!");
+        console.log("Category already exists in Map.");
+        return;
+    }
+
+    const enteredProducts = prompt("Enter products for that category, separated by commas (e.g.: Tablet, Monitor):");
+    const productList = enteredProducts.split(",").map(p => p.trim());
+
+    mapProducts.set(newCategory, productList);
+    console.log(`Category "${newCategory}" added with products:`, productList);
+
+    productList.forEach(productName => {
+        products[nextId] = {
+            id: nextId,
+            nameProduct: productName,
+            price: Math.floor(Math.random() * 100 + 80)
+        };
+        setProducts.add(productName);
+        nextId++;
+    });
+}
+
+// Preguntar si quiere agregar una categoría
+let userChoice;
+while (userChoice !== "1" && userChoice !== "2") {
+    userChoice = prompt("Do you want to add a new category? Enter 1 for YES or 2 for NO:");
+
+    if (userChoice === "1") {
+        let keepGoing = true;
+        while (keepGoing) {
+            addNewCategory();
+            const askAgain = prompt("Do you want to add another category? Enter 1 for YES or 2 for NO:");
+            if (askAgain !== "1") keepGoing = false;
+        }
+    } else if (userChoice === "2") {
+        console.log("No new category was added.");
+    } else {
+        alert("Invalid option. Please enter 1 or 2.");
+    }
+}
+
+// Mostrar los resultados
+console.log("\n--- Object: products ---");
+for (const id in products) {
+    console.log(`Product ID: ${id}, Details:`, products[id]);
+}
+
+console.log("\n--- Set: unique product names ---");
+for (const product of setProducts) {
+    console.log("Unique product:", product);
+}
+
+console.log("\n--- Map: categories and products ---");
+mapProducts.forEach((products, category) => {
+    products.forEach(product => {
+        console.log(`Category: ${category}, Product: ${product}`);
+    });
+});
+
+console.log("\nComplete data management test:");
+console.log("Product list (Object):", products);
+console.table(products);
+console.log("Unique product names (Set):", setProducts);
+console.log("Categories and products (Map):", mapProducts);
+console.table(Array.from(mapProducts.entries()));
+
+// Mostrar en pantalla
+document.querySelector(".button-console").addEventListener("click", () => {
+    showProductTableModal(products, mapProducts);
+});
