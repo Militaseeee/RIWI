@@ -95,7 +95,6 @@ p {
     font-size: 1rem;
 }
 
-
 .button-console {
     background-color: #830d5e; 
 }
@@ -105,8 +104,7 @@ p {
 }
 
 
-
-/* Fondo oscuro detrás del modal */
+/* Dark background behind the modal */
 .dark-modal {
     position: fixed;
     top: 0;
@@ -120,7 +118,7 @@ p {
     z-index: 1000;
 }
 
-/* Contenedor del modal */
+/* Modal container */
 .modal-container {
     position: relative;
     background-color: #fff;
@@ -132,14 +130,14 @@ p {
     overflow-y: auto;
 }
 
-/* Título del modal */
+/* Modal title */
 .modal-container h2 {
     margin-top: 0;
     margin-bottom: 2rem;
     text-align: center;
 }
 
-/* Tabla dentro del modal */
+/* Table inside the modal */
 .modal-container table {
     width: 100%;
     border-collapse: collapse;
@@ -152,11 +150,12 @@ p {
     text-align: left;
 }
 
+/* Table header background */
 .modal-container th {
     background-color: #719ff3;
 }
 
-/* Botón de cerrar */
+/* Close button */
 .modal-close-button {
     position: absolute;
     top: 10px;
@@ -170,6 +169,7 @@ p {
     padding: 0;
 }
 
+/* Close icon image */
 .close-icon-img {
     width: 30px;
     height: 30px;
@@ -180,6 +180,7 @@ p {
     transform: scale(1.2);
 }
 
+/* Second table title (Category and Products) */
 .cat-prod-title {
     margin-top: 2rem !important;
     margin-bottom: 1.5rem;
