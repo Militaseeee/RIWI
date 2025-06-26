@@ -63,6 +63,6 @@ training2_module3/
 │   └── modal.js                → Function to create and display the modal popup
 ├── img/
 │   ├── arrow.png               → Image used for closing the modal
-│   ├── bg.jpg                  → Background image (optional)
-│   └── logo.png                → Project or app logo (if any)
+│   ├── background.avif         → Background image (optional)
+│   └── img_left.jpg            → Project or app logo (if any)
 ```
