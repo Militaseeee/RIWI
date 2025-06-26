@@ -54,10 +54,15 @@ It’s ideal for beginners who are curious about how data is stored and shown in
 ## 📁 Project Structure
 
 ```
-project/
-├── index.html         → The main page
-├── styles.css         → The visual styles (layout and modal)
-├── gestion_datos.js   → JavaScript file where the data logic lives
-├── img/               → Folder with assets
-│   └── arrow.png      → Image used as a close button in the modal
+training2_module3/
+├── index.html                  → Main HTML page
+├── css/
+│   └── style.css               → Styles for layout, modal, and responsiveness
+├── js/
+│   ├── gestion_datos.js        → Logic for data management (objects, sets, maps)
+│   └── modal.js                → Function to create and display the modal popup
+├── img/
+│   ├── arrow.png               → Image used for closing the modal
+│   ├── bg.jpg                  → Background image (optional)
+│   └── logo.png                → Project or app logo (if any)
 ```
