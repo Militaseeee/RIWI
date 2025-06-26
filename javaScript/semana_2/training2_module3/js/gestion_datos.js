@@ -19,7 +19,7 @@ const mapProducts = new Map([
     ["accessories", ["mouse", "keyboard"]]
 ]);
 
-// Get next available product ID
+// Get next available product ID -> The highest ID in products is searched to assign a new one without repeating
 let nextId = Math.max(...Object.keys(products).map(Number)) + 1;
 
 // Ask the user if they want to add a new category
@@ -45,16 +45,16 @@ while (userChoice !== 1 && userChoice !== 2) {
             console.log(`Category ${newCategory} added with products:, productList`);
 
             // Add each product to the 'products' object
+            // Create a new product with a random price, add it to products and the Set, then increment the ID
             productList.forEach(productName => {
                 products[nextId] = {
                     id: nextId,
                     nameProduct: productName,
-                    price: Math.floor(Math.random() * 500 + 50) // Fake random price
+                    price: Math.floor(Math.random() * 100 + 80) // Fake random price, only I use for put a price
                 };
                 setProducts.add(productName); // Add to set
                 nextId++;
             });
-
             break;
         }
     } else if (userChoice === "2") {
@@ -65,19 +65,18 @@ while (userChoice !== 1 && userChoice !== 2) {
     }
 }
 
-
 // Traverse the products object
 console.log("\n--- Object: products ---");
 for (const id in products) {
-    console.log(`Product ID: ${id}, Details:, products[id]`);
+    console.log(`Product ID: ${id}, Details:`, products[id]);
 }
 
-// Traverse the Set of products
+// Traverse the Set of products -> Print unique product names without duplicates
 console.log("\n--- Set: unique product names ---");
 for (const product of setProducts) {
     console.log("Unique product:", product);
 }
-// Traverse the product Map
+// Traverse the product Map -> This nested forEach prints the products grouped by category
 console.log("\n--- Map: categories and products ---");
 mapProducts.forEach((products, category) => {
     products.forEach(product => {
@@ -85,10 +84,15 @@ mapProducts.forEach((products, category) => {
     });
 });
 
-// Final summary
+// Final summary -> All the information is displayed at the end, including a visual table for products and categories
 console.log("\n Complete data management test:");
 console.log("Product list (Object):", products);
 console.table(products)
 console.log("Unique product names (Set):", setProducts);
 console.log("Categories and products (Map):", mapProducts);
 console.table(Array.from(mapProducts.entries()));
+
+// Display data on screen with a button
+document.querySelector(".button-console").addEventListener("click", () => {
+    showProductTableModal(products, mapProducts);
+});
