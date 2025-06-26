@@ -1,4 +1,5 @@
-function showProductTableModal(products, mapProducts) {
+const showProductTableModal = (products, mapProducts) => {
+// function showProductTableModal(products, mapProducts) {
     // In this part, the dark background layer is created so the modal looks good
     const overlay = document.createElement("div");
     overlay.classList.add("dark-modal");
