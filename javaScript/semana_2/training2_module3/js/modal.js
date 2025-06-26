@@ -40,14 +40,18 @@ function showProductTableModal(products, mapProducts) {
     modal.appendChild(table);
 
 
-    // Second table (MAP)
+    /* Second table (MAP) */
+
+    // shows product categories and their respective products
     const mapTitle = document.createElement("h2");
     mapTitle.textContent = "Categories and Products";
     mapTitle.classList.add("cat-prod-title");
     modal.appendChild(mapTitle);
 
+    // Create the table element for categories and products
     const mapTable = document.createElement("table");
 
+    // Add header row to the category-product table
     const mapHeaderRow = document.createElement("tr");
     ["Category", "Product"].forEach(text => {
         const th = document.createElement("th");
@@ -56,23 +60,21 @@ function showProductTableModal(products, mapProducts) {
     });
     mapTable.appendChild(mapHeaderRow);
 
+    // Populate the table by iterating over the Map of categories
     mapProducts.forEach((productList, category) => {
         productList.forEach(product => {
             const row = document.createElement("tr");
 
+            // Each row contains the category and its product
             [category, product].forEach(value => {
                 const td = document.createElement("td");
                 td.textContent = value;
                 row.appendChild(td);
             });
-
             mapTable.appendChild(row);
         });
     });
-
     modal.appendChild(mapTable);
-
-
 
     // Create the close button using an image for aesthetic purposes
     const closeButton = document.createElement("button");
