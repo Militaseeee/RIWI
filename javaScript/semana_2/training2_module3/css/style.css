@@ -52,6 +52,9 @@ body {
 
 .text-right {
     margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* Title */
@@ -101,3 +104,84 @@ p {
     background-color: #5c0a42;
 }
 
+
+
+/* Fondo oscuro detrás del modal */
+.dark-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Contenedor del modal */
+.modal-container {
+    position: relative;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 90%;
+    max-height: 90vh;
+    width: 700px;
+    overflow-y: auto;
+}
+
+/* Título del modal */
+.modal-container h2 {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Tabla dentro del modal */
+.modal-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modal-container th,
+.modal-container td {
+    border: 1px solid #474343;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.modal-container th {
+    background-color: #719ff3;
+}
+
+/* Botón de cerrar */
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.close-icon-img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.close-icon-img:hover {
+    transform: scale(1.2);
+}
+
+.cat-prod-title {
+    margin-top: 2rem !important;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
