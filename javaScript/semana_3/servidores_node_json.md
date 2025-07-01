@@ -185,3 +185,4 @@ axios.get('https://jsonplaceholder.typicode.com/posts/1')
 4. **Métodos HTTP**: Describe brevemente para qué se usa cada uno de los métodos HTTP: GET, POST, PUT, DELETE.
 
 5.https://crudcrud.com/
+
