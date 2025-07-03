@@ -22,8 +22,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const temperature = data.main.temp;
             const humidity = data.main.humidity;
             const speedWind = data.wind.speed;
-            const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
-            const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString();
+            const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
             const { icon, description } = data.weather[0];
             // const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
             const iconUrl = `https://rodrigokamada.github.io/openweathermap/images/${icon}_t@4x.png`;
