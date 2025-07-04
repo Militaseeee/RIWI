@@ -1,0 +1,231 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Global body styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #92d8f3;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+}
+
+/* Main card container */
+.container {
+    background: #30697f;
+    backdrop-filter: blur(15px); /* Slight blur effect */
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Section title */
+h2 {
+    color: #ffffff;
+    margin-bottom: 2.5rem;
+    font-size: 2rem;
+}
+
+/* Close button (top-right X) for modal */
+.close-button {
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.close-button:hover {
+    color: #e74c3c; /* Red hover effect */
+}
+
+/* Button group on main UI */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* CRUD action buttons */
+.button-ask {
+    height: 44px;
+    width: 100%;
+    background: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+    color: #007baa;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.button-ask:hover {
+    background-color: #e0f7ff;
+    color: #005577;
+}
+
+/* Confirm button spacing */
+#confirm-button {
+    margin-top: 1rem;
+    background: #091c25;
+    color: white;
+}
+
+/* Modal dialog box */
+.modal-crud {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    background: #fff;
+    color: #333;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+/* Inputs inside modal */
+.modal-crud input[type="text"],
+.modal-crud input[type="number"] {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+/* Product table (used in 'show products') */
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: #ffffff;
+    color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table header row */
+.product-table thead {
+    background-color: #ddd;
+}
+
+.product-table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+}
+
+/* Table body cells */
+.product-table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+/* Alternate row colors for table */
+.product-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Error message text */
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* General modal content wrapper */
+#modalContent {
+    text-align: left;
+}
+
+/* Product list (for deletion) container */
+.delete-product-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Individual product item in delete list */
+.delete-product-item {
+    padding: 12px 18px;
+    border-bottom: 1px solid #e2e2e2;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.delete-product-item:last-child {
+    border-bottom: none;
+}
+
+.delete-product-item:hover {
+    background-color: #e8f7ff;
+}
+
+/* Product label + checkbox layout */
+.delete-product-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+/* Styled checkbox */
+.delete-checkbox {
+    accent-color: #007baa;
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+/* Alternate row coloring like product table  */
+.delete-product-item:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.delete-product-item:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 900; 
+    display: none; 
+}

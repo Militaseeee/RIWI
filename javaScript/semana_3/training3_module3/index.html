@@ -3,21 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
 </head>
 <body>
-    <button onclick="existingProducts()">
-        Ver productos
-    </button>
-    <button onclick="newProductFunction()">
-        Agregar 1 product
-    </button>
-    <button onclick="updateProductFunction()">
-        Actualizar
-    </button>
-    <button onclick="deleteProduct()">
-        Eliminar
-    </button>
+
+    <section class="container">
+    <h2>Product management</h2>
+
+
+    <div class="button-group">
+        <button onclick="selectCrud('show')" class="button-ask">Show products</button>
+        <button onclick="selectCrud('new')" class="button-ask">Add product</button>
+        <button onclick="selectCrud('update')" class="button-ask">Update product</button>
+        <button onclick="selectCrud('delete')" class="button-ask">Delete product</button>
+    </div>
+</section>
+
+    <div id="modalOverlay" class="modal-overlay"></div>
+
+    <dialog id="modalCrud" class="modal-crud">
+        <button class="close-button" onclick="modalCrud.close()">×</button>
+        <h3 id="modalTitle">Modal</h3>
+        <form id="modalForm" method="dialog">
+            <div id="modalContent"></div>
+            <button type="submit" class="button-ask" id="confirm-button">Confirm</button>
+            <!-- <button type="button" onclick="modalCrud.close()" class="button-ask">Cancel</button> -->
+        </form>
+    </dialog>
     
     <script src="./js/gestion_api.js" ></script>
 </body>
