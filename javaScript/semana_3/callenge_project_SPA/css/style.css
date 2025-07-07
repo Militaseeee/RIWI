@@ -12,15 +12,21 @@ body {
     background-color: #f9f9f9;
 }
 
-.app-container {
+.container {
     display: flex;
+    height: 100vh; 
+    width: 100vw;
 }
 
 /* Sidebar */
 .sidebar {
-    width: 220px;
-    background: #f2e9ff;
-    padding: 20px;
+  width: 220px;
+  background: #f2e9ff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;  /* Espacio entre los elementos (arriba, medio, abajo) */
+  height: 100%;  /* Asegura que el sidebar ocupe toda la altura */
 }
 
 .sidebar h2 {
@@ -30,49 +36,53 @@ body {
 }
 
 .profile {
-    text-align: center;
+  text-align: center;
 }
 
 .profile img {
-    width: 70px;
-    border-radius: 50%;
-    margin-bottom: 10px;
+  width: 70px;
+  border-radius: 50%;
+  margin-bottom: 10px;
 }
 
 .profile p {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .profile span {
-    font-size: 14px;
-    color: purple;
+  font-size: 14px;
+  color: purple;
+}
+
+.sidebar nav {
+  flex-grow: 1;  /* Esto asegura que el nav ocupe el espacio restante */
 }
 
 .sidebar nav ul {
-    list-style: none;
-    margin-top: 20px;
+  list-style: none;
+  padding: 0;
 }
 
 .sidebar nav ul li {
-    margin: 15px 0;
-    cursor: pointer;
+  margin: 15px 0;
+  cursor: pointer;
 }
 
 .sidebar nav ul li.active {
-    color: #fff;
-    background-color: #7300ff;
-    padding: 8px;
-    border-radius: 5px;
+  color: #fff;
+  background-color: #7300ff;
+  padding: 8px;
+  border-radius: 5px;
 }
 
 #logout {
-    margin-top: 30px;
-    background: none;
-    border: 1px solid #7300ff;
-    color: #7300ff;
-    padding: 6px 10px;
-    cursor: pointer;
-    border-radius: 5px;
+  margin-top: 30px;
+  background: none;
+  border: 1px solid #7300ff;
+  color: #7300ff;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 /* Main content */
@@ -81,8 +91,6 @@ body {
     padding: 20px;
     overflow-y: auto;
 }
-
-
 
 header h1 {
     font-size: 22px;
@@ -113,13 +121,13 @@ header button {
 }
 
 /* Parte izquierda (ícono info) */
-.top-left .icon {
+.top-right .icon {
   width: 24px;
   height: 24px;
 }
 
 /* Parte derecha (input + campana) */
-.top-right {
+.top-left {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -133,20 +141,32 @@ header button {
 
 .search-wrapper input {
   width: 100%;
-  padding: 8px 12px 8px 36px;
+  padding: 8px 36px 8px 12px; /* Cambiado: espacio a la derecha ahora */
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 .search-icon {
   position: absolute;
-  left: 10px;
+  right: 10px; /* Cambiado de left a right */
   top: 50%;
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
   opacity: 0.6;
 }
+
+/* .icon {
+  width: 32px;
+  height: 32px;
+} */
+
+/* Opcional: si quieres ajustar solo la notificación */
+.notification-icon {
+  width: 20px;
+  height: 20px;
+}
+
 
 /* Fila inferior */
 .student-actions {
@@ -155,10 +175,24 @@ header button {
   align-items: center;
 }
 
-.student-actions h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: bold;
+.actions-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre el ícono y el botón */
+}
+
+.select-arrows-icon {
+  width: 30px;  /* Ajusta el tamaño del ícono */
+  height: 30px;
+}
+
+#addUserBtn {
+  background-color: #7300ff;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 
@@ -242,4 +276,15 @@ form button {
     margin-top: 10px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-btn img, .delete-btn img {
+    width: 30px;
 }

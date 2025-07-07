@@ -1,17 +1,18 @@
+<!-- #9e9a9a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>CRUD Operations - User Admin</title>
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/style.css"/>
 </head>
 <body>
-    <div class="app-container">
+    <div class="container">
         <!-- Sidebar -->
         <aside class="sidebar">
             <h2>CRUD OPERATIONS</h2>
             <div class="profile">
-                <img src="./assets/img/admin.avif" alt="Admin" />
+                <img src="./assets/img/admin.avif" alt="Admin"/>
                 <p>Random guy</p>
                 <span>Admin</span>
             </div>
@@ -31,28 +32,31 @@
         <!-- Main Content -->
         <main class="main-content">
             <header class="header-container">
-  <!-- Fila superior -->
-  <div class="top-row">
-  <div class="top-left">
-    <img src="./assets/icons/info.svg" alt="Info" class="icon info-icon" />
-  </div>
+                <!-- Fila superior -->
+                <div class="top-row">
+                    <div class="top-right">
+                        <img src="./assets/icons/arrow-left.svg" alt="arrow" class="icon arrow-left-icon"/>
+                    </div>
+                
+                    <div class="top-left">
+                        <div class="search-wrapper">
+                            <img src="./assets/icons/search.svg" alt="Search" class="search-icon"/>
+                            <input type="text" id="searchInput" placeholder="Search..."/>
+                        </div>
+                        <img src="./assets/icons/notification.svg" alt="Notifications" class="icon notification-icon"/>
+                    </div>
+                </div>
 
-  <div class="top-right">
-    <div class="search-wrapper">
-      <img src="./assets/icons/search.svg" alt="Search" class="search-icon" />
-      <input type="text" id="searchInput" placeholder="Search..." />
-    </div>
-    <img src="./assets/icons/bell.svg" alt="Notifications" class="icon notification-icon" />
-  </div>
-</div>
+                <!-- Fila inferior -->
+                <div class="student-actions">
+                  <h1>Students List</h1>
+                    <div class="actions-wrapper">
+                        <img src="./assets/icons/select-arrows.svg" alt="select" class="icon select-arrows-icon"/>
+                        <button id="addUserBtn">Add New Student</button>
+                    </div>
+                </div>
+            </header>
 
-<!-- Fila inferior -->
-<div class="student-actions">
-  <h1>Students List</h1>
-  <button id="addUserBtn">Add New Student</button>
-</div>
-
-</header>
             <table>
                 <thead>
                     <tr>

@@ -16,8 +16,12 @@ export function renderUsers(users) {
         <td>${user.enrollNumber}</td>
         <td>${user.dateOfAdmission}</td>
         <td>
-        <button class="edit-btn" data-id="${user.id}">✏️</button>
-        <button class="delete-btn" data-id="${user.id}">🗑️</button>
+        <button class="edit-btn" data-id="${user.id}">
+            <img src="./assets/icons/pencil.svg" alt="Edit" class="edit-icon"/>
+        </button>
+        <button class="delete-btn" data-id="${user.id}">
+            <img src="./assets/icons/trash.svg" alt="Delete" class="delete-icon"/>
+        </button>
         </td>`;
 
     tbody.appendChild(row);
