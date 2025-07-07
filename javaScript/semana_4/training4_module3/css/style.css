@@ -1,0 +1,85 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background: #f4f7f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+    /* width: 40rem; 
+    height: 30rem; */
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+form input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.container-buttons {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}
+
+button {
+    cursor: pointer;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+}
+
+#saveButton {
+    background-color: #007bff;
+}
+
+#saveButton:hover {
+    background-color: #0056b3;
+}
+
+#clearButton {
+    background-color: #df2929;
+}
+
+#clearButton:hover {
+    background-color: #9e0f0f;
+}
+
+#output {
+    margin-top: 3rem;
+    color: #444;
+    font-size: 1.2rem;
+    font-weight: 600;
+    min-height: 1.5rem;
+    text-align: center;
+}
