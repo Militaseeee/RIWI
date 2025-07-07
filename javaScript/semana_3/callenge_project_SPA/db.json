@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": "83a3",
+      "name": "Cristian Penagos",
+      "email": "cristian.pf@gmmail.edu.co",
+      "phone": "3112345674",
+      "enrollNumber": "45654534534534534",
+      "dateOfAdmission": "2010-11-24"
+    },
+    {
+      "id": "f887",
+      "name": "Pablo Jimez",
+      "email": "pable.@gmaiil.com",
+      "phone": "34234242",
+      "enrollNumber": "544645654563",
+      "dateOfAdmission": "2001-05-12"
+    }
+  ]
+}
