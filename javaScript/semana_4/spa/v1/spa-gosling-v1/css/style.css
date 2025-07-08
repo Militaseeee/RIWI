@@ -1,0 +1,113 @@
+* {
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', sans-serif; 
+}
+
+body {
+    display: flex;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar {
+    width: 20%; 
+    min-width: 200px; /* Prevents the sidebar from becoming too narrow */
+    max-width: 300px;
+    background-color: #222;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    height: 100vh; 
+    overflow: hidden; /* Prevents the sidebar from overflowing its content */
+}
+
+.sidebar-header {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    white-space: nowrap; /* Prevents long lines from breaking */
+    overflow: hidden; /* Hides any overflow */
+    text-overflow: ellipsis; /* Adds "..." if text overflows */
+}
+
+.sidebar-header h1 a {
+    text-decoration: none;  
+    color: white; 
+}
+
+.sidebar-header h2 {
+    font-size: 1rem;
+    color: #ccc;
+}
+
+.sidebar-header h1 a:hover {
+    color: #818181;  
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    padding: 12px 20px;
+    margin: 5px 0;
+    display: flex; /* Aligns the icons with the text */
+    align-items: center; /* Centers the icons with the text */
+}
+
+nav a img {
+    width: 20px; /* Adjusts the icon size */
+    height: 20px;
+    margin-right: 10px; /* Adds space between the icon and text */
+}
+
+nav a:hover {
+    background-color: #444; /* Changes background color on hover */
+}
+
+.content {
+    flex-grow: 1;
+    padding: 30px;
+    background-color: #f4f4f4;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+/* Adds better spacing between sections */
+.section-main {
+    margin-bottom: 40px;
+}
+
+.section-main, h1, h2 {
+    margin-bottom: 1rem; /* Adds bottom margin to sections and headers */
+}
+
+/* Styling for paragraphs */
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px; /* Adds space after each paragraph */
+}
+
+/* Styling for lists */
+ul {
+    list-style-type: disc;
+    padding-left: 20px; /* Adds indentation to the list */
+}
+
+ul li {
+    font-size: 1rem;
+    margin-bottom: 10px; /* Adds space between list items */
+}
