@@ -1,0 +1,69 @@
+<!-- #9e9a9a -->
+<!-- npm init -y -->
+<!-- npm install -D vite -->
+<!-- npm run dev -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CRUD Operations - User Admin</title>
+    <link rel="stylesheet" href="./css/style.css"/>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <h2>CRUD OPERATIONS</h2>
+            <div class="profile">
+                <img src="./assets/img/profile-imagen.jpg" alt="Admin"/>
+                <p>Random guy</p>
+                <span>Admin</span>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/home" data-link ><img src="./assets/icons/home.png" alt="Home Icon" class="nav-icon"/>Home</a>
+                    </li>
+                    <li>
+                        <a href="/course" data-link ><img src="./assets/icons/label.png" alt="Course Icon" class="nav-icon"/>Course</a>
+                        <!-- <img src="./assets/icons/label.png" alt="Course Icon" class="nav-icon"/>
+                        <span>Course</span> -->
+                    </li>
+                    <li class="active">
+                        <!-- <img src="./assets/icons/graduation-cap.svg" alt="Users Icon" class="nav-icon"/>
+                        <span>Users</span> -->
+                        <a href="/users" data-link ><img src="./assets/icons/graduation-cap.svg" alt="Users Icon" class="nav-icon"/>Users</a>
+                    </li>
+                    <li>
+                        <a href="/payment" data-link ><img src="./assets/icons/payment.png" alt="Payment Icon" class="nav-icon"/>Payment</a>
+                        <!-- <img src="./assets/icons/payment.png" alt="Payment Icon" class="nav-icon"/>
+                        <span>Payment</span> -->
+                    </li>
+                    <li>
+                        <a href="/report" data-link ><img src="./assets/icons/report.png" alt="Report Icon" class="nav-icon"/>Report</a>
+                        <!-- <img src="./assets/icons/report.png" alt="Report Icon" class="nav-icon"/>
+                        <span>Report</span> -->
+                    </li>
+                    <li>
+                        <a href="/settings" data-link ><img src="./assets/icons/settings.png" alt="Settings Icon" class="nav-icon"/>Settings</a>
+                        <!-- <img src="./assets/icons/settings.png" alt="Settings Icon" class="nav-icon"/>
+                        <span>Settings</span> -->
+                    </li>
+                </ul>
+            </nav>
+            <button id="logout">Logout
+                <img src="./assets/icons/logout.png" alt="Logout Icon"/> <!-- Aquí está el icono -->
+            </button>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="content" class="main-content">
+        
+        </main>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+    
+</body>
+</html>

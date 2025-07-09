@@ -1,0 +1,376 @@
+/*  This block applies a global reset to remove default margins, paddings, and ensure consistency across browsers */
+* {
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family: 'Segoe UI', sans-serif; 
+}
+
+/* This sets the body's layout to a flex container, taking up the entire viewport height and width with a light background */
+body {
+  display: flex; 
+  height: 100vh; 
+  background-color: #f9f9f9; 
+}
+
+/* This block ensures the container takes up the entire viewport and uses Flexbox layout to structure content */
+.container {
+  display: flex;
+  height: 100vh; 
+  width: 100vw; 
+}
+
+/* Defines the layout of the sidebar, including fixed width, background color, padding, and Flexbox structure for child elements */
+/* Sidebar container */
+.sidebar {
+  width: 220px;
+  background: #f2e9ff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Sidebar title */
+.sidebar h2 {
+  color: #7300ff;
+  margin-bottom: 30px;
+  font-size: 1.2rem;
+}
+
+/* Profile section */
+.profile {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.profile img {
+  width: 100px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.profile p {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.profile span {
+  font-size: 14px;
+  color: purple;
+}
+
+/* Navigation menu */
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar nav ul li {
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.sidebar nav ul li.active {
+  background-color: #8c77a7;
+}
+
+.sidebar nav ul li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+  text-decoration: none;
+  color: #000;
+  border-radius: 5px;
+}
+
+.sidebar nav ul li a:hover {
+  background-color: #ded0f1;
+}
+
+/* Icon inside menu item */
+.sidebar nav ul li a img.nav-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+
+/* Styles the logout button at the bottom of the sidebar, making it look like a link with purple borders */
+#logout {
+  display: flex;
+  margin-top: auto; /* Push the button to the end of the sidebar */
+  background: none;
+  border: none;
+  color: #353535;
+  font-size: 16px;
+  padding: 10px 15px;
+  cursor: pointer;
+  align-items: center; 
+}
+
+#logout img {
+  margin-left: 10px; 
+  width: 20px; 
+  height: 20px; 
+}
+
+/* Styles the main content area, including padding, scrolling, and layout */
+.main-content {
+  flex: 1; /* Take remaining space in the flex container */
+  padding: 20px; 
+  overflow-y: auto; 
+}
+
+header h1 {
+  font-size: 22px; 
+}
+
+/* Styles for buttons in the header, with background color, padding, rounded corners, and pointer cursor */
+header button {
+  background-color: #7300ff; 
+  color: white; 
+  border: none; 
+  padding: 10px 18px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+/* Controls the layout and spacing of elements in the header, like buttons and titles */
+.header-container {
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+  margin-bottom: 20px; 
+  padding: 0 20px; /* Horizontal padding */
+}
+
+/* Aligns items in the top header row, space between for left and right-aligned items */
+.top-row {
+  display: flex; 
+  justify-content: space-between;
+  align-items: center; 
+}
+
+/* This controls the size and layout of the icon inside the top-right section */
+.top-right .icon {
+  width: 24px; 
+  height: 24px; 
+}
+
+/* Layout for the left section of the top row (input + notification bell) */
+.top-left {
+  display: flex; 
+  align-items: center; 
+  gap: 15px; 
+}
+
+/* Wraps the search input and positions the search icon inside */
+.search-wrapper {
+  position: relative; /* Position search icon relative to the input */
+  width: 250px; 
+}
+
+.search-wrapper input {
+  width: 100%; 
+  padding: 8px 36px 8px 12px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+}
+
+.search-icon {
+  position: absolute; /* Position the icon absolutely within the input */
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+  width: 16px; /* Icon size */
+  height: 16px; 
+  opacity: 0.6; /* Slightly transparent */
+}
+
+/* Size for the notification bell icon*/
+.notification-icon {
+  width: 20px; 
+  height: 20px; 
+}
+
+/* Layout for the bottom row of actions in the main content area */
+.student-actions {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+/* Wraps icons and buttons for actions, adds space between them */
+.actions-wrapper {
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+}
+
+/* .select-arrows-icon {
+  width: 10px; 
+  height: 10px; 
+} */
+
+/* Styles the add user button in the student actions section */
+#addUserBtn {
+  background-color: #7300ff; 
+  color: white; 
+  border: none;
+  padding: 10px 18px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+/* Styles for the table, including padding, borders, and text alignment */
+table {
+  width: 100%; 
+  margin-top: 20px;
+  border-collapse: collapse; 
+}
+
+thead th {
+  text-align: left;
+  padding: 12px;
+  background-color: #eee; 
+}
+
+tbody td {
+  padding: 12px; 
+  border-bottom: 1px solid #ccc; 
+}
+
+tbody tr img {
+  width: 50px;
+  border-radius: 50%; 
+}
+
+td button {
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  margin: 0 5px; /* Space between buttons */
+}
+
+/* This styles the modal (popup) window and its content, including positioning and overlay */
+.modal {
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background: rgba(0,0,0,0.5);
+  display: none; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+.modal-content {
+  background: white; 
+  padding: 30px; 
+  border-radius: 10px; 
+  width: 350px;
+  position: relative; 
+}
+
+.close-btn {
+  position: absolute; /* Positioned absolutely within modal */
+  right: 15px; 
+  top: 10px; 
+  font-size: 22px; 
+  cursor: pointer; 
+}
+
+/* Styles the form input fields and the form button */
+form input {
+  display: block; 
+  width: 100%; 
+  margin: 10px 0; 
+  padding: 8px; 
+  border-radius: 4px; 
+  border: 1px solid #ccc; 
+}
+
+form button {
+  background-color: #7300ff; 
+  color: white; 
+  border: none; 
+  padding: 10px; 
+  margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Buttons (edit & delete): Styles the edit and delete buttons inside the table */
+.edit-btn, .delete-btn {
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+}
+
+.edit-btn img, .delete-btn img {
+  width: 30px; /* Icon size for edit and delete buttons */
+}
+
+
+
+
+/* login */
+.login {
+  max-width: 400px; 
+  width: 100%;
+  background-color: #f2e9ff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  justify-self: center;
+  
+}
+
+/* Estilo del título */
+.login h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Estilos para el formulario */
+.login form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos para los labels y los inputs */
+.login label {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.login input {
+  padding: 0.8rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.login button {
+  padding: 0.8rem;
+  background-color: #8c77a7;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login button:hover {
+  background-color: #6b5b8a;
+}
