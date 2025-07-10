@@ -34,7 +34,7 @@
             <th>Phone</th>
             <th>Enroll Number</th>
             <th>Date of Admission</th>
-            <th>Actions</th>
+            <th id="actionDeleteUser">Actions</th>
         </tr>
     </thead>
     <tbody id="userTableBody"></tbody>
@@ -46,11 +46,11 @@
         <span class="close-btn">&times;</span>
         <h2 id="modalTitle">Add User</h2>
         <form id="userForm">
-            <input type="hidden" id="userId" />
+            <input type="hidden" id="userId"/>
             <input type="text" id="name" placeholder="Full Name" required/>
             <input type="email" id="email" placeholder="Email" required/>
             <input type="tel" id="phone" placeholder="Phone" required/>
-            <input type="text" id="enrollNumber" placeholder="Enroll Number" required/>
+            <input type="hidden" id="enrollNumber"/>
             <input type="date" id="dateOfAdmission" required/>
             <button type="submit">Save</button>
         </form>
@@ -64,4 +64,4 @@
     <script src="./js/ui.js"></script>
     <script src="./js/modal.js"></script> -->
 
-    <script type="module" src="./script.js"></script>
+    <script type="module" src="../script.js"></script>

@@ -1,4 +1,5 @@
 const BASE_URL = "http://localhost:3000/users";
+const BASE_URL_ROLE = "http://localhost:3000/roles"
 
 // Get all users
 export async function getUsers() {
@@ -7,6 +8,10 @@ export async function getUsers() {
 }
 
 
+export async function getRoles() {
+    const res = await fetch(BASE_URL_ROLE);
+    return res.json();
+}
 // Create a new user
 export async function createUser(user) {
     const res = await fetch(BASE_URL, {

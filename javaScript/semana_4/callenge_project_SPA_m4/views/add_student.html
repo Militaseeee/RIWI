@@ -1,0 +1,27 @@
+<section class="add-student-view">
+    <div class="form-card">
+        <h1>Add New Student</h1>
+        <div class="avatar-placeholder">
+            <img src="../assets/icons/new-user.svg" alt="User Avatar"/>
+        </div>
+        <h2>Register New Student</h2>
+        <form id="addStudentForm">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required/>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required/>
+
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" required/>
+
+            <label for="dateOfAdmission">Date of Admission</label>
+            <input type="date" id="dateOfAdmission" name="dateOfAdmission" required/>
+
+            <div class="form-actions">
+                <button type="button" class="cancel-btn" data-link href="/users">Cancel</button>
+                <button type="submit" class="save-btn">Save</button>
+            </div>
+        </form>
+    </div>
+</section>

@@ -1,13 +1,23 @@
-import { getUsers, createUser, updateUser, deleteUser } from "./js/api";
+import { getUsers, createUser, updateUser, deleteUser, getRoles } from "./js/api";
 
 // script.js
 // const BASE_URL = "http://localhost:3000/users";
+
+let counterId = 0;
 
 // INIT APP
 export async function initApp() {
   console.log("🚀 initApp executed from script.js");
 
   const users = await getUsers();
+
+  if (users.length > 0) {
+    const lastUser = users[users.length - 1];
+    counterId = Number(lastUser.id) + 1;
+  } else {
+    counterId = 1;
+  }
+
   renderUsers(users);
   setListeners();
 }
@@ -20,7 +30,7 @@ function setListeners() {
   const form = document.getElementById("userForm");
 
   if (addBtn) {
-    addBtn.addEventListener("click", openModalCreate);
+    addBtn.addEventListener("click", () => navigate("/add_student"));
   }
 
   if (closeBtn) {
@@ -33,7 +43,6 @@ function setListeners() {
     });
   }
 
-  let counterId = 3;
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -47,8 +56,8 @@ function setListeners() {
         "dateOfAdmission": formatDateToSave(form.dateOfAdmission.value),
       };
       counterId++
-      const id = form.userId.value;
 
+      const id = form.userId.value;
       if (id) {
         await updateUser(id, user);
       } else {
@@ -63,17 +72,17 @@ function setListeners() {
 }
 
 // Modal functions
-function openModalCreate() {
-  const form = document.getElementById("userForm");
-  const modal = document.getElementById("userModal");
-  const modalTitle = document.getElementById("modalTitle");
-  const userIdField = document.getElementById("userId");
+// function openModalCreate() {
+//   const form = document.getElementById("userForm");
+//   const modal = document.getElementById("userModal");
+//   const modalTitle = document.getElementById("modalTitle");
+//   const userIdField = document.getElementById("userId");
 
-  modalTitle.textContent = "Add User";
-  form.reset();
-  userIdField.value = "";
-  modal.style.display = "flex";
-}
+//   modalTitle.textContent = "Add User";
+//   form.reset();
+//   userIdField.value = "";
+//   modal.style.display = "flex";
+// }
 
 async function openModalEdit(id) {
   const users = await getUsers();
@@ -94,6 +103,16 @@ async function openModalEdit(id) {
 function closeModal() {
   const modal = document.getElementById("userModal");
   modal.style.display = "none";
+}
+
+const formatDateToSave = (inputDate) => {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const [year, month, day] = inputDate.split("-");
+  const monthAbbr = months[parseInt(month, 10) - 1];
+
+  return `${day}-${monthAbbr}-${year}`;
 }
 
 function formatDateInput(dateStr) {
@@ -127,7 +146,6 @@ function renderUsers(users) {
       </td>`;
     tbody.appendChild(row);
   });
-
   addRowListeners();
 }
 
@@ -151,14 +169,9 @@ function addRowListeners() {
   });
 }
 
-function formatDateToSave(dateStr) {
-  const date = new Date(dateStr);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = date.toLocaleString("en-US", { month: "short" });
-  const year = date.getFullYear();
-  return `${day}-${month}-${year}`;
+function random14Digits() {
+  return Math.floor(Math.random() * 9e13 + 1e13).toString();
 }
-
 
 function isAuth() {
   const result = localStorage.getItem("Auth") || null;
@@ -166,39 +179,50 @@ function isAuth() {
   return resultBool;
 }
 
-function setupLoginForm() {
-  const userAuth = "admin";
-  const passAuth = "1234";
+async function setupLoginForm() {
+  
+  const roles = await getRoles();
 
   const form = document.getElementById("login");
-
   form.addEventListener("submit", (e) => {
-    e.preventDefault();
+      e.preventDefault()
 
-    const user = document.getElementById("user").value;
-    const pass = document.getElementById("password").value;
+      const email = document.getElementById("user").value;
+      const pass = document.getElementById("password").value
+      let userVal = false;
 
-    if (user === userAuth && pass === passAuth) {
-      localStorage.setItem("Auth", "true");
-      navigate("/home");
-    } else {
-      alert("usuario o contraseña son incorrectos");
+      roles.forEach((showRole) => {
+        const userEmail = showRole.email;
+        // const role_user = showRole.role;
+        const psw = showRole.password;
+        
+        if (email === userEmail && pass === psw) {
+            localStorage.setItem("Auth", "true");
+            localStorage.setItem("UserData", JSON.stringify(showRole));
+            navigate("/home");
+            userVal = true;
+          } 
+        });
+        if (!userVal){
+          alert("username or password is incorrect");
+        }
+      });
     }
-  });
-}
 
 const buttonCloseSession = document.getElementById("logout");
 buttonCloseSession.addEventListener("click", () => {
   localStorage.setItem("Auth", "false");
+  localStorage.removeItem("UserData");
   navigate("/login");
 });
 
-// SPA router
+// SPA routerB
 const routes = {
   "/": "./index.html",
   "/users": "./views/users.html",
   "/home": "./views/home.html",
   "/login": "./views/login.html",
+  "/add_student": "./views/add_student.html",
 };
 
 document.body.addEventListener("click", (e) => {
@@ -210,6 +234,15 @@ document.body.addEventListener("click", (e) => {
 });
 
 async function navigate(pathname) {
+
+  //Bloque para reemplazar los valores de los elementos HTML con su respectivo rol de usuario 
+  const userData = await JSON.parse(localStorage.getItem("UserData"));
+  let valRol = false;
+  if (userData) {
+    document.getElementById("nameUser").textContent = userData.name;
+    document.getElementById("role").textContent = userData.role;
+  }
+  // Fin del bloque. Adiós
 
   if (!isAuth()) { pathname = "/login"; }
 
@@ -242,6 +275,7 @@ async function navigate(pathname) {
     sidebar.style.display = "none";
     main.classList.add("login-centered");
     setupLoginForm();
+    
   } else {
     const main = document.getElementById('content');
     const sidebar = document.getElementById("sidebar");
@@ -258,9 +292,49 @@ async function navigate(pathname) {
       li.classList.remove("active");
     }
   });
-
   if (pathname === "/users") {
-    initApp();
+    switch(userData.role){
+      case 'Admin':
+        initApp()
+        break;
+      case 'User':
+        await initApp()
+        const editButton = document.querySelectorAll('.edit-btn').forEach(btnEdit => {
+          btnEdit.style.display = 'none';
+        })
+        const deleteButton = document.querySelectorAll('.delete-btn').forEach(deleteBtn => {
+          deleteBtn.style.display = 'none';
+        })
+
+        const actionDelete = document.getElementById('actionDeleteUser')
+        actionDelete.style.display = 'none';
+
+        const deleteWrapper = document.getElementById('addUserBtn')
+        deleteWrapper.style.display = 'none'
+
+      default:
+        break
+    }
+  }
+
+  if (pathname === "/add_student") {
+    const form = document.getElementById("addStudentForm");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const newStudent = {
+        "id": counterId,
+        "name": form.name.value,
+        "email": form.email.value,
+        "phone": form.phone.value,
+        "enrollNumber": random14Digits(),
+        "dateOfAdmission": formatDateToSave(form.dateOfAdmission.value),
+      };
+      counterId++;
+
+      await createUser(newStudent);
+      navigate("/users");
+    });
   }
 }
 

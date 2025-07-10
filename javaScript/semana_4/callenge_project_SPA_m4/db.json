@@ -6,23 +6,109 @@
       "email": "correo@ejemplo.com",
       "phone": "1234567890",
       "enrollNumber": "12345678901234",
-      "dateOfAdmission": "08-Dec-2021"
+      "dateOfAdmission": "07-Dec-2021"
+    },
+    {
+      "id": 2,
+      "name": "Cristian ",
+      "email": "ensayando@gmailll.com",
+      "phone": "35234",
+      "enrollNumber": "324234",
+      "dateOfAdmission": "05-Sep-2024"
     },
     {
       "id": 3,
-      "name": "Cristian ",
-      "email": "ensayando@gmailll.com",
-      "phone": "352",
-      "enrollNumber": "324234",
-      "dateOfAdmission": "07-Sep-2024"
-    },
-    {
-      "id": 4,
       "name": "Daniela",
       "email": "johnbra@gmail.com",
       "phone": "352",
       "enrollNumber": "324234",
       "dateOfAdmission": "24-Mar-2008"
+    },
+    {
+      "id": 4,
+      "name": "prueba",
+      "email": "prueba@gmail.com",
+      "phone": "454353",
+      "enrollNumber": "17083515065340",
+      "dateOfAdmission": "19-Feb-2003"
+    },
+    {
+      "id": 5,
+      "name": "prueba 2",
+      "email": "prueba@gmail.com",
+      "phone": "345234523",
+      "enrollNumber": "80588132110120",
+      "dateOfAdmission": "30-Dec-2003"
+    },
+    {
+      "id": 6,
+      "name": "prueba 3",
+      "email": "prueba@gmail.com",
+      "phone": "33333333333",
+      "enrollNumber": "85937583984652",
+      "dateOfAdmission": "10-Jun-2001"
+    },
+    {
+      "id": 9,
+      "name": "prueba 4",
+      "email": "prueba@gmail.com",
+      "phone": "4534534534",
+      "enrollNumber": "67423844778835",
+      "dateOfAdmission": "19-Apr-2003"
+    },
+    {
+      "id": 10,
+      "name": "Juan",
+      "email": "john@gmail.com",
+      "phone": "555555551551111511",
+      "enrollNumber": "13238961460683",
+      "dateOfAdmission": "03-May-2800"
+    },
+    {
+      "id": 11,
+      "name": "probando",
+      "email": "prueba@gm.com",
+      "phone": "322423423",
+      "enrollNumber": "47561525232948",
+      "dateOfAdmission": "20-Feb-2003"
+    },
+    {
+      "id": 12,
+      "name": "prueba 2",
+      "email": "robinson@riwi.io",
+      "phone": "265465346531465",
+      "enrollNumber": "89167230667595",
+      "dateOfAdmission": "20-Feb-2003"
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "email": "pedro@gmail.com",
+      "name": "Pedro Caro",
+      "role": "Admin",
+      "password": "1234"
+    },
+    {
+      "id": 2,
+      "email": "daniela@gmail.com",
+      "name": "Daniela",
+      "role": "User",
+      "password": "1234"
+    },
+    {
+      "id": 3,
+      "email": "dawi@gmail.com",
+      "name": "Dawinson",
+      "role": "User",
+      "password": "1234"
+    },
+    {
+      "id": 4,
+      "email": "gabi@gmail.com",
+      "name": "Gabi",
+      "role": "Admin",
+      "password": "1234"
     }
   ]
 }
