@@ -374,3 +374,10 @@ form button {
 .login button:hover {
   background-color: #6b5b8a;
 }
+
+.login-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

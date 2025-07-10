@@ -5,7 +5,7 @@ import { getUsers, createUser, updateUser, deleteUser } from "./js/api";
 
 // INIT APP
 export async function initApp() {
-  console.log("🚀 initApp ejecutado desde script.js");
+  console.log("🚀 initApp executed from script.js");
 
   const users = await getUsers();
   renderUsers(users);
@@ -227,17 +227,26 @@ async function navigate(pathname) {
 
   history.pushState({}, "", pathname);
 
+  // if (pathname === "/login") {
+  //   const main = document.getElementById('content')
+  //   const sidebar = document.getElementById("sidebar")
+  //   sidebar.style.display = "none"
+  //   setupLoginForm();
+  // } else {
+  //   sidebar.style.display = "flex"
+  // }
 
   if (pathname === "/login") {
-    const main = document.getElementById('content')
-    content.style.display = 'flex';
-    content.style.justifyContent = 'center';
-    content.style.alignItems = 'center';
-    const sidebar = document.getElementById("sidebar")
-    sidebar.style.display = "none"
+    const main = document.getElementById('content');
+    const sidebar = document.getElementById("sidebar");
+    sidebar.style.display = "none";
+    main.classList.add("login-centered");
     setupLoginForm();
   } else {
-    sidebar.style.display = "flex"
+    const main = document.getElementById('content');
+    const sidebar = document.getElementById("sidebar");
+    sidebar.style.display = "flex";
+    main.classList.remove("login-centered");
   }
 
   // Update the .active class in the sidebar
@@ -259,4 +268,7 @@ window.addEventListener("popstate", () => {
   navigate(location.pathname);
 });
 
-navigate(location.pathname);
+// navigate(location.pathname);
+const initialPath = isAuth() ? location.pathname : "/login";
+navigate(initialPath);
+
