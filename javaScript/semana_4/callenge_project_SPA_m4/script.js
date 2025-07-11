@@ -1,9 +1,8 @@
-import { getUsers, createUser, updateUser, deleteUser, getRoles } from "./js/api";
+import { getUsers, createUser, getRoles } from "./js/api";
+import { setDateInputValidation, formatDateInput, formatDateToSave, setListeners } from "./js/form";
+import { renderUsers } from "./js/usersTable";
 
-// script.js
-// const BASE_URL = "http://localhost:3000/users";
-
-let counterId = 0;
+export let counterId = 0;
 
 // INIT APP
 export async function initApp() {
@@ -22,153 +21,6 @@ export async function initApp() {
   setListeners();
 }
 
-// FORM LOGIC
-function setListeners() {
-  const addBtn = document.getElementById("addUserBtn");
-  const closeBtn = document.querySelector(".close-btn");
-  const modal = document.getElementById("userModal");
-  const form = document.getElementById("userForm");
-
-  if (addBtn) {
-    addBtn.addEventListener("click", () => navigate("/add_student"));
-  }
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", closeModal);
-  }
-
-  if (modal) {
-    window.addEventListener("click", (e) => {
-      if (e.target === modal) closeModal();
-    });
-  }
-
-  if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const user = {
-        "id": counterId,
-        "name": form.name.value,
-        "email": form.email.value,
-        "phone": form.phone.value,
-        "enrollNumber": form.enrollNumber.value,
-        "dateOfAdmission": formatDateToSave(form.dateOfAdmission.value),
-      };
-      counterId++
-
-      const id = form.userId.value;
-      if (id) {
-        await updateUser(id, user);
-      } else {
-        await createUser(user);
-      }
-
-      const users = await getUsers();
-      renderUsers(users);
-      closeModal();
-    });
-  }
-}
-
-// Modal functions
-// function openModalCreate() {
-//   const form = document.getElementById("userForm");
-//   const modal = document.getElementById("userModal");
-//   const modalTitle = document.getElementById("modalTitle");
-//   const userIdField = document.getElementById("userId");
-
-//   modalTitle.textContent = "Add User";
-//   form.reset();
-//   userIdField.value = "";
-//   modal.style.display = "flex";
-// }
-
-async function openModalEdit(id) {
-  const users = await getUsers();
-  const user = users.find((u) => u.id == id);
-  if (!user) return;
-
-  document.getElementById("userId").value = user.id;
-  document.getElementById("name").value = user.name;
-  document.getElementById("email").value = user.email;
-  document.getElementById("phone").value = user.phone;
-  document.getElementById("enrollNumber").value = user.enrollNumber;
-  document.getElementById("dateOfAdmission").value = formatDateInput(user.dateOfAdmission);
-
-  document.getElementById("modalTitle").textContent = "Edit User";
-  document.getElementById("userModal").style.display = "flex";
-}
-
-function closeModal() {
-  const modal = document.getElementById("userModal");
-  modal.style.display = "none";
-}
-
-const formatDateToSave = (inputDate) => {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-  const [year, month, day] = inputDate.split("-");
-  const monthAbbr = months[parseInt(month, 10) - 1];
-
-  return `${day}-${monthAbbr}-${year}`;
-}
-
-function formatDateInput(dateStr) {
-  const date = new Date(dateStr);
-  return date.toISOString().split("T")[0];
-}
-
-// Render users
-function renderUsers(users) {
-  const tbody = document.getElementById("userTableBody");
-  if (!tbody) return;
-
-  tbody.innerHTML = "";
-
-  users.forEach((user) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td><img src="./assets/img/admin.avif" alt="Avatar" /></td>
-      <td>${user.name}</td>
-      <td>${user.email}</td>
-      <td>${user.phone}</td>
-      <td>${user.enrollNumber}</td>
-      <td>${user.dateOfAdmission}</td>
-      <td>
-        <button class="edit-btn" data-id="${user.id}">
-          <img src="./assets/icons/pencil.svg" alt="Edit" class="edit-icon"/>
-        </button>
-        <button class="delete-btn" data-id="${user.id}">
-          <img src="./assets/icons/trash.svg" alt="Delete" class="delete-icon"/>
-        </button>
-      </td>`;
-    tbody.appendChild(row);
-  });
-  addRowListeners();
-}
-
-function addRowListeners() {
-  document.querySelectorAll(".edit-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const id = btn.dataset.id;
-      openModalEdit(id);
-    });
-  });
-
-  document.querySelectorAll(".delete-btn").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const id = btn.dataset.id;
-      if (confirm("Are you sure you want to delete this user?")) {
-        await deleteUser(id);
-        const users = await getUsers();
-        renderUsers(users);
-      }
-    });
-  });
-}
-
 function random14Digits() {
   return Math.floor(Math.random() * 9e13 + 1e13).toString();
 }
@@ -185,29 +37,29 @@ async function setupLoginForm() {
 
   const form = document.getElementById("login");
   form.addEventListener("submit", (e) => {
-      e.preventDefault()
+    e.preventDefault()
 
-      const email = document.getElementById("user").value;
-      const pass = document.getElementById("password").value
-      let userVal = false;
+    const email = document.getElementById("user").value;
+    const pass = document.getElementById("password").value
+    let userVal = false;
 
-      roles.forEach((showRole) => {
-        const userEmail = showRole.email;
-        // const role_user = showRole.role;
-        const psw = showRole.password;
-        
-        if (email === userEmail && pass === psw) {
-            localStorage.setItem("Auth", "true");
-            localStorage.setItem("UserData", JSON.stringify(showRole));
-            navigate("/home");
-            userVal = true;
-          } 
-        });
-        if (!userVal){
-          alert("username or password is incorrect");
-        }
-      });
+    roles.forEach((showRole) => {
+      const userEmail = showRole.email;
+
+      const psw = showRole.password;
+      
+      if (email === userEmail && pass === psw) {
+          localStorage.setItem("Auth", "true");
+          localStorage.setItem("UserData", JSON.stringify(showRole));
+          navigate("/home");
+          userVal = true;
+        } 
+    });
+    if (!userVal){
+      alert("username or password is incorrect");
     }
+  });
+}
 
 const buttonCloseSession = document.getElementById("logout");
 buttonCloseSession.addEventListener("click", () => {
@@ -233,7 +85,7 @@ document.body.addEventListener("click", (e) => {
   }
 });
 
-async function navigate(pathname) {
+export async function navigate(pathname) {
 
   //Bloque para reemplazar los valores de los elementos HTML con su respectivo rol de usuario 
   const userData = await JSON.parse(localStorage.getItem("UserData"));
@@ -242,7 +94,6 @@ async function navigate(pathname) {
     document.getElementById("nameUser").textContent = userData.name;
     document.getElementById("role").textContent = userData.role;
   }
-  // Fin del bloque. Adiós
 
   if (!isAuth()) { pathname = "/login"; }
 
@@ -260,14 +111,16 @@ async function navigate(pathname) {
 
   history.pushState({}, "", pathname);
 
-  // if (pathname === "/login") {
-  //   const main = document.getElementById('content')
-  //   const sidebar = document.getElementById("sidebar")
-  //   sidebar.style.display = "none"
-  //   setupLoginForm();
-  // } else {
-  //   sidebar.style.display = "flex"
-  // }
+  if (pathname === "/home") {
+    
+    const changeImg = document.getElementById('changePicture');
+
+    if (userData.role === "User") {
+      changeImg.src = './assets/img/user.jpg';
+    } else if (userData.role === "Admin") {
+      changeImg.src = './assets/img/profile-imagen.jpg';
+    }
+  }
 
   if (pathname === "/login") {
     const main = document.getElementById('content');
@@ -293,6 +146,13 @@ async function navigate(pathname) {
     }
   });
   if (pathname === "/users") {
+    const changeImg = document.getElementById('changePicture');
+
+    if (userData.role === "User") {
+      changeImg.src = './assets/img/user.jpg';
+    } else if (userData.role === "Admin") {
+      changeImg.src = './assets/img/profile-imagen.jpg';
+    }
     switch(userData.role){
       case 'Admin':
         await initApp()
@@ -310,17 +170,17 @@ async function navigate(pathname) {
           deleteBtn.style.display = 'none';
         })
 
-        const actionDelete = document.getElementById('actionDeleteUser')
+        const actionDelete = document.getElementById('actionDeleteUser');
         actionDelete.style.display = 'none';
-
         
-
       default:
         break
     }
   }
 
   if (pathname === "/add_student") {
+    setDateInputValidation();
+
     const form = document.getElementById("addStudentForm");
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
