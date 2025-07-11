@@ -224,6 +224,7 @@ header button {
   padding: 10px 18px; 
   border-radius: 5px; 
   cursor: pointer; 
+  display: none;
 }
 
 /* Styles for the table, including padding, borders, and text alignment */
