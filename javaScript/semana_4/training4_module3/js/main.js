@@ -16,12 +16,12 @@ const enterData = () => {
     const name = capitalizeFirstLetter(nameInput.value.trim());
     const age = parseInt(ageInput.value);
  
-    if (name && !isNaN(age)) {
+    if (name && (!isNaN(age) && age > 0)) {
         localStorage.setItem('userName', name);
         localStorage.setItem('userAge', age);
 
-        console.log(`😎 userName: ${localStorage.getItem('😎 userName')}`);
-        console.log(`🎂 userAge: ${localStorage.getItem('🎂 userAge')}`);
+        console.log(`😎 userName: ${localStorage.getItem('userName')}`);
+        console.log(`🎂 userAge: ${localStorage.getItem('userAge')}`);
 
         updateInteractionCount();
 
