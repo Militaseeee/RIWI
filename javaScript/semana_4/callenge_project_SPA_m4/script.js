@@ -295,7 +295,11 @@ async function navigate(pathname) {
   if (pathname === "/users") {
     switch(userData.role){
       case 'Admin':
-        initApp()
+        await initApp()
+
+        const deleteWrapper = document.getElementById('addUserBtn')
+        deleteWrapper.style.display = 'block'
+
         break;
       case 'User':
         await initApp()
@@ -309,8 +313,7 @@ async function navigate(pathname) {
         const actionDelete = document.getElementById('actionDeleteUser')
         actionDelete.style.display = 'none';
 
-        const deleteWrapper = document.getElementById('addUserBtn')
-        deleteWrapper.style.display = 'none'
+        
 
       default:
         break
@@ -345,4 +348,3 @@ window.addEventListener("popstate", () => {
 // navigate(location.pathname);
 const initialPath = isAuth() ? location.pathname : "/login";
 navigate(initialPath);
-
