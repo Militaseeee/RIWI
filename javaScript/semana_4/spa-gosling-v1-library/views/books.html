@@ -1,0 +1,45 @@
+<header>
+  <h1>Book List</h1>
+  <div class="header-toolbar">
+    <div class="available-books-summary">
+      <strong>Available Books: <span id="availableCount">0</span></strong>
+    </div>
+
+    <div class="search-and-button">
+      <input type="text" id="searchInput" placeholder="Search by title..." />
+      <button id="addBookBtn">Add Book</button>
+    </div>
+  </div>
+</header>
+
+<table>
+  <thead>
+    <tr>
+      <th>Avatar</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>ISBN</th>
+      <th>Date of Entry</th>
+      <th id="actionBorrowBook">Borrow</th>
+      <th id="actionHide">Actions</th>
+      <!-- <th id="actionHide">Actions</th> -->
+    </tr>
+  </thead>
+  <tbody id="bookTableBody"></tbody>
+</table>
+
+<div class="modal" id="bookModal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h2 id="modalTitle">New Book</h2>
+    <form id="bookForm">
+      <input type="hidden" id="bookId" />
+      <input type="text" id="title" placeholder="Title" required />
+      <input type="text" id="author" placeholder="Author" required />
+      <input type="hidden" id="isbn" placeholder="ISBN" required />
+      <input type="date" id="dateOfEntry" required />
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>
+<script type="module" src="../js/script.js"></script>

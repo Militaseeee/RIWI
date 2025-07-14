@@ -1,0 +1,104 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "Cien Años de Soledad",
+      "author": "Gabriel García Márquezz",
+      "isbn": "9780060883287",
+      "dateOfEntry": "08-Dec-2021",
+      "borrowedBy": [
+        "Daniela"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "El Principito",
+      "author": "Antoine de Saint-Exupéry",
+      "isbn": "43490929306035",
+      "dateOfEntry": "23-Jun-2006",
+      "borrowedBy": [
+        "Daniela"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Don Quijote de la Mancha",
+      "author": "Miguel de Cervantes",
+      "isbn": "41026344162681",
+      "dateOfEntry": "20-Dec-2001",
+      "borrowedBy": []
+    },
+    {
+      "id": "4",
+      "title": "Crónica de una Muerte Anunciada",
+      "author": "Gabriel García Márquez",
+      "isbn": "34271219218338",
+      "dateOfEntry": "05-Aug-1998",
+      "borrowedBy": []
+    },
+    {
+      "id": "5",
+      "title": "Los Juegos del Hambre",
+      "author": "Suzanne Collins",
+      "isbn": "92378515213034",
+      "dateOfEntry": "14-Jul-2025",
+      "borrowedBy": []
+    },
+    {
+      "id": "6",
+      "title": "Harry Potter y la piedra filosofal",
+      "author": "J.K. Rowling",
+      "isbn": "28364418437285",
+      "dateOfEntry": "17-Jun-2025",
+      "borrowedBy": []
+    },
+    {
+      "id": "7",
+      "title": "Matilda",
+      "author": "Roald Dahl",
+      "isbn": "45374200545365",
+      "dateOfEntry": "17-Feb-2009",
+      "borrowedBy": []
+    },
+    {
+      "id": "8",
+      "title": "Alicia en el País de las Maravillas",
+      "author": "Lewis Carroll",
+      "isbn": "32705144002038",
+      "dateOfEntry": "29-Nov-2017",
+      "borrowedBy": []
+    },
+    {
+      "id": "9",
+      "title": "Harry Potter y el Prisionero de Azkaban",
+      "author": "J.K. Rowling",
+      "isbn": "84702202622822",
+      "dateOfEntry": "01-Jul-2010",
+      "borrowedBy": []
+    },
+    {
+      "id": "10",
+      "title": "1984",
+      "author": "George Orwell",
+      "isbn": "26715663180074",
+      "dateOfEntry": "11-Jul-2025",
+      "borrowedBy": []
+    }
+  ],
+  "roles": [
+    {
+      "id": "1",
+      "email": "admin@biblioteca.com",
+      "name": "Fernando",
+      "role": "Admin",
+      "password": "1234"
+    },
+    {
+      "id": "2",
+      "email": "user@biblioteca.com",
+      "name": "Daniela",
+      "role": "User",
+      "password": "1234"
+    }
+  ]
+}
