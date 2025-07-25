@@ -1,0 +1,59 @@
+CREATE TABLE blood_type (
+    id_blood INT AUTO_INCREMENT PRIMARY KEY,
+    blood_type VARCHAR(5) NOT NULL
+);
+
+CREATE TABLE specialist_doctor (
+    id_specialist INT AUTO_INCREMENT PRIMARY KEY,
+    name_espec VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE doctor (
+    id_doctor INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    telephone VARCHAR(10),
+    email VARCHAR(100),
+    experience_year INT,
+    salary DECIMAL(10, 2),
+    id_specialist INT,
+    FOREIGN KEY (id_specialist) REFERENCES specialist_doctor(id_specialist)
+);
+
+CREATE TABLE patients (
+    id_patient INT AUTO_INCREMENT PRIMARY KEY,
+    name_complete VARCHAR(100) NOT NULL,
+    born_date DATE,
+    gender VARCHAR(10),
+    number_cont VARCHAR(10),
+    email VARCHAR(100),
+    address VARCHAR(100),
+    id_blood INT,
+    FOREIGN KEY (id_blood) REFERENCES blood_type(id_blood)
+);
+
+CREATE TABLE status_appointment (
+    id_status INT AUTO_INCREMENT PRIMARY KEY,
+    status_desc VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE appointment (
+	id_appointment INT AUTO_INCREMENT PRIMARY KEY,
+	date DATE NOT NULL,
+	hour TIME NOT NULL,
+    reason_cons VARCHAR(250),
+    id_status INT,
+    id_patient INT,
+    id_doctor INT,
+    FOREIGN KEY (id_status) REFERENCES status_appointment(id_status),
+	FOREIGN KEY (id_patient) REFERENCES patients(id_patient),
+	FOREIGN KEY (id_doctor) REFERENCES doctor(id_doctor)
+);
+
+CREATE TABLE diagnoses (
+    id_diagnoses INT AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(250) NOT NULL,
+    indication_doc VARCHAR(250) NOT NULL,
+    medic_prei VARCHAR(250) NOT NULL,
+    id_appointment INT,
+    FOREIGN KEY (id_appointment) REFERENCES appointment(id_appointment)
+);
