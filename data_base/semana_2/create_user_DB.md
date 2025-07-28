@@ -35,3 +35,5 @@ Para quitar un permiso previamente dado, por ejemplo INSERT, se usa el comando R
 REVOKE INSERT ON empleadosdb.empleados FROM 'cris'@'localhost';
 ```
 Esto hará que el usuario cris ya no pueda insertar nuevos registros en la tabla empleados, pero podrá seguir realizando las acciones para las que aún tenga permisos (como SELECT o UPDATE).
+
+📝 **Nota:** Los permisos solo pueden ser revocados por el **usuario que los otorgó** o por un **administrador** (como `root`). Si intentas hacer `REVOKE` desde un usuario que no tiene autoridad sobre esos permisos, recibirás un error de acceso denegado.
