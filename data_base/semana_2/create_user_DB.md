@@ -28,3 +28,10 @@ USE empleadosdb;
 
 SELECT * FROM empleados;
 ```
+## ❌ REVOKE: Retirar permisos previamente otorgados
+Para quitar un permiso previamente dado, por ejemplo INSERT, se usa el comando REVOKE. Esto es útil si quieres limitar las acciones que puede realizar un usuario.
+
+```sql
+REVOKE INSERT ON empleadosdb.empleados FROM 'cris'@'localhost';
+```
+Esto hará que el usuario cris ya no pueda insertar nuevos registros en la tabla empleados, pero podrá seguir realizando las acciones para las que aún tenga permisos (como SELECT o UPDATE).
