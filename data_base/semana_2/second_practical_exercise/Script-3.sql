@@ -43,6 +43,8 @@ SELECT COUNT(*) AS total_users FROM users;
 
 SELECT name, year FROM users ORDER BY year DESC LIMIT 1
 
+SELECT name, year FROM users WHERE year = (SELECT MAX(year) FROM users);
+
 SELECT name, year FROM users ORDER BY year ASC LIMIT 1
 
 SELECT * FROM users WHERE city = 'Medellín';
