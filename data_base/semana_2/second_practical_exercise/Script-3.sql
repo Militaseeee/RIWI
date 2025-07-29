@@ -49,6 +49,8 @@ SELECT name, year FROM users ORDER BY year ASC LIMIT 1
 
 SELECT name, year FROM users WHERE year = (SELECT MIN(year) FROM users) ORDER BY name ASC;
 
+SELECT name, year FROM users WHERE year = (SELECT MIN(year) FROM users) AND name LIKE 'A%' ORDER BY name ASC;
+
 SELECT * FROM users WHERE city = 'Medellín';
 
 SELECT COUNT(*) AS active_users FROM users WHERE isActive = 1
