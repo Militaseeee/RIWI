@@ -1,0 +1,1001 @@
+name,year,grade,city,isActive
+Purificación Rivero Arjona,39,4.3,Barranquilla,True
+José Mari Torre-Quirós,31,4.9,Barranquilla,False
+Jorge Gastón Gil Vargas,34,4.9,Cali,True
+Epifanio Chaves Bustamante,47,2.4,Bogotá,True
+Rosalía Dionisia Collado Menéndez,54,4.4,Cartagena,True
+Pánfilo Benavent Murillo,34,2.3,Medellín,False
+Manuelita Cabrero Otero,45,3.7,Cali,False
+Estela Fuente Tapia,35,3.8,Bogotá,False
+Teresita Vázquez Juliá,43,4.6,Cali,True
+Samuel Alcalá Bueno,50,4.7,Medellín,False
+Olimpia Abella Uriarte,60,4.5,Bucaramanga,True
+Daniela Morell Barros,54,3.5,Manizales,False
+Álvaro Girona,30,4.2,Bucaramanga,True
+Samu de Samper,27,4.8,Bogotá,True
+Apolinar Montero Verdejo,24,4.4,Barranquilla,True
+Asunción Mata Manuel,20,5.0,Cartagena,False
+Leocadio Méndez Frutos,21,2.9,Cali,True
+Maite Maristela Maestre Salgado,50,3.0,Cartagena,True
+Marc Plaza Molins,53,3.6,Cali,False
+Dalila Manrique-Espejo,20,3.8,Barranquilla,False
+Segismundo Estévez,51,2.7,Bogotá,True
+Mariano Juan Tamayo,26,2.1,Bucaramanga,False
+Arsenio Castillo Conde,45,2.2,Bucaramanga,True
+Tadeo Bernat Posada,24,4.8,Manizales,True
+Eliana Vélez,59,4.8,Cartagena,False
+Teobaldo de Rius,60,3.6,Cartagena,True
+Eli Sanjuan-Ugarte,28,4.7,Cartagena,False
+Anna Morata Carlos,52,2.8,Barranquilla,False
+Maristela Naranjo Falcón,20,3.0,Medellín,False
+Adán del Caro,52,3.9,Manizales,True
+Gilberto de Méndez,30,2.0,Cali,True
+Sabina Barrios Cabrero,60,2.7,Manizales,True
+Teófilo Gilabert Arrieta,36,3.3,Medellín,True
+Melisa Benavent-Amor,24,4.6,Bogotá,True
+Maximino Fabregat Carretero,51,3.9,Cartagena,True
+Apolonia Pellicer Carmona,16,2.4,Bogotá,True
+Marcio Almeida Ferreras,40,2.3,Manizales,True
+Plinio Casals Tello,17,3.8,Bogotá,True
+Prudencio Barriga,60,2.4,Bogotá,True
+Lalo Roig Cadenas,58,2.1,Barranquilla,True
+Andrés Giner-Bello,31,2.2,Medellín,False
+Gabino Isaías Escribano Barriga,37,3.3,Medellín,False
+Josefina Ariza,17,3.8,Bucaramanga,False
+Armida Odalis Posada Flores,27,2.8,Bucaramanga,False
+Gastón Sosa-Dominguez,51,2.5,Bucaramanga,True
+Rodolfo Barco,18,4.4,Bogotá,True
+Telmo Cáceres Noriega,36,3.6,Medellín,False
+Dionisia Carpio,57,2.5,Barranquilla,False
+Águeda Isaura Díez Alcalde,51,4.6,Cali,False
+Nieves Redondo Verdugo,39,4.5,Cali,True
+Moreno Gaspar Pont Iglesia,50,4.1,Barranquilla,True
+Lisandro Alberola Seco,36,4.2,Cartagena,False
+Florencio Arroyo Lucas,23,2.7,Barranquilla,False
+Dimas Tirado Ortuño,54,2.9,Cali,True
+Elvira Nerea Palomar Cazorla,60,2.9,Bucaramanga,False
+Guillermo Reinaldo Ribas Berrocal,56,2.2,Cartagena,True
+Manuel Fernandez Múñiz,59,3.0,Bogotá,True
+Dimas Gisbert Samper,55,3.3,Bucaramanga,False
+Olimpia Ribas Angulo,17,3.2,Bucaramanga,False
+Trini Ripoll Artigas,57,4.1,Bogotá,False
+Jacinto Bartolomé Jove,19,2.8,Bogotá,False
+Jacinto Álamo Torrens,48,4.7,Cartagena,True
+María Del Carmen de Arias,17,3.5,Cali,False
+Eufemia Miguel Solera,18,4.4,Manizales,False
+Sandalio Ribes Fabra,27,3.6,Bucaramanga,True
+Melisa de Castrillo,23,5.0,Barranquilla,False
+Herberto Rios Molina,35,2.0,Medellín,True
+Custodio Alcaraz Abril,58,3.6,Medellín,True
+María José Cabañas,22,3.8,Bogotá,False
+Benigno Fiol,32,4.1,Bogotá,True
+Enrique Omar Esparza Cabrera,45,4.6,Barranquilla,True
+Tania Puente Bertrán,16,2.8,Barranquilla,True
+Emigdio Santamaría Carmona,31,2.4,Cartagena,False
+Bonifacio Viñas-Oliver,22,4.6,Cali,True
+Tristán Cortes Lopez,17,2.1,Bucaramanga,False
+Alfonso Armas Fuster,50,2.9,Cali,True
+León Miranda-Pedraza,59,3.8,Barranquilla,False
+Yéssica Arnal-Urrutia,55,3.3,Manizales,True
+Micaela Rozas Perales,28,3.1,Cali,True
+Carmina de Peña,23,2.5,Cali,False
+Emelina Agullo-Chacón,38,4.2,Cali,True
+Elpidio Mínguez Nebot,17,2.8,Bogotá,False
+Paca Bueno Neira,38,3.2,Cartagena,True
+Alicia Alondra Lerma Céspedes,33,2.3,Bucaramanga,True
+Lupe Mancebo Paniagua,18,2.9,Manizales,True
+Maite Castilla Marcos,34,3.2,Cali,False
+Jorge Heras Asensio,41,2.3,Cartagena,False
+Chuy Tiburcio Zabala Belda,45,3.0,Manizales,False
+Heriberto Silvestre Moya Martínez,22,3.4,Bucaramanga,False
+Asunción Cabezas Teruel,42,2.1,Cali,True
+Evangelina Nuñez Casanova,25,3.9,Barranquilla,True
+Azahar Valenciano Roldan,19,4.4,Bogotá,True
+Eutropio Naranjo Cortés,18,3.2,Medellín,False
+Matías Peña Bonet,50,3.6,Barranquilla,False
+Sancho Blazquez Figuerola,52,4.1,Bogotá,False
+Américo del Aguiló,20,3.1,Cali,True
+Haroldo Villena Manjón,42,2.6,Medellín,True
+Águeda Torres Gaya,59,2.1,Cartagena,False
+Anna Pedrosa Gimeno,58,2.6,Barranquilla,False
+Luís Diaz-Rosado,31,2.6,Medellín,True
+Gastón Cardona,54,2.4,Bogotá,False
+Segismundo Amorós Zaragoza,39,3.1,Manizales,True
+Primitiva Franch Carrera,21,5.0,Barranquilla,True
+Gisela Jerez Galan,51,3.2,Bucaramanga,False
+Sabas Garzón Coll,48,3.5,Cali,False
+Conrado Sedano Pineda,46,3.9,Manizales,True
+Magdalena Corbacho Calvo,49,3.8,Bogotá,True
+Lara Brunilda Ramis Rocha,36,4.1,Bucaramanga,False
+Leocadia Mora,35,2.1,Bogotá,False
+Leticia Franch Gilabert,53,4.4,Manizales,False
+Francisco Monreal Montserrat,52,2.9,Bucaramanga,False
+Juan Francisco Colomer Jimenez,19,4.4,Cartagena,True
+Rita Calixta Pinilla Mariscal,19,2.7,Medellín,False
+Ana Sofía Blazquez Villalonga,15,4.3,Barranquilla,False
+Anacleto Gomila Castrillo,25,4.4,Manizales,False
+Eutimio Alcántara Sanabria,38,3.5,Cartagena,True
+Tere Cuevas Comas,51,2.3,Manizales,True
+Florencia Vazquez Piña,42,4.7,Bogotá,False
+Lidia Aragonés,49,4.7,Barranquilla,False
+Apolonia Villaverde-Benito,39,3.8,Bogotá,True
+Yolanda Fábregas Manjón,57,4.7,Bucaramanga,True
+Xiomara del Toledo,34,3.5,Cali,False
+María Fernanda Guillen Almagro,19,3.5,Cali,False
+Raimundo Espada Mate,41,3.2,Barranquilla,True
+Mariana Iñiguez,25,3.9,Bogotá,True
+Ana Sofía Uriarte Juárez,33,4.2,Cali,True
+Rolando Herminio Plana Pla,17,3.4,Bogotá,False
+Ceferino Castejón Haro,53,4.2,Bucaramanga,True
+Pánfilo Severino Múñiz Baquero,37,3.2,Cartagena,False
+Jose Angel Rios Chico,39,3.4,Medellín,False
+Vilma Bilbao Cordero,24,2.1,Cartagena,True
+Guiomar Aranda Solano,55,3.0,Bucaramanga,False
+Jesusa Arévalo Cadenas,27,3.2,Manizales,False
+Reyes Cordero Almagro,22,4.6,Cartagena,False
+Marcelino Cazorla Morante,54,3.9,Cali,True
+Pancho Olivares Ferrero,58,4.1,Cali,True
+Rita Trujillo Cantero,39,4.4,Bucaramanga,True
+Marcos Solera Nebot,48,4.6,Bogotá,True
+Néstor Marti Castejón,40,3.3,Manizales,True
+Rosalía Marin Carrión,44,3.1,Bucaramanga,True
+Teodora Fajardo,17,4.7,Medellín,False
+Rosendo Pou Sales,31,4.7,Cartagena,True
+Prudencia Farré Sarabia,29,2.3,Manizales,False
+Rosa Benet Arribas,47,2.9,Medellín,True
+Jose Carlos Jaume Amor,42,4.7,Barranquilla,True
+Natividad Garzón,21,3.2,Medellín,False
+Arturo del Vendrell,24,4.2,Medellín,False
+Baudelio Camilo Rojas Roca,42,4.1,Medellín,False
+Baldomero Ricart Barros,35,4.2,Medellín,False
+Hipólito Costa Anglada,19,2.4,Bucaramanga,True
+Irene Rincón Andrés,37,3.0,Medellín,True
+Ágata Morata Iriarte,38,2.2,Bogotá,True
+Gabriel Bejarano Carrión,15,2.6,Bucaramanga,True
+Nydia Andreu Ojeda,15,2.9,Bucaramanga,True
+Carmina Agustín Gual,53,2.7,Bogotá,True
+Andrea Clemente Galiano,44,2.3,Cali,False
+Cristian Casal Aguilar,23,2.1,Bogotá,False
+Gerónimo Onofre Amat Guerrero,36,3.4,Cali,False
+Ciro Santiago Capdevila,50,3.9,Bogotá,True
+Fabiola Jordá Castillo,21,3.6,Cali,True
+Cristóbal Paredes Naranjo,39,4.7,Bogotá,True
+Emelina Marti Morillo,35,3.5,Bogotá,True
+Manu Berrocal Calderon,33,3.1,Bucaramanga,True
+Marisa del Crespi,23,3.8,Barranquilla,True
+Viviana Collado Casares,59,2.2,Barranquilla,False
+Fausto de Guzmán,50,3.3,Bogotá,False
+Esteban Perales Rivas,34,3.9,Medellín,True
+Tito Catalán Almansa,43,3.9,Bucaramanga,True
+Angélica Beltran Catalán,39,3.2,Barranquilla,False
+Emperatriz Riera Cisneros,43,2.6,Cali,False
+Ileana Martí-Pacheco,20,4.9,Manizales,True
+Edelmiro Sales Peiró,32,2.3,Cartagena,True
+Amparo Peñalver,59,3.3,Barranquilla,True
+Adelia Rincón Montes,41,3.3,Bogotá,False
+Clara Peral Marcos,36,4.8,Bogotá,False
+Apolonia Esteve Camps,44,3.9,Medellín,False
+Basilio Correa-Salmerón,28,2.9,Manizales,False
+Catalina Robles Rosales,54,3.4,Bogotá,False
+Duilio Santana Niño,22,4.3,Bucaramanga,False
+Bibiana Padilla,49,3.8,Barranquilla,False
+Melania Bolaños Tomas,20,4.0,Manizales,True
+Eugenio Abellán,49,4.3,Cali,True
+María Pilar Sevilla Aguilera,22,2.8,Bucaramanga,True
+Eustaquio Carbó,15,2.8,Cartagena,False
+Leandro Marco Costa Rodrigo,43,2.3,Cali,False
+Araceli Valenciano Guerra,33,4.6,Bucaramanga,True
+Rafaela del Losada,53,2.3,Medellín,False
+Benito León Armas,34,3.6,Medellín,True
+Eduardo Puig Zorrilla,25,2.2,Manizales,False
+Olimpia Prieto-Sales,33,3.6,Cartagena,True
+Raúl Iriarte Otero,49,2.3,Bucaramanga,False
+Tristán René Ferrández Blázquez,32,2.9,Cali,True
+Andrés Felipe Jáuregui Mayoral,25,2.4,Medellín,False
+Evita de Ibañez,40,3.8,Bogotá,False
+Anastasio Ribera Manjón,37,3.9,Bucaramanga,False
+Juan Bautista Bonifacio Zabala Gallo,28,3.4,Bucaramanga,False
+Aránzazu del Quintanilla,46,4.0,Medellín,False
+Esteban Salamanca-Peral,34,2.4,Barranquilla,True
+Maxi Cervera-Crespo,54,2.6,Cali,False
+Pablo Carreño Pizarro,40,4.7,Medellín,True
+Marta Solé Chaparro,58,4.6,Bucaramanga,False
+Nayara del Pablo,15,3.1,Medellín,True
+Perlita Ribes Gibert,32,4.6,Bucaramanga,False
+Laura Valls Monreal,29,2.4,Cartagena,False
+Modesta Barrena Saldaña,27,2.3,Barranquilla,False
+Calixto Ramón Valbuena Badía,39,2.5,Barranquilla,False
+Concepción Alba Padilla Soto,24,3.3,Bucaramanga,True
+Victoria Agustín Zurita,48,2.9,Bogotá,True
+Olegario Bertrán Prats,43,3.0,Barranquilla,False
+Geraldo Armengol Carmona,46,3.2,Bogotá,True
+Abril Elba Marco González,43,4.8,Cartagena,True
+Remigio Maestre Feijoo,39,2.1,Bucaramanga,True
+Isaac Serna Murillo,26,3.1,Bucaramanga,True
+Carla Muro Robles,29,3.8,Cartagena,True
+Brunilda Salvà Coloma,60,4.6,Manizales,False
+Estela Castelló,37,3.2,Medellín,False
+Xavier Estévez,52,3.4,Cali,False
+Febe Porcel Roma,28,3.0,Medellín,True
+Gema Gimeno Ferrández,18,2.5,Medellín,False
+Clara Ayala Pont,56,2.0,Medellín,False
+Demetrio Blazquez Estévez,58,2.7,Cartagena,False
+Amparo Durán Guijarro,50,4.8,Barranquilla,True
+Emma María José Bolaños Vigil,36,3.8,Cartagena,True
+Rogelio Valentín Osuna Reina,35,3.0,Barranquilla,False
+Amelia Villalonga Ros,31,2.1,Medellín,True
+Jenny Trillo-Iñiguez,38,2.2,Manizales,False
+Concepción Navas Larrañaga,27,4.5,Cali,False
+Alfredo Badía Cánovas,34,3.6,Barranquilla,False
+Abril Manjón Aguilar,45,3.0,Bucaramanga,True
+Amílcar Roman Girona,17,2.9,Cartagena,True
+Gisela Manuela Giner Santiago,15,3.4,Bucaramanga,False
+Fortunato Calatayud,18,4.8,Barranquilla,False
+Verónica Anselma Montaña Moraleda,44,3.3,Medellín,True
+Jessica del Jaume,30,2.3,Manizales,True
+Juan Carlos Arregui Falcón,41,4.7,Bogotá,False
+Anita Gallego Zamorano,54,2.2,Barranquilla,False
+Cecilia Fortuny Iglesias,17,4.9,Bogotá,False
+Fabricio Juan Planas Iñiguez,29,2.4,Manizales,False
+Fabiola Heredia Arribas,37,3.0,Barranquilla,True
+Leoncio Angelino Agullo Serna,50,4.7,Cartagena,True
+Paloma Ríos Asenjo,60,2.9,Barranquilla,False
+Leire Serna Sacristán,49,3.9,Cali,True
+Aristides Bertrán Hernando,16,2.4,Manizales,True
+Severiano Corral Riba,26,4.2,Bogotá,True
+Isidro Benítez,33,4.6,Bucaramanga,True
+Manuelita Prado Ariza,49,3.5,Manizales,True
+Edelmiro Trillo Gimeno,22,3.2,Cali,True
+Sosimo Lorenzo Ortuño,51,3.1,Bucaramanga,False
+Irma Campo Machado,29,4.2,Bogotá,True
+Macarena Rocío Fortuny Martin,48,2.9,Cali,True
+Lola Sevilla Julián,38,3.9,Cali,True
+David Alegre-Carrera,23,4.4,Cartagena,False
+Rita Olivia Cabeza Duque,38,3.8,Medellín,True
+Diana Gibert Luís,40,2.5,Bogotá,True
+Raimundo Villalba Romero,23,4.3,Manizales,False
+Benjamín Planas Llamas,51,4.3,Bogotá,True
+Rafa Palomar Gras,23,4.4,Manizales,False
+Nadia del Giralt,37,3.8,Bogotá,False
+Anacleto del Morán,21,3.8,Medellín,False
+Glauco del Madrid,46,3.4,Medellín,True
+Carlota Cervantes-Alcántara,50,4.0,Bucaramanga,False
+Ligia del Pedraza,45,3.6,Bucaramanga,True
+Mercedes Amaya-Castilla,31,2.4,Barranquilla,True
+Calixta Elorza Vicens,35,4.4,Barranquilla,True
+Borja Fábregas Valdés,28,2.1,Bucaramanga,True
+Raquel García-Gutierrez,36,4.6,Bucaramanga,True
+Saturnino Guillen Planas,31,3.0,Bogotá,False
+María Fernanda Cazorla Valentín,16,3.1,Cartagena,True
+Mario Amo Zurita,55,2.5,Medellín,False
+Felisa Laura Sarmiento Mendizábal,55,2.2,Bogotá,True
+Damián Cánovas Uría,15,2.7,Bucaramanga,False
+Magdalena Mir Bermúdez,19,4.5,Cali,False
+Bruno Querol-Feijoo,23,4.7,Bogotá,False
+Roberta Manzanares Plana,42,2.4,Cali,True
+Cristóbal Arenas Miró,56,3.0,Manizales,False
+Francisco Javier del Gonzalez,39,2.0,Cali,False
+Francisco Jose Cámara-Mayol,17,3.7,Medellín,False
+Gaspar Barragán Corbacho,39,2.5,Cartagena,True
+Ainoa Tudela Barriga,54,4.6,Cartagena,True
+Dionisio Arrieta Alberola,20,3.0,Manizales,True
+Nacho del Batlle,30,4.8,Manizales,True
+Francisco Jose Rocamora Cerdán,58,3.7,Bucaramanga,True
+Jacobo Rozas,42,4.8,Cartagena,True
+Gastón Mesa Elorza,54,3.9,Bucaramanga,True
+Pascuala Real Piñeiro,54,3.8,Cali,False
+Hernando Laguna Sevillano,39,2.1,Medellín,False
+Lorenzo Casado Rebollo,20,3.1,Bucaramanga,True
+Carlota Acero Valle,44,2.7,Cali,True
+María Vilaplana Colomer,40,3.0,Manizales,False
+Fidel Gámez Egea,40,2.0,Cartagena,False
+Aitor de Diéguez,50,3.4,Medellín,False
+Ignacio Calleja Sebastián,58,2.1,Barranquilla,True
+Marino Arjona Iriarte,40,3.0,Medellín,True
+Rosenda Peñas Amores,32,4.2,Medellín,False
+Jose Ramón Borrás Palma,58,4.0,Bucaramanga,False
+Nico Carlos Sedano Guzman,58,4.3,Manizales,False
+Felipa Cámara,39,4.9,Cali,True
+Evangelina Lerma Ugarte,22,3.7,Cali,True
+Adoración Mercader Maldonado,52,4.0,Cartagena,False
+José de Jáuregui,25,4.7,Bogotá,False
+Javier Prats Carretero,15,3.8,Medellín,True
+Fanny Valcárcel Azcona,37,3.1,Bucaramanga,False
+Elías Aramburu Izquierdo,35,3.5,Barranquilla,False
+Odalys Manjón-Galan,25,2.0,Bogotá,True
+Lorena Nieto,43,2.4,Medellín,False
+Silvia Iglesia Gallardo,57,4.5,Manizales,False
+Lorenzo Mur Herrera,54,2.6,Cartagena,False
+Nereida Osuna-Cámara,32,4.8,Bogotá,True
+Fito Agullo Azcona,19,4.0,Bogotá,True
+Calixta Ocaña-Parejo,47,3.9,Cartagena,False
+Matías Eugenio Moraleda Uría,42,2.8,Cali,True
+María Carmen Rosa Domínguez,42,4.3,Manizales,False
+Rufino Chico Arranz,31,3.6,Cartagena,False
+Begoña Noguera Agustí,36,2.6,Manizales,False
+Yéssica Jiménez Expósito,24,4.5,Manizales,True
+Leonardo Rodrigo Lopez,57,4.1,Manizales,False
+Juan Manuel Doménech Barroso,38,3.4,Medellín,False
+Luis Miguel Canet Varela,55,3.8,Manizales,True
+María Del Carmen del Royo,16,3.1,Bogotá,True
+Fabricio López-Alcalde,55,3.1,Bucaramanga,False
+Reyes Lozano Jordá,16,4.2,Bogotá,True
+Lucila del Nogués,32,2.6,Manizales,False
+Patricio Rosales,19,3.7,Bogotá,False
+Telmo Aguado Vidal,47,4.7,Manizales,True
+Ruben Plana Paniagua,27,2.5,Medellín,False
+Alicia Requena Gracia,55,3.2,Cali,False
+Gerardo Ángel Cuadrado,42,4.6,Manizales,False
+Maximiano Pablo,54,3.0,Cali,True
+Agustina Ibañez Herranz,46,2.0,Cali,True
+Cirino Rivera-Bermejo,40,3.2,Manizales,False
+Jacinta Guzmán-Sancho,59,4.6,Medellín,False
+Visitación Cabrera,37,4.5,Bogotá,False
+Celestino Saez,35,4.5,Barranquilla,False
+Ignacio Prat Llabrés,48,2.4,Medellín,False
+Isaías Palacio-Mosquera,38,2.0,Bogotá,True
+Fabio Andrés Ugarte,57,3.6,Medellín,False
+Rico Iglesia Franco,16,2.9,Bogotá,False
+Gabriela Ruano Porras,41,4.0,Cartagena,True
+Lupe Sola Pacheco,40,4.6,Cartagena,True
+Begoña Lopez-Mosquera,25,2.4,Bogotá,False
+Heliodoro Sáez Vélez,60,3.9,Manizales,True
+Alfonso Bertrán Olivera,48,2.1,Cartagena,False
+Adela Baños Farré,26,3.0,Cartagena,True
+Nico Sotelo Aroca,20,3.7,Manizales,False
+Áurea Amaya Miranda,27,4.4,Cali,False
+Yolanda Casares Llopis,31,3.6,Barranquilla,True
+Nazaret Cisneros Coloma,43,3.7,Medellín,True
+Teresita Maza Vidal,56,3.5,Manizales,False
+Ceferino Casares Cañete,19,2.6,Manizales,False
+Olalla Artigas Vizcaíno,54,2.7,Barranquilla,True
+Sergio Ponce Escribano,60,3.0,Bucaramanga,True
+Rosalía Blanch Berrocal,45,4.3,Medellín,True
+Carmelita del Fortuny,48,3.0,Manizales,True
+Fernando Izaguirre-Jove,21,3.3,Cali,False
+Jessica Cortina,36,4.5,Cartagena,False
+Mamen Corominas Arias,55,2.4,Cali,True
+Carmen Vila-Aragón,26,4.2,Medellín,False
+Salomé Bellido Ferrando,53,2.6,Barranquilla,True
+María Jesús Gómez Segarra,59,2.9,Barranquilla,True
+Candela Múgica,53,4.3,Bucaramanga,True
+Jordán Barceló Blanca,37,4.8,Medellín,False
+Fabiana Acedo,18,3.3,Cartagena,False
+Baldomero Roma Ortuño,58,2.9,Manizales,False
+Jennifer Narváez-Pineda,41,2.5,Barranquilla,False
+Fidela Carrera,27,4.8,Medellín,False
+Federico Alsina Esparza,21,2.4,Cali,True
+Agapito Nebot Ferrando,26,3.2,Bucaramanga,True
+Hilario Barrios Merino,35,3.4,Cartagena,False
+Zaida Azorin Diéguez,45,2.2,Medellín,False
+Ágata Berenguer Real,31,2.1,Cartagena,True
+Isidro Pacheco Jaume,20,3.0,Medellín,False
+Lope Teobaldo Santiago Revilla,17,2.5,Cartagena,False
+Albino Santiago Laguna,17,2.0,Cali,True
+Guillermo Baró,50,4.1,Bogotá,True
+Ariadna Casal Amo,25,3.9,Bogotá,False
+Ainara Elorza Quintanilla,16,3.4,Bucaramanga,False
+Nuria Montserrat Alcalde Moraleda,17,2.7,Bucaramanga,False
+Rosa Valcárcel Tamayo,36,2.5,Bogotá,False
+Timoteo Aznar Quesada,29,2.5,Barranquilla,False
+Alberto Villalobos-Báez,38,4.6,Bogotá,False
+Flavio Palmer Cabello,51,4.3,Bogotá,True
+Alejandra Correa Villalonga,58,3.2,Manizales,True
+Alejandro Aarón Peñas Nebot,24,2.1,Manizales,False
+Leocadio Collado Cueto,47,2.0,Medellín,True
+Rosario Cuenca Herrera,51,3.8,Manizales,True
+Eulalia Aitana Tomas Puig,58,4.4,Manizales,True
+Daniel Hernandez Lucena,41,3.3,Bucaramanga,False
+Carlota Gárate Ortuño,60,2.7,Bogotá,False
+Ceferino del Sierra,47,2.6,Barranquilla,True
+Valentina Cervera Pomares,23,3.2,Bucaramanga,False
+Regina Alcalde-Cámara,21,3.3,Barranquilla,True
+Adela Porta-Dueñas,45,3.1,Barranquilla,True
+Agapito Amaya Morales,56,3.4,Cartagena,True
+Abril Arenas,31,5.0,Cartagena,False
+Román Caparrós Coloma,49,2.1,Cartagena,False
+Nicodemo Pino Amor,30,2.8,Cartagena,False
+Isa Méndez Huguet,40,4.9,Medellín,True
+Germán Viana Gascón,24,4.1,Medellín,False
+Gloria de Castilla,40,3.3,Medellín,False
+Marcia Orozco Bárcena,53,3.4,Bogotá,False
+Visitación Rubio Hoyos,45,3.2,Cartagena,False
+Francisca Gomila Prat,47,2.3,Cali,False
+Mohamed del Puerta,24,3.9,Manizales,False
+Anastasia Iniesta-Llorens,55,3.6,Medellín,True
+Florencia Almeida,31,2.5,Cartagena,False
+María José Reyna Sánchez Gálvez,33,3.1,Medellín,False
+Alex Montoya-Portillo,50,3.3,Bucaramanga,False
+Juanito Atienza Cobos,32,3.1,Bogotá,False
+Alba Robledo Pozuelo,23,2.4,Cartagena,False
+Ángela Calvo Serna,25,2.1,Cartagena,False
+Joaquina Candelaria Doménech Niño,44,2.2,Bucaramanga,True
+Guiomar Cuenca Luz,42,3.6,Cartagena,True
+Aurelia Pedrosa,25,2.5,Bogotá,True
+Bienvenida Pallarès Suárez,16,3.6,Manizales,False
+Primitiva Balaguer,37,4.7,Cartagena,False
+Valentín Jiménez,60,4.4,Bucaramanga,True
+Porfirio Morata Marti,41,4.3,Cali,True
+Melisa Armengol Manuel,36,3.9,Cali,True
+Irene de Reguera,39,5.0,Bucaramanga,False
+Godofredo Galindo-Oliver,30,4.6,Barranquilla,False
+Blas Canet Palau,39,4.8,Cartagena,False
+Albino Ros Puig,41,5.0,Manizales,True
+Angelita Bermejo Roig,58,4.9,Bogotá,True
+Paola de Dominguez,52,3.8,Bucaramanga,True
+Cristóbal Córdoba Gracia,59,4.3,Bucaramanga,True
+Juan Francisco Cerdá Ureña,53,3.9,Cartagena,True
+Ximena Maestre Naranjo,32,4.1,Cartagena,True
+Salvador Rebollo Juárez,39,2.3,Medellín,True
+Francisco Javier Valls Mármol,22,4.7,Manizales,False
+Nélida de Peñalver,35,2.3,Barranquilla,False
+Encarnación de Pinedo,52,4.1,Bucaramanga,False
+Gema Soto Vidal,29,4.8,Cartagena,True
+Hernando Herminio Cabañas Correa,47,4.8,Bogotá,True
+Abilio Villar Campillo,56,4.5,Cartagena,False
+Marc Vilanova,53,4.0,Barranquilla,False
+Eliseo Domingo Peña,31,2.1,Bogotá,False
+Régulo Araujo Alarcón,25,4.7,Cartagena,True
+Victor Manuel Paredes Terrón,39,4.8,Medellín,False
+Asunción Santamaria Peinado,36,2.7,Manizales,False
+Obdulia Izaguirre-Torrecilla,17,3.4,Medellín,False
+Íñigo de Bermejo,47,3.5,Bucaramanga,False
+Águeda Diéguez,45,2.8,Bogotá,False
+Severiano Diaz Villar,25,2.9,Cartagena,True
+María Fernanda Galindo Ríos,44,2.2,Medellín,False
+Dulce Almazán Cañete,40,3.7,Barranquilla,True
+Carlota Sainz Baeza,31,3.4,Manizales,True
+Áurea Bolaños Quirós,33,2.4,Manizales,True
+Cruz Velázquez Sarabia,23,4.0,Medellín,True
+Jose Cal Leiva,52,3.7,Medellín,True
+Leandra Prado,40,3.7,Manizales,False
+Dulce Escrivá Gras,60,4.1,Barranquilla,False
+Filomena de Mate,36,4.6,Bucaramanga,True
+Selena África Cobo Saura,30,2.7,Manizales,False
+Andrés Tejera Pozuelo,32,2.7,Barranquilla,False
+Guadalupe Briones-Lara,47,4.8,Medellín,True
+Crescencia Cantero Martin,34,3.7,Bogotá,False
+Geraldo Burgos Chacón,39,4.6,Bogotá,True
+Sergio Cerro Fiol,33,4.8,Bucaramanga,False
+Alcides Quiroga Trujillo,57,4.6,Cali,False
+Jordi Olivera Novoa,39,3.8,Manizales,True
+Olegario Adadia Hernández,40,3.1,Manizales,False
+Jose Ramón del Llobet,29,4.0,Cali,False
+Adalberto del Pacheco,42,2.8,Barranquilla,False
+Ángeles Nogueira,21,3.4,Cali,True
+Antonio Mayol Roca,43,2.5,Bogotá,True
+Rafael del Piquer,36,3.5,Medellín,False
+David Maestre Flores,39,3.4,Barranquilla,True
+Mónica Palomar Luna,58,3.2,Cali,False
+María José Castelló Carreras,29,2.9,Bucaramanga,True
+Felicidad Vall Sotelo,20,3.4,Barranquilla,True
+Nacio del Palmer,42,5.0,Cartagena,True
+Eligia Palomar Pérez,41,2.3,Bogotá,False
+Toribio Baldomero Tena Manuel,26,2.3,Manizales,False
+Jacinto Correa Núñez,16,2.7,Medellín,True
+Ramiro de Neira,39,3.6,Bogotá,True
+Crescencia Canet Plana,53,3.8,Bogotá,True
+Jordana Vilanova Serrano,44,2.6,Medellín,False
+Saturnina Giménez-Pujol,19,3.6,Bogotá,True
+Esperanza Torrecilla,41,3.1,Manizales,True
+Fausto de Briones,42,2.6,Manizales,True
+Ester Prado Gordillo,54,4.9,Medellín,False
+Amanda Arjona Ramos,60,3.1,Cali,False
+Eleuterio Fonseca Morillo,56,2.4,Cartagena,True
+Basilio Escrivá Pascual,31,4.8,Bucaramanga,True
+Demetrio Arranz Aguiló,32,2.1,Bogotá,True
+Luna Acuña Castilla,39,2.6,Bucaramanga,False
+Segismundo Flores Bilbao,27,3.3,Cartagena,True
+Chita Abellán Viña,50,2.3,Barranquilla,True
+Soraya Herminia Batlle Elorza,47,4.7,Barranquilla,True
+Danilo del Piña,44,3.6,Bogotá,False
+Roxana Abad Ruano,31,3.1,Cartagena,False
+Graciano Armengol,29,3.4,Cali,False
+Edelmira Albina Oliver Pedrero,41,2.1,Bucaramanga,True
+Nicolasa Santiago Cañizares,50,3.2,Manizales,False
+Lorena Araceli Infante Calderón,29,3.3,Cali,False
+Elías Amador Cifuentes,45,2.4,Barranquilla,False
+Reina Mónica Cerdán Pinilla,38,4.0,Cartagena,True
+Luciano Montenegro,48,4.1,Bogotá,False
+Humberto Verdejo,48,3.9,Medellín,True
+Azeneth Camacho,24,3.0,Cali,True
+Beatriz Verdú Salvà,44,3.2,Bogotá,False
+Carmina Sanz Nicolás,46,2.6,Barranquilla,True
+Horacio Iñiguez Pi,36,4.7,Bucaramanga,True
+Lorenzo Vega Narváez,35,2.5,Cartagena,False
+Javi de Orozco,24,3.9,Cartagena,False
+Remedios Reguera Alvarez,57,3.7,Bogotá,False
+Paloma Aguado Quirós,17,2.7,Cartagena,False
+Consuelo Román Hernando,50,4.2,Medellín,True
+Jorge Taboada-Chico,18,2.4,Barranquilla,True
+Isidro del Palomino,57,4.1,Manizales,False
+María Belén Comas Yuste,56,3.9,Cali,False
+Ciríaco Marín Villaverde,46,4.1,Bogotá,False
+Amor Cortina Novoa,50,4.5,Bucaramanga,False
+Florencio Cueto Solís,40,3.3,Bucaramanga,False
+Nidia Expósito Reina,44,2.2,Bogotá,True
+Celia Diez Portillo,24,4.9,Barranquilla,False
+Rubén Nicolau Viñas,60,3.6,Cali,True
+Porfirio Mosquera,16,3.2,Medellín,False
+Juan Antonio Roura Cornejo,52,3.7,Manizales,False
+Leire Ximena Garcés Sainz,49,2.6,Medellín,True
+Domingo Torrent Moll,48,3.9,Barranquilla,False
+Patricia de Abascal,39,3.6,Medellín,True
+Américo Cañete Herrero,53,4.9,Barranquilla,True
+Trinidad Goicoechea Canales,28,3.3,Manizales,False
+Imelda Macías,34,2.3,Medellín,True
+Leire Fernandez Cárdenas,54,4.9,Medellín,False
+Manuela Palacios Ríos,24,3.4,Medellín,False
+Isabel Moll Solís,32,4.6,Bogotá,False
+Candelario Gimeno Carballo,39,4.2,Cali,True
+Haroldo Simó Gallo,52,2.8,Medellín,True
+Ofelia Artigas Almazán,24,2.9,Cartagena,False
+Claudia Bonilla Revilla,19,4.9,Cartagena,False
+Mariana Reina-Galvez,42,3.0,Bucaramanga,True
+Nicanor Cerezo Tovar,22,3.3,Bucaramanga,True
+Goyo Lalo Batalla Bermudez,24,4.7,Medellín,False
+Patricia Leire Alcántara Frías,30,2.1,Cali,False
+María Manuela Palomino Miguel,39,2.3,Cali,False
+Ramón Alvarado Haro,54,4.4,Bogotá,True
+Teresita Albina Vila Pedrero,36,3.5,Medellín,True
+Joan Jordán Canet,46,4.5,Bucaramanga,False
+Itziar Lopez-Gimenez,36,2.4,Medellín,False
+Fátima Velázquez Nicolás,19,2.8,Medellín,True
+Sergio del Borrell,52,2.4,Medellín,True
+Casemiro Moles Toro,37,2.3,Manizales,True
+Juan José Tello Royo,26,4.1,Bogotá,False
+Gabriela Amador Carnero,27,3.8,Bucaramanga,False
+María Dolores Cañellas Cifuentes,37,2.5,Bucaramanga,False
+Benigno Ropero Huguet,50,4.6,Bogotá,False
+Maxi Lladó Lamas,35,5.0,Cali,True
+Azahar Núñez Manzanares,20,4.0,Cali,False
+María Manuela Falcó Barreda,60,4.3,Cali,True
+Lola Alcalá Cuéllar,20,3.8,Cali,True
+Salud Almeida Jordá,25,4.1,Bogotá,False
+Bernardita Núñez Cabezas,43,2.3,Cartagena,False
+Mar Hilda Bauzà Infante,22,2.2,Barranquilla,False
+Aránzazu Viñas-Benavides,26,2.9,Bucaramanga,False
+Belen Toro-Aramburu,58,4.1,Medellín,True
+Sol Godoy,15,3.9,Cali,True
+Ariadna Gaya Elorza,57,2.9,Cartagena,False
+Heraclio de Saavedra,18,4.3,Bogotá,True
+Camila Leon Olivé,31,3.8,Manizales,False
+Tamara de Garzón,41,2.8,Bogotá,False
+Saturnina Mir Castells,35,4.7,Cartagena,False
+Lisandro Abad-Blanco,43,4.1,Barranquilla,False
+Encarnita Morales Arana,25,3.6,Bogotá,False
+Mariano Alcalá Manzano,39,2.1,Medellín,False
+Celso Llopis Fortuny,21,4.5,Bogotá,False
+Manola Olivares,15,4.7,Cali,False
+Anunciación Ribera Valverde,22,3.6,Barranquilla,False
+Selena del Casado,32,3.2,Barranquilla,True
+Manu Sierra Morante,25,4.1,Manizales,False
+Eusebio Hernando Rueda,27,2.7,Bogotá,False
+Alcides Aitor Aguiló Leon,24,2.6,Cali,True
+Trinidad Millán Molins,26,2.7,Manizales,False
+Montserrat del Atienza,60,4.8,Bogotá,True
+Teobaldo de Jover,52,4.0,Bucaramanga,True
+Amor Roberta Pont Riquelme,48,5.0,Cali,True
+Lupe Gomis-Izaguirre,44,4.4,Manizales,True
+Zaida Tovar Sanchez,18,3.2,Barranquilla,False
+Héctor Perelló Doménech,28,3.2,Cartagena,False
+Amaya Guardia,21,2.4,Medellín,True
+Fátima Anglada Gómez,20,2.0,Bucaramanga,True
+Fabio Cabello España,40,3.4,Cali,False
+Isidoro Alcántara Paredes,37,4.0,Cali,True
+Haydée Casanovas,25,3.8,Bucaramanga,True
+Delia Valero,17,4.3,Medellín,True
+Eloy Heriberto Rosado Sotelo,59,3.3,Barranquilla,True
+Celestino Zamora Palau,53,3.9,Cartagena,False
+Edelmiro Corbacho,15,3.8,Cali,False
+Salomón del Codina,38,4.5,Cali,False
+Leoncio Ibáñez Amores,23,2.1,Manizales,True
+Demetrio Rincón Crespo,53,3.2,Barranquilla,False
+Reynaldo de Diéguez,43,2.4,Manizales,False
+Juan Francisco del Almazán,59,4.7,Cali,False
+Rosa Folch Barrios,40,3.7,Bucaramanga,False
+Carina Piquer Vega,58,4.4,Cartagena,True
+Cloe Plaza Zorrilla,27,3.3,Cali,True
+Aroa Castañeda Boix,47,2.4,Cartagena,False
+Adelina de Alarcón,36,2.8,Cali,False
+Ramón del Sanjuan,56,3.6,Manizales,True
+Hilario Ojeda-Prieto,31,3.4,Medellín,True
+Primitivo Benito-Cruz,27,3.8,Manizales,False
+Daniela Gallego-Arrieta,15,4.5,Bogotá,True
+José Mari Bautista Salmerón,54,2.5,Bucaramanga,False
+Jafet de Vergara,54,4.4,Medellín,True
+Adolfo Marcelino Coloma Ortega,16,3.8,Bogotá,False
+Flavia Martinez Valls,30,3.2,Barranquilla,False
+Bonifacio Alsina-Tello,37,2.3,Barranquilla,True
+Marco Puente,59,2.1,Bogotá,True
+Juana Mata Sacristán,53,3.6,Cali,True
+Jordán Marti Mármol,39,2.6,Bogotá,True
+Tamara Pintor Priego,46,4.0,Cartagena,False
+Gracia Valls-Martí,52,3.9,Manizales,True
+Soledad Gutierrez-Fabregat,15,2.2,Cartagena,True
+Concepción Lara Vilar,56,3.9,Bogotá,True
+José Manuel Checa Villar,41,2.9,Bucaramanga,True
+Reyes del Noguera,60,2.2,Bogotá,False
+Inocencio Mata-Sastre,57,4.2,Barranquilla,False
+Amaya Ferrera,53,4.7,Cali,True
+Jenaro Bayona-Alfaro,44,4.4,Bogotá,True
+Marc Calderón,47,2.8,Bucaramanga,False
+Régulo Abella-Gascón,53,3.3,Bucaramanga,True
+Martin Durán Palomo,53,4.8,Manizales,True
+Ruperta Edelmira Agullo Alegre,58,4.0,Manizales,True
+Marco Diego Menéndez,52,4.3,Manizales,True
+Haroldo del Parejo,45,2.9,Bucaramanga,True
+Antonia Rosales Carlos,58,4.3,Cali,False
+Rodrigo Dueñas Alcaraz,22,3.9,Cartagena,True
+Luisina Elena Osorio Gallardo,15,2.1,Medellín,True
+Chelo Montaña Espinosa,22,3.2,Manizales,False
+Jose Ramón Corbacho Vega,16,2.9,Manizales,True
+Maristela González Acedo,20,4.1,Bucaramanga,True
+Isaías Angulo Cerdá,18,2.6,Medellín,True
+Anselma Rius,53,4.3,Bogotá,False
+Fito Maximiliano Fajardo Barriga,41,3.2,Manizales,True
+Bernardita Molina Lledó,43,4.6,Bogotá,True
+Juliana Muro Lerma,56,2.6,Bogotá,True
+Jenaro Cuervo Campos,51,3.4,Cali,False
+Dora Quiroga,28,3.2,Medellín,True
+Jacinta Ignacia Cuenca Rius,48,4.3,Medellín,True
+Olegario Capdevila Cantón,55,2.9,Manizales,True
+Raúl Toledo Mariscal,47,2.4,Medellín,False
+Octavio Roig Jáuregui,15,4.2,Cali,True
+Ruben Cano-Pagès,36,3.7,Medellín,True
+Sara Benavides,38,2.6,Barranquilla,False
+Alex Alcolea Chacón,58,3.5,Cartagena,True
+Herminio Plaza Teruel,20,2.9,Barranquilla,False
+Faustino Checa Blázquez,49,3.4,Barranquilla,True
+Milagros Gomis Atienza,29,2.4,Barranquilla,False
+Hilario Amorós,24,4.6,Bogotá,True
+Marcelino Pujol Cazorla,17,3.2,Cartagena,True
+Patricia del Ramos,57,2.2,Cali,False
+Violeta Ballesteros Salinas,37,4.8,Manizales,False
+Blanca de Galan,40,3.8,Cali,False
+Carla Borrell-Soria,47,3.0,Manizales,True
+Eloy Edmundo Galán Quintana,39,4.3,Cali,False
+Toni Aznar Zabaleta,47,2.0,Cartagena,True
+Urbano Alarcón Luís,45,2.3,Barranquilla,True
+Rolando Chico Vendrell,49,2.1,Cartagena,True
+Baudelio Márquez Agudo,17,3.7,Medellín,False
+Socorro Codina Murillo,26,3.0,Barranquilla,False
+Pili Barros-Boix,41,2.0,Bucaramanga,True
+Claudia Izaguirre Sanmartín,56,4.0,Bucaramanga,False
+Nilda Toro Sosa,58,4.4,Manizales,True
+Lucila de Berrocal,17,4.3,Barranquilla,True
+Isabel Pla Quintana,39,4.1,Bucaramanga,False
+Julia del Villena,28,4.7,Bucaramanga,False
+Wilfredo Gimenez Cobo,54,3.8,Bucaramanga,True
+Saturnina Vidal Millán,54,3.3,Cartagena,False
+Valerio Bejarano Clemente,42,3.7,Manizales,True
+Ale Plana Carmona,47,3.3,Bogotá,False
+Juan Francisco Leal Mate,39,2.9,Bogotá,False
+Natalia Tapia Quesada,30,3.6,Manizales,False
+Sabina Montaña-Soler,44,2.7,Cali,True
+Fabiola Guerra,35,2.7,Manizales,False
+Alma Plana,50,2.5,Bucaramanga,True
+Fabiana Vila Aguilar,43,3.4,Bucaramanga,True
+Lucio de Talavera,53,3.1,Bogotá,True
+Gerónimo Rozas Hervás,49,3.5,Bogotá,False
+Aitana de Arjona,39,2.8,Bogotá,False
+Felisa Ariño-Paz,41,2.9,Medellín,True
+Francisco Leon Torre,27,4.9,Cartagena,True
+Prudencia Rius Abella,50,3.4,Cali,False
+Nacio del Ocaña,59,3.5,Manizales,False
+Íñigo Arranz Tenorio,58,4.2,Bucaramanga,False
+Mónica Cózar,18,4.6,Medellín,True
+Obdulia Maestre Tomás,36,4.9,Manizales,False
+Yago Amores,54,4.2,Barranquilla,False
+Matilde Durán Sala,50,4.7,Manizales,False
+Marina Mosquera Ropero,38,2.7,Bucaramanga,True
+Rebeca Cobos-Vila,20,5.0,Manizales,True
+Genoveva Gálvez Pedrosa,47,5.0,Manizales,False
+Emiliana Hernandez Galván,53,5.0,Cartagena,True
+Dionisio Peral-Sarabia,16,2.1,Medellín,False
+Marcelino del Coll,20,4.4,Manizales,False
+Daniela Cobo Jerez,60,2.4,Cartagena,True
+Carmela de Salvador,32,2.9,Bogotá,True
+Clara Escudero Palma,23,2.4,Bogotá,False
+Diana Olimpia Borrego Valdés,46,4.4,Bogotá,False
+Eugenio Porta,28,2.2,Manizales,False
+José María Franch-Otero,26,2.6,Cartagena,True
+Estela Almansa Aroca,37,3.6,Barranquilla,True
+Clímaco Cárdenas,32,2.2,Bucaramanga,False
+Jesusa de Iglesia,53,4.2,Medellín,True
+Elvira Torrecilla,28,4.2,Bucaramanga,True
+Ruth Miralles Pol,41,2.4,Barranquilla,True
+Toni Cardona Barral,47,3.0,Bogotá,True
+Candela Larrea Ríos,44,2.9,Barranquilla,True
+Leocadio Vinicio Ribera Tirado,56,3.9,Cali,True
+Constanza Borrás Bernat,21,3.0,Cali,False
+José Luis Alemany Vilalta,49,3.8,Cali,True
+Paula Báez Gutierrez,33,3.7,Medellín,True
+Alfonso Bustos Miguel,39,2.3,Cartagena,True
+Saturnino Posada Castellanos,48,4.6,Bucaramanga,False
+Ángeles Figuerola-Lobato,24,3.3,Bucaramanga,True
+Cebrián Wálter Espejo Gonzalez,26,4.2,Cali,False
+Berto Gracia Jordá,35,3.1,Medellín,False
+Rocío Mateos Codina,39,4.2,Barranquilla,True
+Elba Clara Bermudez Cerezo,60,4.1,Cartagena,True
+Casandra Flor Alemany,56,2.1,Cartagena,False
+Lupita Tena Cases,48,4.3,Barranquilla,True
+Apolinar Lorenzo-Giménez,44,2.6,Medellín,True
+Victoriano Clemente Galan,49,3.2,Cartagena,False
+Nereida Acero-Ripoll,56,2.5,Bogotá,True
+Camilo Toro Armengol,30,2.3,Barranquilla,False
+Esther Gimeno,19,4.7,Cartagena,True
+Javier Moliner Salas,48,2.6,Barranquilla,True
+Moreno del Fabregat,27,4.8,Medellín,True
+Gabino Trillo Lladó,53,2.6,Cartagena,False
+Lupita Luna Gibert,53,3.2,Bucaramanga,False
+Leoncio Gustavo Bastida Díez,58,4.4,Bucaramanga,True
+Aurora Bustamante Villanueva,37,3.0,Manizales,True
+Pepito Serna Cobos,59,3.9,Bogotá,False
+Dorita Ferrero Elías,28,3.6,Bogotá,True
+Eligio Saez Morillo,24,2.7,Barranquilla,True
+Loida Azcona Ocaña,53,2.8,Bucaramanga,False
+Paulina Plana Casas,40,3.0,Bucaramanga,False
+Mariana de Arana,57,2.3,Medellín,False
+Mario Iván Villalonga Ricart,38,3.8,Bucaramanga,True
+Joaquín Frutos,29,4.6,Barranquilla,True
+Antonia Cabanillas Quesada,16,3.5,Bogotá,False
+José Luis Soler Diez,58,2.4,Cartagena,False
+Cosme Guijarro Hernandez,35,4.1,Medellín,False
+Marcelino Pineda Ramos,27,2.6,Cali,False
+Vicente Garcia Zaragoza,56,4.2,Barranquilla,False
+César Téllez,17,2.4,Medellín,False
+Clemente Cabo Vilanova,55,4.0,Cartagena,True
+Marciano Ferrero Vizcaíno,53,3.5,Bogotá,True
+Irene María Carmen Prat Juárez,51,3.3,Bucaramanga,True
+Micaela Andres Orozco,22,4.8,Bogotá,False
+Rebeca Fuster Aramburu,49,3.3,Bogotá,True
+Isidro Garrido,34,4.3,Cartagena,True
+Nilda Garay,58,3.1,Medellín,True
+Calixto Guzmán Santiago,46,2.7,Medellín,True
+Apolonia Llorente Manjón,60,4.1,Cartagena,True
+Eulalia Martorell Borrego,44,4.5,Bucaramanga,False
+Beatriz Sarita Valderrama Pellicer,59,3.7,Barranquilla,True
+María Ángeles Montserrat Borja Grau,30,3.9,Bucaramanga,True
+Hernando Heredia Alemán,46,4.0,Bucaramanga,True
+Elisabet Cobo Villar,15,2.7,Bucaramanga,True
+Pepita Coello Carmona,55,4.9,Manizales,True
+Estrella Montero,19,2.3,Medellín,False
+Geraldo Feliu Fonseca,54,3.4,Manizales,False
+Juan Bautista Paco Rodrigo Pinedo,52,3.3,Medellín,True
+Alicia Clavero Saez,24,4.5,Barranquilla,True
+Ernesto Cortina Zurita,37,3.0,Bucaramanga,False
+Severo Tovar,39,4.7,Cali,True
+Calixta Comas Román,28,4.3,Cartagena,True
+Raimundo Galán-Caro,30,4.6,Bogotá,False
+Buenaventura Sala Roda,35,4.9,Medellín,False
+Simón Arenas Martínez,41,3.7,Cartagena,True
+Maribel Blázquez Pazos,60,3.0,Cartagena,False
+Aureliano Urrutia Hoyos,27,2.9,Barranquilla,False
+Alondra Andrés,30,4.4,Cali,False
+Antonia Solana-Juan,20,3.1,Barranquilla,True
+Domitila Peñalver-Cámara,39,4.9,Barranquilla,True
+Matías de Villaverde,55,4.3,Cali,False
+Jose Ramón Hervia Alberto,44,3.8,Cartagena,True
+Calixto de Cortes,25,4.5,Cali,True
+María Teresa Elías-Bayo,39,4.1,Bogotá,False
+Enrique Bustos Lerma,45,2.8,Barranquilla,True
+Josefina Maricruz Jordá Rivas,53,3.5,Manizales,True
+Paulino Benavides Cid,59,2.0,Cali,False
+América Oliver Méndez,60,4.1,Manizales,True
+Melchor Raya-Portero,57,2.1,Cali,False
+Eusebio Herranz Garay,54,4.2,Bogotá,False
+Manu Cobo Huguet,41,4.3,Bogotá,True
+Clotilde Santamaría,30,3.1,Bucaramanga,False
+Trinidad Alarcón Ibáñez,43,2.5,Manizales,False
+Marina Vives Castelló,42,4.5,Barranquilla,False
+Otilia Pont Fonseca,52,2.3,Medellín,False
+Asdrubal Iván Lerma Gálvez,23,2.3,Manizales,False
+Vito Medina-Blazquez,56,3.4,Barranquilla,True
+Blanca Sandoval Amo,41,2.2,Manizales,False
+Milagros Salvà Azorin,53,2.5,Cali,True
+José Mari María Rodrigo Solé,50,4.0,Cali,True
+Soledad Mariana Villar Ferreras,24,2.0,Cali,False
+Silvio Aguilera Lasa,43,4.5,Bogotá,False
+Simón Plaza Jimenez,57,3.7,Cali,True
+Jose Carlos Sotelo,43,3.2,Medellín,True
+José Ángel Quintero-Cazorla,21,3.0,Bogotá,False
+Leonor Edelmira Dueñas Alcántara,49,2.3,Manizales,False
+Fortunato Jurado,20,2.3,Cartagena,False
+Nando Anguita Rubio,18,2.7,Manizales,True
+Felix María Fernández Murillo,58,2.5,Bogotá,True
+Reyna Castell Casals,44,2.8,Manizales,True
+Gastón del Sala,43,4.1,Cartagena,True
+Olegario Pablo Roma,50,3.1,Medellín,True
+Guadalupe Pastor Camacho,34,2.2,Manizales,False
+León Santamaría Castro,28,2.8,Barranquilla,True
+Adrián Zamorano Pomares,44,3.9,Cartagena,False
+Cándida Pozuelo Bárcena,26,3.3,Manizales,True
+Amparo Marti Donaire,52,3.3,Cartagena,True
+Emilio Juan José Casanova Navas,33,3.0,Cali,False
+Calixto Abellán Buendía,55,4.6,Bucaramanga,False
+Primitiva Nebot Santamaria,60,4.7,Cali,False
+Domingo Perelló,25,2.6,Bogotá,False
+Joaquina Jurado-Donoso,35,3.9,Cali,False
+Gloria Alcolea Calderón,54,4.4,Bucaramanga,False
+Balduino Murcia Galiano,58,2.7,Medellín,False
+Lalo Baudelio Vallejo Mascaró,48,4.5,Bogotá,True
+Aurelio Malo Barrera,39,4.9,Cartagena,False
+Édgar de Córdoba,50,2.4,Barranquilla,False
+Caridad Daza Sola,44,4.4,Barranquilla,False
+Vito Diez-Sabater,15,2.6,Bogotá,True
+Alba Pinedo-Alegre,46,5.0,Bucaramanga,True
+Aureliano Menendez Blanch,48,4.1,Cartagena,False
+Claudia Jerez Plana,54,2.8,Medellín,False
+Jesús del Estévez,16,3.6,Bucaramanga,False
+Micaela Aguirre Robledo,15,2.6,Cali,False
+Cruz Elodia Oliver Vilalta,43,4.1,Bucaramanga,False
+Juana Solsona Isern,19,4.9,Medellín,False
+Elena Céspedes Estrada,39,3.9,Barranquilla,True
+Vinicio del Morales,33,3.5,Barranquilla,True
+Gilberto Sánchez Macías,55,3.3,Cali,False
+Agustín de Segovia,24,3.2,Manizales,False
+Salud Esparza,40,4.1,Manizales,False
+Saturnino Porcel,45,3.6,Cali,False
+Eusebia Mamen Cañas Aparicio,52,3.9,Bogotá,False
+Haydée Solera Saez,17,3.3,Barranquilla,False
+Adora Figueroa Frías,19,4.0,Cali,True
+Jose Luis Catalá Bonilla,39,2.1,Cali,True
+Nélida Quirós,26,4.5,Barranquilla,True
+Eligia Claudia Bermúdez Roman,21,2.5,Cartagena,True
+Lalo Tejada Noriega,29,3.9,Bogotá,True
+Conrado Marquez Riquelme,56,3.6,Bucaramanga,False
+Ofelia Vilaplana Luque,58,3.3,Cali,False
+Alejo Boix Oliva,43,2.9,Cartagena,True
+Milagros Revilla Piquer,25,3.4,Medellín,True
+Epifanio del Pérez,45,4.4,Cali,False
+Abigaíl del Maldonado,34,3.2,Cartagena,False
+Calista Pujol Rosado,36,4.3,Medellín,True
+Oriana Matas Soria,56,4.1,Cali,True
+Flora del Riquelme,44,3.9,Cartagena,True
+Mireia Domínguez-Olivares,39,4.6,Barranquilla,True
+Ibán Saavedra Saez,17,4.4,Medellín,False
+Anacleto Néstor González Muñoz,15,2.9,Medellín,True
+Godofredo de Nevado,17,3.9,Bogotá,True
+Ciriaco Valencia Bayón,45,3.9,Cartagena,True
+Chus Antón Granados,16,4.8,Cartagena,True
+Adelardo Viña Ruiz,21,2.2,Medellín,True
+Carmina Mancebo Puente,27,4.5,Barranquilla,False
+Esperanza Arellano Cuervo,20,2.3,Bucaramanga,False
+Camila Campillo Caro,47,4.2,Bogotá,True
+Sabina Luna Mayoral,23,4.6,Bucaramanga,False
+Gustavo Alcides Lastra Mármol,47,2.4,Bucaramanga,True
+Anabel Barreda Marin,50,2.7,Bucaramanga,False
+Javi del Fuster,38,3.6,Cali,False
+Valentina Bayo Rodrigo,34,2.7,Bucaramanga,True
+Alfonso Bravo Peinado,24,3.8,Manizales,False
+Eugenio Mendizábal Barco,33,4.8,Cartagena,False
+Alcides Aroca Costa,16,2.0,Bogotá,False
+Teófila Carla Soriano Bertrán,58,4.1,Bucaramanga,True
+Berta Almagro-Cepeda,26,2.3,Barranquilla,False
+Antonio Bas Carmona,57,2.4,Cali,True
+Segismundo Cabrera,17,2.5,Bucaramanga,False
+Iris Bernat Cardona,35,2.6,Bucaramanga,True
+Paca Salinas Vallejo,47,4.4,Bogotá,False
+Julián Cal Chacón,35,2.6,Medellín,True
+Pastora Roca Vidal,37,4.4,Manizales,True
+Apolinar Velázquez Arana,32,4.3,Barranquilla,False
+Diana de Pineda,17,3.9,Bogotá,False
+Lucía Morante Poza,17,4.9,Barranquilla,False
+Dionisio Lorenzo Bravo Corominas,25,4.8,Medellín,False
+Graciela Susanita Pastor Luque,20,5.0,Bucaramanga,False
+Ligia Pereira Almansa,15,4.3,Cali,True
+Aarón Clemente Jiménez,56,5.0,Manizales,True
+Nacho Cerro,31,3.1,Manizales,True
+Bautista Tovar Tomé,25,3.5,Manizales,True
+Emiliano Julián Chamorro,41,2.9,Bucaramanga,True
+Chema Ortega Morales,31,2.0,Manizales,True
+Maximiano Bustamante,36,2.5,Barranquilla,True
+Rosalina Uría,52,3.6,Bogotá,True
+Maximiano Iglesias Montesinos,56,3.6,Manizales,True
+Maximino Carmona,44,4.6,Bucaramanga,False
+Nazaret Nuria Herrero Osorio,52,3.9,Cali,False
+Rebeca Calderón Llobet,38,2.4,Manizales,True
+Manuela Palacios Antón,41,3.1,Barranquilla,True
+Cristina Prado Aragón,58,4.2,Bucaramanga,False
+Lupe León Cuervo,53,2.0,Manizales,True
+Alonso Leal-Bernad,54,4.2,Barranquilla,False
+Mirta Riera Aguilera,25,2.5,Barranquilla,False
+Danilo Escobar-Isern,43,4.5,Bucaramanga,True
+Ángeles Zabaleta Carballo,31,2.2,Bogotá,True
+Jose Ramón Flores Benavent,34,4.7,Bucaramanga,True
+Eloísa Arnau Jordá,21,5.0,Cali,True
+Albino Cuadrado Mur,40,2.8,Bucaramanga,False
+Victor Quiroga Guillén,35,3.6,Barranquilla,False
+Maite Figuerola-Angulo,44,2.4,Cartagena,False
+Primitiva de Santiago,31,2.8,Cali,False
+Mónica del Nadal,53,3.5,Barranquilla,True
+Filomena Caro Alegria,42,2.8,Bucaramanga,False
+Filomena Estrada Tena,17,4.9,Barranquilla,True
+Poncio del Alcolea,32,4.1,Medellín,True
+Marino Urrutia,46,4.0,Barranquilla,False
+Prudencia Poza Cáceres,50,3.4,Barranquilla,False
+Norberto Romeu Piquer,52,2.6,Cartagena,True
+Sarita Garmendia Iriarte,53,3.1,Cali,False
+Pancho Cuadrado Abril,19,2.7,Bogotá,False
+Xavier Reinaldo Esteban Cabeza,55,2.4,Barranquilla,False
+Edgardo Egea Puga,43,4.6,Bogotá,False
+Juan Carlos Robledo-Montes,31,3.5,Bucaramanga,True
+Pascuala del Trujillo,17,3.1,Cartagena,False
+Azeneth Iglesia Miró,40,4.4,Bucaramanga,True
+Edmundo López-Perez,34,4.7,Cartagena,True
+Lola Ainoa Valero Vilaplana,24,2.2,Cali,True
+Cintia Roca,17,2.1,Barranquilla,True
+Pío Ramos-Arce,51,3.6,Bogotá,False
+Hipólito Boada Lobo,51,2.4,Cali,True
+Albino Ureña Porta,34,3.1,Bogotá,False
+Felicia del Zabaleta,38,2.1,Medellín,True
+Manu Taboada Esteban,54,4.0,Cali,False
+Priscila Amaya-Pagès,52,3.1,Manizales,True
+Fabio Ros,57,4.3,Barranquilla,False
+Damián Cabanillas Dalmau,55,2.6,Barranquilla,False
+Jenny Maxi Castells Valencia,46,3.3,Barranquilla,False
+Soraya Sacristán Cortes,24,3.3,Bogotá,False
+Ricarda Iniesta Tur,55,4.3,Cali,True
+Olimpia Zapata Goicoechea,23,3.4,Cali,False
+Geraldo Vicens Laguna,43,3.0,Bogotá,False
+Ruth Bárcena Melero,23,4.1,Manizales,True
+José Antonio Chaves Codina,46,2.5,Cartagena,False
+Francisco Ferreras Arregui,35,2.5,Bucaramanga,False
+Jose Ignacio Sotelo Bermejo,25,2.8,Cali,True
+Luciana Ayuso-Chaparro,22,3.1,Manizales,False
+Marcela Cerdá Jordá,34,3.0,Manizales,True
+Eutropio Palacios Castrillo,27,4.0,Cali,True
+Zaira Peláez Arnau,25,4.5,Bogotá,False
+Aroa Cabrero Canet,30,2.2,Cartagena,False
+Nando Fabio Pavón Escribano,60,2.3,Barranquilla,True
+Nando Taboada Quirós,40,3.4,Bucaramanga,True
+Melisa Gargallo Bravo,60,2.4,Medellín,True
+Tania Lasa Torre,55,2.4,Barranquilla,True
+Nayara Ureña Peñas,33,2.2,Cartagena,True
+Iker Fuster Rodrigo,28,4.6,Cali,False
+Eloy Bellido,26,3.6,Bucaramanga,False
+Joan Montserrat Parejo,36,3.9,Bucaramanga,False
+Salomón Sandalio Sandoval Nuñez,31,4.7,Bogotá,True
+Ceferino del Castell,20,2.6,Cartagena,False
+Rosaura Gilabert Valencia,58,4.2,Manizales,True
+Atilio Sales Monreal,36,3.5,Manizales,False
+Armando Molina Cárdenas,44,4.4,Bogotá,False
+Gaspar Carnero-Capdevila,26,3.5,Bogotá,True
+Estrella Mosquera Menendez,23,4.7,Barranquilla,False
+Tatiana Abellán Fajardo,21,3.1,Bogotá,True
+Miguel Ciro Doménech Cuenca,35,2.4,Bogotá,False
+Dalila Bernad Zabaleta,57,3.5,Cali,False
+Vidal Camacho-Azcona,47,5.0,Cali,False
+Petrona Borrell Portillo,16,3.9,Cartagena,True
+Julieta Chico Chico,32,2.6,Cartagena,True
+Édgar Carbajo Corbacho,34,3.3,Medellín,True
+Silvestre Quintero Burgos,44,3.6,Cartagena,False
+Apolinar Luis Cabo Gaya,41,3.0,Manizales,False
+Telmo Seve Quintana Dueñas,29,5.0,Barranquilla,True
+Jennifer Lasa,48,4.2,Manizales,True
+Maura Díaz Quintanilla,45,4.4,Medellín,True
+Victoriano Elorza-Cáceres,50,4.5,Manizales,True
+Curro Viña Pallarès,22,2.2,Cali,True
+Teófila Botella Mármol,19,4.0,Manizales,True
+Imelda Mate,26,4.7,Cali,False
+Rufina Barbero Chaves,56,4.9,Cartagena,False
+Carmelita Valera Gonzalo,41,2.6,Bucaramanga,True
+Anacleto de Sacristán,53,4.2,Cartagena,True
+Ariel Palomo Gomila,43,4.2,Barranquilla,True
+Felix Cañete Flores,27,2.2,Bucaramanga,True
+Mario del Valderrama,35,4.3,Cali,False
+Marita Teruel Varela,36,3.6,Barranquilla,False
+Roldán Marti-Alfaro,32,3.5,Cali,False
+Noa María Ángeles Escribano Llabrés,49,3.0,Bucaramanga,False
+Josué Canet,40,5.0,Manizales,False
+Isidro Chucho Canals Atienza,59,2.0,Manizales,False
+Luisa Álvaro Peña,34,3.2,Bucaramanga,True
+Ester Nebot González,26,3.4,Bogotá,True
+Leocadia Coca Vizcaíno,19,4.6,Cali,True
+Rafael Tirado Chaves,52,4.6,Bucaramanga,False
+Aristides Alfonso Chacón,22,3.4,Bogotá,False
+Amaro Montesinos Mesa,26,2.3,Medellín,True
+Rodolfo Barros,59,4.2,Medellín,True
+Reynaldo Gras Elías,52,2.4,Cartagena,True
+Fátima Pedro Riquelme,56,3.1,Medellín,True
