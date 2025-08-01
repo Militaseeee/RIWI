@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Empleados</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Gestión de Empleados</h1>
+
+    <!-- Botón para abrir modal -->
+  <div style="text-align: right; margin-bottom: 20px;">
+    <button id="abrirModal" class="nuevo-btn">➕ Nuevo Empleado</button>
+  </div>
+
+  <h2>Lista de Empleados (<span id="contador">0</span>)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Departamento</th>
+        <th>Edad</th>
+        <th>Salario</th>
+        <th>Fecha Ingreso</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="empleadoLista"></tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="cerrar">&times;</span>
+    <form id="empleadoForm">
+      <input type="hidden" id="id" />
+      <input type="text" id="nombre" placeholder="Nombre" required />
+      <input type="text" id="apellido" placeholder="Apellido" required />
+      <input type="text" id="departamento" placeholder="Departamento" required />
+      <input type="number" id="edad" placeholder="Edad" required />
+      <input type="number" id="salario" placeholder="Salario" required />
+      <input type="date" id="fecha_ingreso" required />
+      <button type="submit">Guardar</button>
+    </form>
+  </div>
+</div>
+
+  <script src="main.js"></script>
+</body>
+</html>
