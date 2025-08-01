@@ -1,0 +1,101 @@
+id,nombre,edad,salario,departamento
+1,Paula Ángel Catalá,60,4259890,Atención al Cliente
+2,David Bastida Marquez,53,3405161,Ventas
+3,Baudelio Santos Bernal,26,3828674,Ventas
+4,Calista Yéssica Nadal Tovar,34,3118590,Ventas
+5,Aarón Baños Gallart,24,4103732,Recursos Humanos
+6,Berto Pizarro Priego,42,3034964,Recursos Humanos
+7,Berto Rubio Sotelo,22,3811110,Marketing
+8,Amalia Paulina Fábregas Samper,26,3887312,Recursos Humanos
+9,Josep Saura,50,2642681,Logística
+10,María Teresa Salamanca Grau,41,4382249,Finanzas
+11,Pío Sanmiguel Perez,53,3929127,Finanzas
+12,Gregorio Aguirre Coloma,47,3944905,Logística
+13,Marciano Barragán-Gallardo,51,3976110,Finanzas
+14,Candelaria Peinado-Beltrán,25,2850789,Tecnología
+15,Juan del Grau,50,4862058,Finanzas
+16,Josep Morera Ibarra,40,4279846,Finanzas
+17,Almudena Pinilla Arnaiz,32,3139150,Marketing
+18,Loreto Cuadrado Páez,26,2839546,Logística
+19,Azahara Dávila-Correa,20,3195992,Marketing
+20,Elvira Bernal Pereira,25,2996457,Logística
+21,María Fernanda Moraleda Cases,57,4699109,Ventas
+22,Noelia Calderón Espada,51,2623020,Atención al Cliente
+23,Alejandra Arnal-Lobato,36,3168750,Marketing
+24,Fausto Perez,55,4288179,Recursos Humanos
+25,Arcelia Azorin Cuesta,41,4772698,Marketing
+26,Isaura Vallés Correa,58,2756756,Recursos Humanos
+27,Alfredo de Valcárcel,29,3548523,Recursos Humanos
+28,Diego Tejada Hernandez,44,3068177,Logística
+29,Celso Milla Alarcón,26,4318764,Recursos Humanos
+30,Nazaret Bellido,40,3861513,Atención al Cliente
+31,Pelayo Falcó Diego,51,2781880,Logística
+32,Graciana Velasco Cerro,56,3790742,Recursos Humanos
+33,María Teresa Garmendia Fonseca,35,3064298,Ventas
+34,Buenaventura Lobo Bustos,36,4933070,Atención al Cliente
+35,Adriana Manso Lopez,53,2696209,Ventas
+36,Inocencio Elías Salamanca,29,4831657,Ventas
+37,Leocadia Lloret Niño,41,2872680,Recursos Humanos
+38,Wálter Raimundo Jordá Olivé,38,3740465,Ventas
+39,Cándida Palacio Pascual,58,4746601,Tecnología
+40,Heriberto Ayuso Ropero,35,2852581,Logística
+41,Graciela Peñas Solano,60,4535237,Recursos Humanos
+42,Georgina Cornejo Valls,20,2826943,Logística
+43,Ciríaco Checa Espejo,46,4207518,Tecnología
+44,Caridad Leiva Roig,55,2942472,Recursos Humanos
+45,Marcial Lloret Hervia,47,4427101,Atención al Cliente
+46,Elvira Mínguez Lucas,34,4175854,Finanzas
+47,Guadalupe Jordán Bárcena,47,3192367,Finanzas
+48,Ricarda Calderón Revilla,55,3892274,Atención al Cliente
+49,Primitivo Arenas Andreu,55,4805644,Tecnología
+50,Dorotea Malo Naranjo,34,4215939,Marketing
+51,Pepita Luján Vicens,60,4196476,Tecnología
+52,Nilo Agudo,51,3055797,Finanzas
+53,Adelaida Morcillo-Falcón,26,3015082,Ventas
+54,Fortunato Moreno Merino Álamo,27,4464282,Recursos Humanos
+55,Ámbar Alberdi Company,40,3326195,Tecnología
+56,Yago Gerónimo Somoza Márquez,22,3552799,Recursos Humanos
+57,Blas Vazquez Villanueva,44,2981596,Logística
+58,Miriam Morera Mena,23,4079784,Atención al Cliente
+59,Valero Reina Manzano,47,3893989,Finanzas
+60,Flavio González Gallego,25,2666644,Recursos Humanos
+61,Yéssica Abad-Requena,51,2659110,Ventas
+62,Reyes Castro Roldán,42,4706867,Marketing
+63,Gil Cervantes Cifuentes,32,4683315,Atención al Cliente
+64,Isidoro Molins Goicoechea,44,3960124,Atención al Cliente
+65,Teresa González,37,2758639,Tecnología
+66,Socorro Sandra Guitart Coello,52,2802413,Ventas
+67,Leire del Cid,48,3400505,Marketing
+68,Carlito Salom Mancebo,25,3938329,Recursos Humanos
+69,Rafael Benítez,50,4440637,Ventas
+70,María Belén Recio Merino,51,4244029,Marketing
+71,Arcelia Pombo Moraleda,47,3863162,Tecnología
+72,Marcial Ropero Casanovas,48,3835055,Logística
+73,Begoña Cañete-Llano,50,4784425,Atención al Cliente
+74,Berta Madrigal Cobos,23,2533892,Marketing
+75,Andrés Felipe Alcántara-Sanmiguel,28,3249507,Tecnología
+76,Josué Feliu López,36,3186621,Ventas
+77,Matilde Roca Puga,33,3617542,Ventas
+78,Oriana Ponce Fabra,38,2560846,Marketing
+79,Amancio Vallés Canet,26,3826162,Recursos Humanos
+80,Zaira Jesusa Manzanares Guitart,48,4535332,Recursos Humanos
+81,Juan Francisco Solsona Perera,57,3731970,Finanzas
+82,Diana Martí-Toro,36,4434628,Ventas
+83,José María Iriarte Perales,59,3616457,Ventas
+84,Isaac Zorrilla Calvo,46,3322843,Atención al Cliente
+85,Aroa Portero Alcántara,36,3304052,Ventas
+86,Juan José Ribas-Bastida,32,3160175,Marketing
+87,Ramón Tejera Atienza,53,2870525,Marketing
+88,Azahara Sosa Gargallo,33,4865263,Ventas
+89,Gracia Mirta Puerta Sedano,57,4026040,Marketing
+90,Maribel Girona-Sevilla,37,4181198,Marketing
+91,Cosme Azorin Calderon,20,4810131,Logística
+92,Severo Marquez Murcia,37,4090053,Recursos Humanos
+93,Maura Gargallo Rojas,20,3521878,Ventas
+94,Ildefonso del Córdoba,23,4825460,Marketing
+95,Eloísa Lloret Sevilla,47,2631909,Recursos Humanos
+96,Eligio Sierra Castell,35,4037378,Ventas
+97,León Galván Fuertes,56,2684219,Atención al Cliente
+98,Artemio Nogueira Andreu,20,3085709,Ventas
+99,Xavier Gargallo-Seguí,52,4300846,Marketing
+100,Ángela Pavón Rivas,36,4715681,Tecnología
