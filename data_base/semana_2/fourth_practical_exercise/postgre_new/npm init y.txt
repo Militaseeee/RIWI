@@ -3,3 +3,11 @@ npm init -y
 npm install express pg cors
 
 node scriptpg.js
+
+
+------------
+
+
+npm install -D vite
+
+npm run dev
