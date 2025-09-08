@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="data_base">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/data_base/pd_camila_acosta_gosling.zip!/" />
+      <root url="jar://$PROJECT_DIR$/data_base/postgre.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

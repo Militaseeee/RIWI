@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="spa-gosling-v2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/javaScript/semana_4/spa/v2/spa-gosling-v2.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

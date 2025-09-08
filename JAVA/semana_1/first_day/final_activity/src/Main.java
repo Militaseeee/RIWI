@@ -9,7 +9,7 @@ public class Main {
         double basic = 80.0;
         double plus = 120.0;
         double premium = 180.0;
-        byte discount = 10;
+        byte discount = 0; // now we accumulate discounts
         double total = 0;
 
         Scanner sc = new Scanner(System.in);
@@ -23,9 +23,9 @@ public class Main {
         System.out.println("Type your weight in kg");
         double weight = sc.nextDouble();
 
-        sc.nextLine();
+        sc.nextLine(); // clear buffer
 
-        System.out.println("Chose your plan");
+        System.out.println("\nChose your plan");
         System.out.println("BASIC");
         System.out.println("PLUS");
         System.out.println("PREMIUM");
@@ -36,69 +36,54 @@ public class Main {
         System.out.println("2 - false");
         byte chose = sc.nextByte();
 
-        if ( plan == "BASIC" ) {
-            System.out.println("You should pay " + basic);
-        } else if ( plan == "PLUS" ) {
-            System.out.println("You should pay " + plus);
-        } else if ( plan == "PREMIUM" ) {
-            System.out.println("You should pay " + premium);
+        double basePrice = 0; // Determine base price
+        if (plan.equalsIgnoreCase("BASIC")) {
+            basePrice = basic;
+        } else if (plan.equalsIgnoreCase("PLUS")) {
+            basePrice = plus;
+        } else if (plan.equalsIgnoreCase("PREMIUM")) {
+            basePrice = premium;
         }
 
-        if ( chose == 1 ) {
-            first_time = true;
-            System.out.println("You have a discount of " + discount);
-
-            if ( plan == "BASIC" ) {
-                System.out.println("You should pay " + basic);
-                total = (basic * discount) / 100.0;
-            } else if ( plan == "PLUS" ) {
-                System.out.println("You should pay " + plus);
-                total = (plus * discount) / 100.0;
-            } else if ( plan == "PREMIUM" ) {
-                System.out.println("You should pay " + premium);
-                total = (premium * discount) / 100.0;
-            }
-
-            System.out.println("You have pay: " + total);
-
-        } else if ( age > 16 && age < 25 ) {
-            System.out.println("You have a discount of " + discount);
-
-            if ( plan == "BASIC" ) {
-                System.out.println("You should pay " + basic);
-                total = (basic * discount) / 100.0;
-            } else if ( plan == "PLUS" ) {
-                System.out.println("You should pay " + plus);
-                total = (plus * discount) / 100.0;
-            } else if ( plan == "PREMIUM" ) {
-                System.out.println("You should pay " + premium);
-                total = (premium * discount) / 100.0;
-            }
-
-            System.out.println("You have pay: " + total);
-
-        } else if ( discount > 20 ) {
-            System.out.println("You can't have more 20%");
+        // Discounts
+        if (chose == 1) {
+            discount += 10; // first time
+        }
+        if (age >= 16 && age <= 25) {
+            discount += 10; // young
         }
 
-        if ( age < 14 ) {
+        if (discount > 20) {
+            discount = 20; // 20% cap
+        }
+
+        total = basePrice - (basePrice * discount / 100.0);
+
+        if (age < 14) {
             System.out.println("Not eligible");
-        } else if ( age > 14 && age < 18 ) {
+        } else if (age < 18) {
             System.out.println("Requires guardian authorization");
         }
 
-        Double bmi = weight / (height * height);
+        double bmi = weight / (height * height);
 
-        if ( bmi < 18.5 ) {
+        if (bmi < 18.5) {
             System.out.println("Low weight");
-        } else if ( bmi > 18.5 && bmi < 24.9 ) {
+        } else if (bmi <= 24.9) {
             System.out.println("Normal");
-        } else if ( bmi > 25 && bmi < 29.9 ) {
+        } else if (bmi <= 29.9) {
             System.out.println("Overweight");
         } else {
             System.out.println("Obesity");
         }
 
-        System.out.println("Your data is: " + name + plan + discount + total + bmi);
+        System.out.println(" ------------------------- ");
+        System.out.println("Name: " + name);
+        System.out.println("Plan: " + plan);
+        System.out.println("Base price: $" + basePrice);
+        System.out.println("Discount applied: " + discount + "%");
+        System.out.println("Final price: $" + total);
+        System.out.println("BMI: " + bmi);
+        System.out.println(" ------------------------- ");
     }
 }

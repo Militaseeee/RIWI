@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="spanish_sesion">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/data_base/semana_2/training2_module4/spanish_sesion/caso_de_uso.zip!/" />
+      <root url="jar://$PROJECT_DIR$/data_base/semana_2/training2_module4/spanish_sesion/desarrollo_entrenamiento.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

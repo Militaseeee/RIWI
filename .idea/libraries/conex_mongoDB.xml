@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="conex_mongoDB">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/data_base/semana_3/conex_mongoDB/conex_mongoDB.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

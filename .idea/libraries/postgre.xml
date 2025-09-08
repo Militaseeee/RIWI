@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="postgre">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/data_base/semana_2/fourth_practical_exercise/postgre.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
