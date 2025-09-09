@@ -1,5 +1,5 @@
 # Contenido en Markdown con ejemplos de los métodos String en Java
-markdown_content = """
+
 # 📘 Métodos de la clase String en Java
 
 En Java, los `String` son objetos y tienen muchos métodos útiles.  
