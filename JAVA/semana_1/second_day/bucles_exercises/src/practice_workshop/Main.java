@@ -56,7 +56,7 @@ public class Main {
             System.out.println("Position " + i + ": " + sixPositions[i]);
         }
         System.out.println("\n");
-        
+
         // ArrayList:
         // 4. Crea un ArrayList con al menos 4 nombres de tus compañeros
         ArrayList<String> namesFriends = new ArrayList<>();
@@ -77,8 +77,33 @@ public class Main {
         System.out.println("\n");
 
         // 5. Recorre el ArrayList e imprime: "Hola, "
-        ArrayList<String> showHello = new ArrayList<>();
+        ArrayList<String> showPeople = new ArrayList<>();
 
+        showPeople.add("Daniel");
+        showPeople.add("Andrea");
+        showPeople.add("Thiago");
 
+        for (int i = 0; i < showPeople.size(); i++) {
+            System.out.println("Hello, " + showPeople.get(i));
+        }
+        System.out.println("\n");
+
+        for (String names : showPeople) {
+            System.out.println("HELLO, " + names);
+        }
+        System.out.println("\n");
+
+        // 6. Crea un HashMap<Integer, String> que guarde el número de documento como clave y el nombre como valor.
+        HashMap<Integer, String> dataPeople = new HashMap<>();
+
+        dataPeople.put(1, "Cris");
+        dataPeople.put(2, "Pablo");
+        dataPeople.put(3, "Camila");
+
+        // 7. Recorre el mapa e imprime un mensaje así:
+        for (Map.Entry <Integer, String> showInformation : dataPeople.entrySet()) {
+
+            System.out.println("ID: " + showInformation.getKey() + " → Name: " + showInformation.getValue());
+        }
     }
 }
