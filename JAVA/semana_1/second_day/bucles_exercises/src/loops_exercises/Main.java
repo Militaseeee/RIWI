@@ -162,6 +162,141 @@ public class Main {
 
         // La suma de los números que están dentro del intervalo (intervalo abierto). Cuantos números están fuera del intervalo. He informa si hemos introducido algún número igual a los límites del intervalo.
 
+//        // // Ask the user for the interval limits
+//        System.out.println("Enter lower limit: ");
+//        int lower = sc.nextInt();
+//        System.out.println("Enter upper limit: ");
+//        int upper = sc.nextInt();
+//
+//        // Validate that the lower bound is less than the upper bound
+//        // We use a for loop without initialization or increment, it works like a while loop
+//        for (; lower >= upper ;) {
+//            System.out.println("The lower limit must be less than the upper limit. Try again");
+//            System.out.println("Enter lower limit: ");
+//            lower = sc.nextInt();
+//            System.out.println("Enter upper limit: ");
+//            upper = sc.nextInt();
+//        }
+//
+//        // Variables for statistics
+//        int sumInside = 0;              // sum of numbers within the interval
+//        int countOutside = 0;           // how many numbers were outside the interval
+//        boolean equalToLimit = false;   // if there was any number equal to the limits
+//
+//        // We traverse that amount with a for
+//        System.out.println("\nHow many numbers do you want to enter?");
+//        int amount = sc.nextInt();
+//
+//        // Read numbers with a for
+//        for (int i = 1; i <= amount; i++) {
+//            System.out.println("Enter number " + i + ": ");
+//            int number = sc.nextInt();
+//
+//            // Check where the number falls
+//            if (number > lower && number < upper) {
+//                sumInside += number;
+//            } else if (number == lower || number == upper) {
+//                equalToLimit = true;
+//            } else {
+//                countOutside++; // It is out of range
+//            }
+//        }
+//
+//        // Show results
+//        System.out.println("\n--- Results ---");
+//        System.out.println("Sum of numbers inside interval: " + sumInside);
+//        System.out.println("Count of numbers outside interval: " + countOutside);
+//
+//        if (equalToLimit) {
+//            System.out.println("At least one number was equal to the limits");
+//        } else {
+//            System.out.println("No number was equal to the limits");
+//        }
 
+        // Second form (easy)
+
+//        int lower, upper;
+//
+//        do {
+//            System.out.println("Enter lower limit: ");
+//            lower = sc.nextInt();
+//            System.out.println("Enter upper limit: ");
+//            upper = sc.nextInt();
+//
+//            if (lower >= upper) {
+//                System.out.println("The lower limit must be less than the upper limit. Try again.\n");
+//            }
+//        } while (lower >= upper);
+//
+//        int sumInside = 0;
+//        int countOutside = 0;
+//        boolean equalToLimit = false;
+//
+//        System.out.println("\nNow enter numbers (0 to finish):");
+//        int number;
+//
+//        do {
+//            number = sc.nextInt();
+//            if (number == 0) {
+//                break;
+//            }
+//            if (number > lower && number < upper) {
+//                sumInside += number;
+//            } else if (number == lower || number == upper) {
+//                equalToLimit = true;
+//            } else {
+//                countOutside++;
+//            }
+//
+//        } while (number != 0);
+//
+//        System.out.println("\n--- Results ---");
+//        System.out.println("Sum of numbers inside interval: " + sumInside);
+//        System.out.println("Count of numbers outside interval: " + countOutside);
+//
+//        if (equalToLimit) {
+//            System.out.println("At least one number was equal to the limits");
+//        } else {
+//            System.out.println("No number was equal to the limits");
+//        }
+
+        // 9. Escribe un programa que dados dos números, uno real (base) y un entero positivo (exponente), saque por pantalla el resultado de la potencia. No se puede utilizar el operador de potencia.
+
+        // THIS FORM IS EASY, ONLY I PUT THIS CODE FOR I HAVE IDEA IN A FUTURE
+//        System.out.println("Enter the base: ");
+//        int base = sc.nextInt();
+//
+//        System.out.println("Enter the base: ");
+//        int exponent = sc.nextInt();
+//
+//        // Use method Math.pow
+//        double power = Math.pow(base, exponent);
+//        System.out.println(base + " raised to the power of " + exponent + " is: " + power);
+
+//        System.out.println("Enter the base: ");
+//        double base = sc.nextDouble();
+//
+//        System.out.println("Enter the exponent (positive integer): ");
+//        int exponent = sc.nextInt();
+//
+//        if (exponent < 0) {
+//            System.out.println("Error!!! the exponent must be a positive integer");
+//        } else {
+//            double power = 1; // We start at 1 because it is the neutral of multiplication
+//            for (int i = 1; i <= exponent; i++) {
+//                power *= base;
+//            }
+//
+//            System.out.println(base + " raised to the power of " + exponent + " is: " + power);
+//        }
+
+        // 10. Algoritmo que muestre la tabla de multiplicar de los números 1,2,3,4 y 5.
+
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("\nMultiplication Table of " + i);
+            for (int j = 1; j <= 10 ; j++) {
+                System.out.println(i + " * " + j + " = " + (i * j));
+            }
+        }
     }
 }
