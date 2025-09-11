@@ -11,6 +11,7 @@ public class Main {
         HashMap<Integer, String> customers = new HashMap<>();
         HashMap<Integer, String> orders = new HashMap<>();
         HashMap<Integer, Integer> id_price = new HashMap<>();
+        HashMap<Integer, Boolean> paid_status = new HashMap<>();
 
         // Self-incrementing ID counter
         int idCounter = 1;
@@ -22,7 +23,8 @@ public class Main {
             System.out.println("1. Show menu");
             System.out.println("2. Register customer and order");
             System.out.println("3. Show registered accounts");
-            System.out.println("4. Go out");
+            System.out.println("4. Register payment");
+            System.out.println("5. Go out");
             System.out.println("\n ---------------------------------\n");
 
             System.out.print("Choose an option: ");
@@ -44,7 +46,7 @@ public class Main {
 
                     customers.put(idCounter, name);
 
-                    System.out.println("Choose the menu: \n");
+                    System.out.println("\nChoose the menu: ");
                     System.out.println("1 = Menu of the day");
                     System.out.println("2 = Executive menu");
                     int menuChoice = sc.nextInt();
@@ -61,6 +63,7 @@ public class Main {
                         id_price.put(idCounter, 0);
                     }
 
+                    paid_status.put(idCounter, false); //This part is default, not paid
                     System.out.println("Registered customer with ID: " + idCounter);
                     idCounter++; // each registered customer is increased
                     break;
@@ -73,11 +76,25 @@ public class Main {
                         String CustomerName = entry.getValue();
                         String order = orders.get(id);
                         int total = id_price.get(id);
-                        System.out.println("ID: " + id + " → Nombre: " + CustomerName + " → Pedido: " + order + " → Total: $" + total);
+                        boolean paid = paid_status.getOrDefault(id, false);
+                        String status = paid ? "PAID" : "PENDING";
+                        System.out.println("ID: " + id + " → Nombre: " + CustomerName + " → Pedido: " + order + " → Total: $" + total + "→ Status:" + status);
+                    }
+                    break;
+                case 4:
+                    System.out.println("\nType the ID of the customer who is paying: ");
+                    int pay = sc.nextInt();
+                    sc.nextLine();
+
+                    if (customers.containsKey(pay)) {
+                        paid_status.put(pay, true);
+                        System.out.println(customers.get(pay) + " has paid their account");
+                    } else {
+                        System.out.println("Invalid Id, customer not found");
                     }
                     break;
 
-                case 4:
+                case 5:
                     System.out.println("Are you sure you want to exit? (y/n)");
                     String confirm = sc.nextLine().toLowerCase();
 
@@ -93,6 +110,6 @@ public class Main {
                     System.out.println("Invalid option, please try again");
             }
 
-        } while(opc != 4);
+        } while(opc != 5);
     }
 }
