@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Main {
@@ -33,7 +34,6 @@ public class Main {
                 }
 
                 int opc = Integer.parseInt(opcStr);
-
                 switch (opc) {
                     case 1:
                         createProduct();
@@ -45,11 +45,10 @@ public class Main {
                         buyProduct();
                         break;
                     case 4:
-                        //mostrarEstadisticas();
-                        System.out.println("HELLO 4");
+                        showStatistics();
                         break;
                     case 5:
-                        //buscarProducto();
+                        searchProduct();
                         System.out.println("HELLO 5");
                         break;
                     case 6:
@@ -64,8 +63,7 @@ public class Main {
             }
         }
         // Al salir del bucle, mostramos el ticket final
-        JOptionPane.showMessageDialog(null, String.format(" - Goodbye!!!! Come back soon c: - \n Total purchases this session: $%,.2f", totalBuy));
-
+        JOptionPane.showMessageDialog(null, String.format(" --- Goodbye!!!! Come back soon c: --- \n Total purchases this session: $%,.2f", totalBuy));
     }
 
     public static void createProduct() {
@@ -102,17 +100,16 @@ public class Main {
             // El usuario presionó cancelar en algún punto
             JOptionPane.showMessageDialog(null, "Operation cancelled");
         }
-
     }
 
     public static void listInventory() {
         if (products.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "The inventory is empty");
+            JOptionPane.showMessageDialog(null, "The inventory is empty", "Error!!!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // StringBuilder -> Es una clase que sirve para construir textos grandes de manera eficiente
-        StringBuilder inventaryStr = new StringBuilder("- Inventory -\n");
+        StringBuilder inventaryStr = new StringBuilder("------------------- Inventory --------------------\n");
         inventaryStr.append(String.format("%-20s | %-15s | %s\n", "Product", "Price", "Stock")); //.format -> genera una cadena formateada usando placeholders
         inventaryStr.append("---------------------------------------------------\n");
 
@@ -128,10 +125,15 @@ public class Main {
         JTextArea textArea = new JTextArea(inventaryStr.toString());
         textArea.setEditable(false); // Esto me sirve para que el usuario no me modifique
         JScrollPane scrollPane = new JScrollPane(textArea); // Barra de desplazamiento
-        JOptionPane.showMessageDialog(null, scrollPane, "Store Inventory", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, scrollPane, "Store Inventory", JOptionPane.PLAIN_MESSAGE);
     }
 
     public static void buyProduct() {
+        if (products.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "The inventory is empty", "Error!!!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         String productName = JOptionPane.showInputDialog("What product do you want to buy?");
         if (productName == null)
             return;  // Si cancela, salimos del metodo
@@ -163,8 +165,8 @@ public class Main {
 
             // Confirmación de la compra
             int confirmacion = JOptionPane.showConfirmDialog(null,
-                    String.format("Confirmar compra:\n%d x %s = $%,.2f\n¿Deseas continuar?", amountBuy, productName, subtotal),
-                    "Confirmar Compra",
+                    String.format("Confirm purchase:\n%d x %s = $%,.2f\nDo you wish to continue?", amountBuy, productName, subtotal),
+                    "Confirm Purchase",
                     JOptionPane.YES_NO_OPTION);
 
             if (confirmacion == JOptionPane.YES_OPTION) {
@@ -182,7 +184,119 @@ public class Main {
         }
     }
 
+    public static void showStatistics() {
+        if (products.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "The inventory is empty", "Error!!!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //double pricesMax = Arrays.stream(prices).max().getAsDouble();
+        //double pricesMin = Arrays.stream(prices).min().getAsDouble();
+        double pricesMax = prices[0];
+        double pricesMin = prices[0];
+        String productExpensive = products.get(0);
+        String productCheap = products.get(0);
 
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > pricesMax) {
+                pricesMax = prices[i];
+                productExpensive = products.get(i);
+            }
+            if (prices[i] < pricesMin) {
+                pricesMin = prices[i];
+                productCheap = products.get(i);
+            }
+        }
+
+        String statistics = String.format(
+                " -------------- Price statistics -------------- \n\n" +
+                        "Product more expensive: %s --> $%,.2f\n" + "Product cheaper: %s --> $%,.2f", productExpensive, pricesMax, productCheap, pricesMin
+        );
+        JOptionPane.showMessageDialog(null, statistics);
+    }
+
+    public static void searchProduct() {
+        if (products.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "The inventory is empty", "Error!!!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String search = JOptionPane.showInputDialog("Type the name of the product you want to search for:");
+        if (search == null || search.trim().isEmpty()) {
+            return;
+        }
+        search = search.trim().toLowerCase();
+        StringBuilder watchResults = new StringBuilder("----------- Search results ----------- \n\n");
+
+        boolean find = false;
+
+        for (int i = 0; i < products.size(); i++) {
+            String currentName = products.get(i);
+            // Usamos .contains() para la búsqueda parcial
+            if (currentName.toLowerCase().contains(search)) {
+                watchResults.append(String.format("Product: %s\nPrice: $%,.2f\nStock: %d units\n\n",
+                        currentName, prices[i], stock.get(currentName)));
+                find = true;
+            }
+        }
+
+        if (find) {
+        JOptionPane.showMessageDialog(null, watchResults.toString());
+        } else {
+        JOptionPane.showMessageDialog(null, "No products were found matching this: '" + watchResults + "'.");
+        }
+    }
+
+
+
+
+
+//    public static void searchProduct() {
+//        if (products.isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "The inventory is empty", "Error!!!", JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
+//
+//        String search = JOptionPane.showInputDialog("Type the name of the product you want to search for:");
+//        if (search == null || search.trim().isEmpty()) {
+//            return;
+//        }
+//        search = search.trim().toLowerCase();
+//        // StringBuilder -> Es una clase que sirve para construir textos grandes de manera eficiente
+//        StringBuilder watchResults = new StringBuilder("----------- Search results ----------- \n");
+//        watchResults.append(String.format("%-20s | %-15s | %s\n", "Product", "Price", "Stock")); //.format -> genera una cadena formateada usando placeholders
+//        watchResults.append("---------------------------------------------------\n");
+//
+//        boolean find = false;
+//
+//        for (int i = 0; i < products.size(); i++) {
+//            String currentName = products.get(i);
+//            // Usamos .contains() para la búsqueda parcial
+//            if (currentName.toLowerCase().contains(search)) {
+//                watchResults.append(String.format("%-20s | $%,-14.2f | %d units\n", currentName, prices[i], stock.get(currentName))); // se contruye la fila
+//                find = true;
+//            }
+//        }
+//
+//        // Usamos un JTextArea dentro del JOptionPane para mostrar texto con formato monoespaciado (ocupa el mismo espacio de ancho)
+//        JTextArea textArea = new JTextArea(watchResults.toString());
+//        textArea.setEditable(false); // Esto me sirve para que el usuario no me modifique
+//        JScrollPane scrollPane = new JScrollPane(textArea); // Barra de desplazamiento
+//        JOptionPane.showMessageDialog(null, scrollPane, "Store Inventory", JOptionPane.PLAIN_MESSAGE);
+//
+//        if (find) {
+//            JOptionPane.showMessageDialog(null, watchResults.toString());
+//        } else {
+//            JOptionPane.showMessageDialog(null, "No products were found matching this: '" + watchResults + "'.");
+//        }
+//    }
+
+
+
+
+
+
+
+    // ------------------------- In this part I have the "Métodos utilitarios" -------------------------
 
     public static void addProduct(String productName, double price, int amount) {
         // 1. Agregar el nombre al ArrayList
@@ -207,6 +321,3 @@ public class Main {
     }
 
 }
-
-
-
