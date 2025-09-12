@@ -68,7 +68,6 @@ public class Main {
 
     }
 
-
     public static void createProduct() {
         String productName = JOptionPane.showInputDialog("Type the name of the product:");
         // Validamos que el nombre no sea nulo (si presiona cancelar) o vacío
@@ -113,21 +112,22 @@ public class Main {
         }
 
         // StringBuilder -> Es una clase que sirve para construir textos grandes de manera eficiente
-        StringBuilder inventaryStr = new StringBuilder("- Inventory -\n\n");
-        inventaryStr.append(String.format("%-20s | %-15s | %s\n", "Product", "Price", "Stock"));
+        StringBuilder inventaryStr = new StringBuilder("- Inventory -\n");
+        inventaryStr.append(String.format("%-20s | %-15s | %s\n", "Product", "Price", "Stock")); //.format -> genera una cadena formateada usando placeholders
         inventaryStr.append("---------------------------------------------------\n");
 
+        // Recorre todos los productos de la lista de productos
         for (int i = 0; i < products.size(); i++) {
             String productName = products.get(i);
             double price = prices[i];
-            int amount = stock.get(productName); // Obtenemos el stock desde el HashMap usando el nombre como clave
-            inventaryStr.append(String.format("%-20s | $%,-14.2f | %d units\n", productName, price, amount));
+            int amountStock = stock.get(productName); // Obtenemos el stock desde el HashMap usando el nombre como clave
+            inventaryStr.append(String.format("%-20s | $%,-14.2f | %d units\n", productName, price, amountStock)); // se contruye la fila
         }
 
-        // Usamos un JTextArea dentro del JOptionPane para mostrar texto con formato monoespaciado
+        // Usamos un JTextArea dentro del JOptionPane para mostrar texto con formato monoespaciado (ocupa el mismo espacio de ancho)
         JTextArea textArea = new JTextArea(inventaryStr.toString());
-        textArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(textArea);
+        textArea.setEditable(false); // Esto me sirve para que el usuario no me modifique
+        JScrollPane scrollPane = new JScrollPane(textArea); // Barra de desplazamiento
         JOptionPane.showMessageDialog(null, scrollPane, "Store Inventory", JOptionPane.INFORMATION_MESSAGE);
     }
 
