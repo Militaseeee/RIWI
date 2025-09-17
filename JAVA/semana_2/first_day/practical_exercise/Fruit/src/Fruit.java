@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class Fruit {
     String name;
@@ -10,7 +9,7 @@ public class Fruit {
     double date;
 
     // constructor method
-    Fruit (String nameFruit, String typeFruit, String colorFruit, String originFruit, double weightFruit, double dateFruit) {
+    Fruit(String nameFruit, String typeFruit, String colorFruit, String originFruit, double weightFruit, double dateFruit) {
         this.name = nameFruit;
         this.type = typeFruit;
         this.color = colorFruit;

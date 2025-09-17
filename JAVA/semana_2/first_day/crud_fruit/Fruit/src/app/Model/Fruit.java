@@ -1,3 +1,5 @@
+package app.Model;
+
 import javax.swing.*;
 
 public class Fruit {
@@ -13,16 +15,14 @@ public class Fruit {
     private static  int counter = 0;
 
     public Fruit(String name, double weightKg, String color, double price, String origin, boolean isOrganic) {
-
-        counter++;
         this.idFruit = counter;
+        counter++;
         this.name = name;
         this.weightKg = weightKg;
         this.color = color;
         this.price = price;
         this.origin = origin;
         this.isOrganic = isOrganic;
-
     }
 
     public int getIdFruit() {
@@ -95,5 +95,17 @@ public class Fruit {
 
     public static void setCounter(int counter) {
         Fruit.counter = counter;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + idFruit  + "\n"+
+                " | Name: " + name + "\n" +
+                " | Weight: " + weightKg + " Kg" + "\n" +
+                " | Color: " + color + "\n" +
+                " | Price: $" + price + "\n" +
+                " | Origin: " + origin + "\n" +
+                " | Organic: " + (isOrganic ? "Yes" : "No") + "\n"+
+                "------------------------------" + "\n";
     }
 }
