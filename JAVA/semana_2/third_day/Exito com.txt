@@ -1,0 +1,28 @@
+Exito.com
+
+- clase padre:
+productos -> cada producto código, nombre, marca, precio, descuento, stock, calificación, detalles
+
+envio -> id_producto, dirección, costo, tiempo estimado, empresa transportadora
+
+Herencia: 
+- categorias
+- envios : Envio del domicilio, recoger en tienda
+
+
+polimorfismo: 
+
+- calcular el precio (descuento, promoción)
+
+* CompraVirtual (maneja pagos en línea, validación de tarjeta, entrega a domicilio).
+
+* CompraFisica (pago en caja, entrega inmediata del producto).
+
+encapsulamiento: cuando la persona compra uno se muestra el stock
+proteger y controlar atributos como el stock
+
+Abstracción: 
+
+- cuando se agrega al carro piden metodo de pago (el usuario no tiene en cuenta como funciona internamente)
+
+- el cliente solo ve un resumen de sus compras pasadas sin conocer cómo funciona internamente el guardado y la recuperación de datos.
