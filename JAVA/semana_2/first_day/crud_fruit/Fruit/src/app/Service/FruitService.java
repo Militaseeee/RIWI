@@ -48,7 +48,6 @@ public class FruitService {
             );
 
             isOrganic = false;
-
             if (result == JOptionPane.OK_OPTION) {
                 String selected = (String) comboBox.getSelectedItem();
 
@@ -57,7 +56,6 @@ public class FruitService {
                             "Please select Yes or No before continuing.",
                             "Invalid selection",
                             JOptionPane.WARNING_MESSAGE);
-                    // Aquí puedes volver a mostrar el diálogo si quieres forzar que elija bien
                 } else {
                     isOrganic = selected.equals("Yes");
                 }
@@ -98,7 +96,6 @@ public class FruitService {
         StringBuilder result = new StringBuilder("Search result:\n");
 
         boolean found = false;
-
         switch (searchOption) {
             case "1":
                 Integer idSearch = Validation.getPositiveInt("Enter the fruit ID to search:");
@@ -116,16 +113,12 @@ public class FruitService {
                     result.append("No fruit found with ID ").append(idSearch);
                 }
                 break;
-
-
             case "2":
                 String nameSearch = JOptionPane.showInputDialog(
                         null, "Enter the fruit name (or part of it) to search:"
                 );
                 if (nameSearch == null) return;
-
                 // nameSearch = Validation.valDataNull(nameSearch, "You must enter a name to search");
-
                 nameSearch = nameSearch.toLowerCase();
                 for (Fruit fruit : listFruit) {
                     if(fruit.getName().toLowerCase().contains(nameSearch)) {
@@ -146,126 +139,102 @@ public class FruitService {
             return;
         }
 
-        
-        try {
-            int idUpdate = Integer.parseInt(
-                    JOptionPane.showInputDialog(null, "Enter the ID of the fruit to update:")
-            );
+        Integer idUpdate = Validation.getPositiveInt("Enter the ID of the fruit to update:");
+        if (idUpdate == null) return;
 
-            Fruit fruitToUpdate = null;
-            for (Fruit fruit : listFruit) {
-                if (fruit.getIdFruit() == idUpdate) {
-                    fruitToUpdate = fruit;
-                    break;
-                }
+        Fruit fruitToUpdate = null;
+        for (Fruit fruit : listFruit) {
+            if (fruit.getIdFruit() == idUpdate) {
+                fruitToUpdate = fruit;
+                break;
             }
-
-            if (fruitToUpdate == null) {
-                JOptionPane.showMessageDialog(null, "No fruit found with ID " + idUpdate);
-                return;
-            }
-
-            boolean keepUpdating = true;
-            while (keepUpdating) {
-                String option = JOptionPane.showInputDialog(
-                        null,
-                        "Updating fruit: " + fruitToUpdate.getName() +
-                                "\n1. Name\n2. Weight\n3. Color\n4. Price\n5. Origin\n6. IsOrganic\n7. Finish",
-                        "Update Menu",
-                        JOptionPane.QUESTION_MESSAGE
-                );
-
-                switch (option) {
-                    case "1":
-                        String newName = JOptionPane.showInputDialog("Enter new name:");
-                        if (newName != null && !newName.trim().isEmpty()) {
-                            fruitToUpdate.setName(newName.trim());
-                        }
-                        break;
-                    case "2":
-                        try {
-                            double newWeight = Double.parseDouble(JOptionPane.showInputDialog("Enter new weight:"));
-                            if (newWeight > 0) fruitToUpdate.setWeightKg(newWeight);
-                            else JOptionPane.showMessageDialog(null, "Weight must be > 0");
-                        } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "Invalid weight value.");
-                        }
-                        break;
-                    case "3":
-                        String newColor = JOptionPane.showInputDialog("Enter new color:");
-                        if (newColor != null && !newColor.trim().isEmpty()) {
-                            fruitToUpdate.setColor(newColor.trim());
-                        }
-                        break;
-                    case "4":
-                        try {
-                            double newPrice = Double.parseDouble(JOptionPane.showInputDialog("Enter new price:"));
-                            if (newPrice >= 0) fruitToUpdate.setPrice(newPrice);
-                            else JOptionPane.showMessageDialog(null, "Price must be >= 0");
-                        } catch (NumberFormatException e) {
-                            JOptionPane.showMessageDialog(null, "Invalid price value.");
-                        }
-                        break;
-                    case "5":
-                        String newOrigin = JOptionPane.showInputDialog("Enter new origin:");
-                        if (newOrigin != null && !newOrigin.trim().isEmpty()) {
-                            fruitToUpdate.setOrigin(newOrigin.trim());
-                        }
-                        break;
-                    case "6":
-                        int confirm = JOptionPane.showConfirmDialog(null, "Is the fruit organic?");
-                        fruitToUpdate.setIsOrganic(confirm == JOptionPane.YES_OPTION);
-                        break;
-                    case "7":
-                        keepUpdating = false;
-                        break;
-                    default:
-                        JOptionPane.showMessageDialog(null, "Invalid option.");
-                        break;
-                }
-            }
-            JOptionPane.showMessageDialog(null, "Fruit updated successfully:\n" + fruitToUpdate);
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Invalid ID format");
         }
+
+        if (fruitToUpdate == null) {
+            JOptionPane.showMessageDialog(null, "No fruit found with ID " + idUpdate);
+            return;
+        }
+
+        boolean keepUpdating = true;
+        while (keepUpdating) {
+            String option = JOptionPane.showInputDialog(
+                    null,
+                    "Updating fruit: " + fruitToUpdate.getName() +
+                                "\n1. Name\n2. Weight\n3. Color\n4. Price\n5. Origin\n6. IsOrganic\n7. Finish",
+                    "Update Menu",
+                    JOptionPane.QUESTION_MESSAGE
+                );
+            if (option == null);
+
+            switch (option) {
+                case "1":
+                    String newName = Validation.valString("Enter new name:");
+                    if (newName != null) fruitToUpdate.setName(newName);
+                    break;
+                case "2":
+                     Double newWeight = Validation.getPositiveDouble("Enter new weight:");
+                     if (newWeight != null) fruitToUpdate.setWeightKg(newWeight);
+                     break;
+                case "3":
+                    String newColor = Validation.valString("Enter new color:");
+                    if (newColor != null) fruitToUpdate.setColor(newColor);
+                    break;
+                case "4":
+                    Double newPrice = Validation.getPositiveDouble("Enter new price:");
+                    if (newPrice != null) fruitToUpdate.setPrice(newPrice);
+                    break;
+                case "5":
+                    String newOrigin = Validation.valString("Enter new origin:");
+                    if (newOrigin != null) fruitToUpdate.setOrigin(newOrigin);
+                    break;
+                case "6":
+                    int confirm = JOptionPane.showConfirmDialog(null, "Is the fruit organic?");
+                    fruitToUpdate.setIsOrganic(confirm == JOptionPane.YES_OPTION);
+                    break;
+                case "7":
+                    keepUpdating = false;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Invalid option");
+                    break;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Fruit updated successfully:\n" + fruitToUpdate);
     }
 
     public static void deleteFruit() {
-        try {
-            int idDelete = Integer.parseInt(
-                    JOptionPane.showInputDialog(null, "Enter the ID of the fruit to delete:")
-            );
+        if (Validation.isListEmpty(listFruit, "fruit")) {
+            return;
+        }
 
-            Fruit fruitToDelete = null;
-            for (Fruit fruit : listFruit) {
-                if (fruit.getIdFruit() == idDelete) {
-                    fruitToDelete = fruit;
-                    break;
-                }
+        Integer idDelete = Validation.getPositiveInt("Enter the ID of the fruit to delete:");
+        if (idDelete == null) return;
+
+        Fruit fruitToDelete = null;
+        for (Fruit fruit : listFruit) {
+            if (fruit.getIdFruit() == idDelete) {
+                fruitToDelete = fruit;
+                break;
             }
+        }
 
-            if (fruitToDelete == null) {
-                JOptionPane.showMessageDialog(null, "No fruit found with ID " + idDelete);
-                return;
-            }
+        if (fruitToDelete == null) {
+            JOptionPane.showMessageDialog(null, "No fruit found with ID " + idDelete);
+            return;
+        }
 
-            int confirm = JOptionPane.showConfirmDialog(
-                    null,
-                    "Are you sure you want to delete this fruit?\n" + fruitToDelete,
-                    "Confirm Deletion",
-                    JOptionPane.YES_NO_OPTION
-            );
+        int confirm = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to delete this fruit?\n" + fruitToDelete,
+                "Confirm Deletion",
+                JOptionPane.YES_NO_OPTION
+        );
 
-            if (confirm == JOptionPane.YES_OPTION) {
-                listFruit.remove(fruitToDelete);
-                JOptionPane.showMessageDialog(null, "Fruit deleted successfully.");
-            } else {
-                JOptionPane.showMessageDialog(null, "Deletion canceled.");
-            }
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Invalid ID format.");
+        if (confirm == JOptionPane.YES_OPTION) {
+            listFruit.remove(fruitToDelete);
+            JOptionPane.showMessageDialog(null, "Fruit deleted successfully.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Deletion canceled.");
         }
     }
 }
