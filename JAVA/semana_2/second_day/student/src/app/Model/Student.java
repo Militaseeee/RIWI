@@ -12,32 +12,25 @@ public class Student extends Person {
         this.subjectList = new ArrayList<>();
     }
 
-    public void addSubject() {
-
+    public void addSubject(Subject subjectAdd) {
         try {
             if (this.subjectList.size() >= 4) {
-                JOptionPane.showMessageDialog(null, "You cannot add more than 4 subjects");
+                System.out.println("You cannot add more than 4 subjects");
                 return;
             }
 
-            String nameSubject = JOptionPane.showInputDialog(null, "Type the subject: ");
-            double noteSubject = Double.parseDouble(JOptionPane.showInputDialog(null, "Type the note each subject:"));
-
-            nameSubject = nameSubject.toLowerCase();
-
             for (Subject subject : subjectList) {
-                if (subject.getNameSubject().equals(nameSubject)) {
-                    JOptionPane.showMessageDialog(null, "This subject already exists");
+                if (subject.getNameSubject().equalsIgnoreCase(subjectAdd.getNameSubject())) {
+                    System.out.println("This subject already exists");
                     return;
                 }
             }
 
-            Subject showSubject = new Subject(nameSubject, noteSubject);
-            subjectList.add(showSubject);
-            JOptionPane.showMessageDialog(null, "Subject added successfully");
+            subjectList.add(subjectAdd);
+            System.out.println("Subject added successfully: " + subjectAdd.getNameSubject());
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Invalid format");
+            System.out.println("Invalid note format");
         }
     }
 
@@ -51,7 +44,37 @@ public class Student extends Person {
             add += avergare.getNote();
         }
         return add / subjectList.size();
-
     }
 
+    @Override
+    public void showInformation() {
+        StringBuilder info = new StringBuilder();
+        info.append("\n=====================================\n");
+        info.append("Student Information\n");
+        info.append("=====================================\n");
+        info.append("Name: ").append(getName()).append("\n");
+        info.append("Age : ").append(getAge()).append(" years\n");
+        info.append("-------------------------------------\n");
+        info.append("-> Subjects:\n");
+
+        if (subjectList.isEmpty()) {
+            info.append("  -> No subjects enrolled\n");
+        } else {
+            for (Subject subject : subjectList) {
+                info.append("  • ").append(subject.getNameSubject()).append("\n");
+                info.append("    - Note  : ").append(subject.getNote()).append("\n");
+                info.append("    - Status: ").append(subject.statusNote()).append("\n");
+                info.append("    -----------------------------\n");
+            }
+        }
+
+        info.append("\n-> Final Average: ")
+                .append(String.format("%.2f", calculateAverage()))
+                .append("\n");
+        info.append("=====================================\n");
+
+        System.out.println(info.toString());
+        JOptionPane.showMessageDialog(null, info.toString());
+
+    }
 }

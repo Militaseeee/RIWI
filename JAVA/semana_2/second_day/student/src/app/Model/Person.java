@@ -29,10 +29,13 @@ public class Person {
     }
 
     // This part is polymorphism
+
     public void showInformation() {
         JOptionPane.showMessageDialog(null,
                 "Name: " + name + "\nAge: " + age);
     }
+
+
 
 
 }
