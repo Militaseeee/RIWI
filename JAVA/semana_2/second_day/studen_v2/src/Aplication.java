@@ -11,7 +11,20 @@ public class Aplication {
             JOptionPane.showMessageDialog(null, "=== Student Data " + i + " ===");
 
             String name = JOptionPane.showInputDialog(null, "Enter the student's name:");
-            byte age = Byte.parseByte(JOptionPane.showInputDialog(null, "Enter the student's age:"));
+            if(name == null){
+                return;
+            }
+            String ageInput = JOptionPane.showInputDialog(null, "Enter the student's age:");
+            if (ageInput == null) {
+                return;
+            }
+
+            if (ageInput.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "You must enter an age.");
+                return;
+            }
+
+            byte age = Byte.parseByte(ageInput);
 
             Student student = new Student(name, age);
 
