@@ -1,10 +1,8 @@
 package app.Model;
 
-import app.Interface.Information;
-
 import javax.swing.*;
 
-public class Person implements Information {
+public class Person {
 
     private String name;
     private byte age;
@@ -30,13 +28,10 @@ public class Person implements Information {
         this.age = age;
     }
 
-    @Override
+    // This part is polymorphism
+
     public void showInformation() {
         JOptionPane.showMessageDialog(null,
                 "Name: " + name + "\nAge: " + age);
     }
-
-    // This part is polymorphism
-
-
 }
