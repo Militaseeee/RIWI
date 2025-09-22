@@ -29,6 +29,9 @@ public abstract class User {
     }
 
     public void setEmail(String email) {
+        if (email == null || !email.contains("@") || email.indexOf("@") > email.lastIndexOf(".")) {
+            throw new IllegalArgumentException("The email must be in a valid format");
+        }
         this.email = email;
     }
 
@@ -45,6 +48,9 @@ public abstract class User {
     }
 
     public void setPassword(String password) {
+        if (password == null || password.length() > 6 ) {
+            throw new IllegalArgumentException("The password must be major than six digits");
+        }
         this.password = password;
     }
 
