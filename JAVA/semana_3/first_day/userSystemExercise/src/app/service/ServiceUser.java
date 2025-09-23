@@ -42,11 +42,14 @@ public class ServiceUser implements IUser, IAuthenticable {
         }
 
         StringBuilder list = new StringBuilder("--- LIST OF USERS ---\n");
+        list.append("----------------------------------\n");
+        list.append("Name | Rol | Status\n");
         for (User user : userList) {
-            list.append("Name: ").append(user.getName())
-                    .append(" -> Rol: ").append(user.getRol())
-                    .append(" -> Status: ").append(user.getStatus())
-                    .append("\n");
+            String line = String.format("%s | %s | %s\n",
+                    user.getName(),
+                    user.getRol(),
+                    user.getStatus());
+            list.append(line);
         }
         return list.toString();
     }
