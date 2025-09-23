@@ -1,7 +1,6 @@
 package app.model;
 
 public abstract class User {
-
     private String name;
     private String email;
     private String rol;
@@ -12,7 +11,7 @@ public abstract class User {
         this.name = name;
         this.email = email;
         this.rol = rol;
-        this.password = rol;
+        this.password = password;
         this.status = status;
     }
 
@@ -29,7 +28,8 @@ public abstract class User {
     }
 
     public void setEmail(String email) {
-        if (email == null || !email.contains("@") || email.indexOf("@") > email.lastIndexOf(".")) {
+        // Valida que el email no sea null, contenga '@' y tenga un '.' después del '@'
+        if (email == null || !email.contains("@") || email.lastIndexOf('.') < email.indexOf('@')) {
             throw new IllegalArgumentException("The email must be in a valid format");
         }
         this.email = email;
@@ -48,7 +48,7 @@ public abstract class User {
     }
 
     public void setPassword(String password) {
-        if (password == null || password.length() > 6 ) {
+        if (password == null || password.length() < 6 ) {
             throw new IllegalArgumentException("The password must be major than six digits");
         }
         this.password = password;
@@ -62,9 +62,7 @@ public abstract class User {
         this.status = status;
     }
 
-
     public abstract String showProfile();
 
     public abstract String rolDescription();
-
 }

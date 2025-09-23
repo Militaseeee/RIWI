@@ -1,7 +1,6 @@
 package app.model;
 
 public class Client extends User{
-
     private String telephone;
     private String address;
 
@@ -20,6 +19,9 @@ public class Client extends User{
     }
 
     public void setTelephone(String telephone) {
+        if (telephone == null || telephone.trim().isEmpty()) {
+            throw new IllegalArgumentException("The phone can't be empty");
+        }
         this.telephone = telephone;
     }
 
@@ -28,6 +30,9 @@ public class Client extends User{
     }
 
     public void setAddress(String address) {
+        if (address == null || address.trim().isEmpty()) {
+            throw new IllegalArgumentException("The address cannot be empty");
+        }
         this.address = address;
     }
 
