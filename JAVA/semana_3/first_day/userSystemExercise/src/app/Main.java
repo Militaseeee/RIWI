@@ -4,6 +4,8 @@ import app.model.Administrator;
 import app.model.Client;
 import app.model.User;
 import app.service.ServiceUser;
+import app.util.Validation;
+
 import javax.swing.JOptionPane;
 import java.util.Optional;
 
@@ -16,11 +18,14 @@ public class Main {
         service.createUser("Admin Root", "admin@root.com", "admin123", "admin");
 
         while (true) {
-            String menuPrincipal = "--- MENÚ PRINCIPAL ---\n\n" +
-                    "1. Crear nuevo usuario\n" +
-                    "2. Iniciar sesión\n" +
-                    "3. Salir\n\n" +
-                    "Elige una opción:";
+            String menuPrincipal =
+                    " -----------------------------------------------------\n" +
+                    "                      MAIN MENU \n" +
+                    " -----------------------------------------------------\n" +
+                    "1. Create new user\n" +
+                    "2. Login\n" +
+                    "3. Go out\n\n" +
+                    "Choose an option:";
 
             String choiceStr = JOptionPane.showInputDialog(null, menuPrincipal);
 
@@ -33,41 +38,79 @@ public class Main {
                 int choice = Integer.parseInt(choiceStr);
                 switch (choice) {
                     case 1:
-                        handleCreateUser(service);
+                        handleCreateUser(service); // Handle -> manejo
                         break;
                     case 2:
                         handleLogin(service);
                         break;
                     case 3:
-                        JOptionPane.showMessageDialog(null, "¡Hasta luego!");
-                        return; // Termina el programa
+                        JOptionPane.showMessageDialog(null, "Bye!!!! See you later!");
+                        return;
                     default:
-                        JOptionPane.showMessageDialog(null, "Opción no válida. Inténtalo de nuevo.");
+                        JOptionPane.showMessageDialog(null, "Invalid option. Please try again");
                 }
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Por favor, introduce un número válido.");
+                JOptionPane.showMessageDialog(null, "Please enter a valid number");
             }
         }
     }
 
     private static void handleCreateUser(ServiceUser service) {
-        String name = JOptionPane.showInputDialog(null, "Introduce tu nombre:");
-        if (name == null) return;
+//        String name = JOptionPane.showInputDialog(null, "Type your name:");
+//        name = Validation.validSearchInput(name);
+//        if (name == null) return;
 
-        String email = JOptionPane.showInputDialog(null, "Introduce tu email:");
-        if (email == null) return;
+        String name;
+        do {
+            name = JOptionPane.showInputDialog(null, "Type your name:");
+            name = Validation.validSearchInput(name);
+            if (name == null) return;
+        } while (name.isEmpty());
 
-        String password = JOptionPane.showInputDialog(null, "Introduce tu contraseña (mínimo 6 caracteres):");
-        if (password == null) return;
+        String email;
+        do {
+            email = JOptionPane.showInputDialog(null, "Type your email:");
+            if (email == null) return;
+            email = Validation.validSearchInput(email);
+        } while (email == null || !Validation.checkEmail(email));
 
-        String rol = JOptionPane.showInputDialog(null, "¿Qué rol quieres? (cliente/admin):");
-        if (rol == null) return;
+//        email = Validation.validSearchInput(email);
+//        Validation.checkEmail(email);
+//        if (email == null) return;
+
+        String password;
+        do {
+            password = JOptionPane.showInputDialog(null, "Type your password (minimum 6 characters):");
+            if (password == null) return;
+            password = Validation.validSearchInput(password);
+        } while (password == null || !Validation.checkPassword(password));
+
+//        String password = JOptionPane.showInputDialog(null, "Type your password (minimum 6 characters):");
+//        password = Validation.validSearchInput(password);
+//        if (password == null) return;
+
+
+        String[] typeOption = {"client", "admin"};
+        int rolType = JOptionPane.showOptionDialog(null, "What role do you want?", "Select Type",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, typeOption, typeOption[0]);
+
+        // If person cancel the process
+        if (rolType== -1) {
+            JOptionPane.showMessageDialog(null, "Operation Cancelled");
+            return;
+        }
+
+        String rol = typeOption[rolType];
+
+//        String rol = JOptionPane.showInputDialog(null, "What role do you want? (client/admin):");
+//        if (rol == null) return;
+//        rol = Validation.validSearchInput(rol);
 
         try {
             service.createUser(name, email, password, rol);
-            JOptionPane.showMessageDialog(null, "¡Usuario " + name + " creado con éxito!");
+            JOptionPane.showMessageDialog(null, "User " + name + " successfully created!");
         } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(null, "Error al crear usuario: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error creating user: " + e.getMessage());
         }
     }
 
@@ -75,32 +118,34 @@ public class Main {
         String email = JOptionPane.showInputDialog(null, "Email:");
         if (email == null) return;
 
-        String password = JOptionPane.showInputDialog(null, "Contraseña:");
+        String password = JOptionPane.showInputDialog(null, "Password:");
         if (password == null) return;
 
         Optional<User> loggedInUser = service.loginUser(email, password);
 
         if (loggedInUser.isPresent()) {
             User user = loggedInUser.get();
-            JOptionPane.showMessageDialog(null, "¡Bienvenido, " + user.getName() + "!\n" + user.rolDescription());
+            JOptionPane.showMessageDialog(null, "¡Welcome, " + user.getName() + "!\n" + user.rolDescription());
 
+            // -> instanceof funciona para verificar si un objeto es una instancia de una clase o interfaz específica
+            // Verifica si el objeto "user" es de tipo Administrator
             if (user instanceof Administrator) {
                 showAdminMenu(service);
             } else if (user instanceof Client) {
                 showClientMenu((Client) user, service);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Credenciales incorrectas o usuario no existe.");
+            JOptionPane.showMessageDialog(null, "Incorrect credentials or user does not exist");
         }
     }
 
     private static void showAdminMenu(ServiceUser service) {
         while (true) {
-            String menuAdmin = "--- MENÚ DE ADMINISTRADOR ---\n\n" +
-                    "1. Ver todos los usuarios\n" +
-                    "2. Bloquear usuario\n" +
-                    "3. Cerrar sesión\n\n" +
-                    "Elige una opción:";
+            String menuAdmin = "--- ADMINISTRATOR MENU ---\n\n" +
+                    "1. See all users\n" +
+                    "2. Block user\n" +
+                    "3. Sign out\n\n" +
+                    "Choose an option:";
             String choiceStr = JOptionPane.showInputDialog(null, menuAdmin);
             if (choiceStr == null) break;
 
@@ -109,10 +154,10 @@ public class Main {
                 switch (choice) {
                     case 1:
                         String userList = service.listAllUsers();
-                        JOptionPane.showMessageDialog(null, userList, "Listado de Usuarios", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, userList, "List of Users", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     case 2:
-                        String emailToBlock = JOptionPane.showInputDialog(null, "Introduce el email del usuario a bloquear:");
+                        String emailToBlock = JOptionPane.showInputDialog(null, "Enter the email of the user to block:");
                         if (emailToBlock != null) {
                             String message = service.blockUser(emailToBlock);
                             JOptionPane.showMessageDialog(null, message);
@@ -121,17 +166,17 @@ public class Main {
                     case 3:
                         return; // Vuelve al menú principal
                     default:
-                        JOptionPane.showMessageDialog(null, "Opción no válida.");
+                        JOptionPane.showMessageDialog(null, "Invalid option");
                 }
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Por favor, introduce un número válido.");
+                JOptionPane.showMessageDialog(null, "Please enter a valid number");
             }
         }
     }
 
     private static void showClientMenu(Client client, ServiceUser service) {
         while (true) {
-            String menuCliente = "--- MENÚ DE CLIENTE ---\n\n" +
+            String menuCliente = "--- CUSTOMER MENU ---\n\n" +
                     "1. Ver mi perfil\n" +
                     "2. Actualizar mi información de contacto\n" +
                     "3. Cerrar sesión\n\n" +

@@ -2,7 +2,7 @@ package app.service;
 
 import app.model.Client;
 
-// Define operaciones de negocio (listar, bloquear, actualizar cliente)
+// Define operaciones de negocio (listar, bloquear y actualizar cliente)
 public interface IUser {
     String listAllUsers();
     String blockUser(String email);

@@ -33,7 +33,6 @@ public class ServiceUser implements IUser, IAuthenticable {
                 .filter(user -> user.getEmail().equalsIgnoreCase(email) && user.getPassword().equals(password))
                 // Devuelve el primero encontrado en un Optional (puede estar vacío si no existe)
                 .findFirst();
-        // return Optional.empty();
     }
 
     @Override
@@ -42,24 +41,25 @@ public class ServiceUser implements IUser, IAuthenticable {
             return "There are no registered users";
         }
 
-        StringBuilder listado = new StringBuilder("--- LIST OF USERS ---\n");
+        StringBuilder list = new StringBuilder("--- LIST OF USERS ---\n");
         for (User user : userList) {
-            listado.append("Name: ").append(user.getName())
-                    .append(" | Rol: ").append(user.getRol())
-                    .append(" | Status: ").append(user.getStatus())
+            list.append("Name: ").append(user.getName())
+                    .append(" -> Rol: ").append(user.getRol())
+                    .append(" -> Status: ").append(user.getStatus())
                     .append("\n");
         }
-        return listado.toString();
+        return list.toString();
     }
 
     @Override
     public String blockUser(String email) {
-        Optional<User> userToBlock = userList.stream()
+        Optional<User> userToBlock = userList.stream() // Convierte la lista de usuarios userList en un stream
                 .filter(user -> user.getEmail().equalsIgnoreCase(email))
-                .findFirst();
+                .findFirst(); // Devuelve el primer usuario que encuentra en un optional (ya que puede existir o no)
 
+        // Comprueba si el Optional contiene un usuario
         if (userToBlock.isPresent()) {
-            userToBlock.get().setStatus("blocked");
+            userToBlock.get().setStatus("blocked"); // SI existe lo cambia
             return "The user " + email + " has been blocked";
         } else {
             return "User not found";
@@ -76,6 +76,4 @@ public class ServiceUser implements IUser, IAuthenticable {
             return "Error: " + e.getMessage();
         }
     }
-
-
 }

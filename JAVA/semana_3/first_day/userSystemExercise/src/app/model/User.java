@@ -1,5 +1,7 @@
 package app.model;
 
+import app.util.Validation;
+
 public abstract class User {
     private String name;
     private String email;
@@ -8,11 +10,17 @@ public abstract class User {
     private String status;
 
     public User(String name, String email, String rol, String password, String status) {
-        this.name = name;
-        this.email = email;
-        this.rol = rol;
-        this.password = password;
-        this.status = status;
+//        this.name = name;
+//        this.email = email;
+//        this.rol = rol;
+//        this.password = password;
+//        this.status = status;
+
+        this.setName(name);
+        this.setEmail(email);
+        this.setRol(rol);
+        this.setPassword(password);
+        this.setStatus(status);
     }
 
     public String getName() {
@@ -28,10 +36,7 @@ public abstract class User {
     }
 
     public void setEmail(String email) {
-        // Valida que el email no sea null, contenga '@' y tenga un '.' después del '@'
-        if (email == null || !email.contains("@") || email.lastIndexOf('.') < email.indexOf('@')) {
-            throw new IllegalArgumentException("The email must be in a valid format");
-        }
+        Validation.checkEmail(email);
         this.email = email;
     }
 
@@ -48,9 +53,7 @@ public abstract class User {
     }
 
     public void setPassword(String password) {
-        if (password == null || password.length() < 6 ) {
-            throw new IllegalArgumentException("The password must be major than six digits");
-        }
+        Validation.checkPassword(password);
         this.password = password;
     }
 
