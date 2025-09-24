@@ -1,0 +1,38 @@
+CREATE DATABASE userSystem;
+
+USE userSystem;
+
+CREATE TABLE users (
+	id_user INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL,
+    name VARCHAR(30) NOT NULL,
+    email VARCHAR(80) UNIQUE NOT NULL,
+    id_role INT NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    id_status INT NOT NULL,
+    FOREIGN KEY (id_role) REFERENCES role(id_role) ON DELETE CASCADE,
+    FOREIGN KEY (id_status) REFERENCES status_user(id_status) ON DELETE CASCADE
+); 
+
+CREATE TABLE role (
+	id_role INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL,
+	name_rol VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE status_user (
+	id_status INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL,
+    name_status VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE block_users_log (
+	id_user INT NOT NULL,
+    FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE
+);
+
+CREATE TABLE customer (
+    id_customer INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL,
+    telephone VARCHAR(15) NOT NULL,
+    address VARCHAR(200) NOT NULL,
+    id_user INT NOT NULL,
+    FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE
+);
+
