@@ -3,7 +3,7 @@
 En Linux (Debian/Ubuntu)
 
 ## 1. Detener el servicio
-```sql
+```bash
 sudo systemctl stop mysql
 ```
 
@@ -13,18 +13,18 @@ sudo apt-get remove --purge mysql-server mysql-client mysql-common mysql-server-
 ```
 
 ## 3. Eliminar configuraciones y bases de datos
-```sql
+```bash
 sudo rm -rf /etc/mysql /var/lib/mysql
 ```
 
 ## 4. Limpiar paquetes que ya no sirven
-```sql
+```bash
 sudo apt-get autoremove
 sudo apt-get autoclean
 ```
 
 ## 5. (Opcional) Verifica que no quede nada
-```sql
+```bash
 dpkg -l | grep mysql
 ```
 
@@ -32,7 +32,7 @@ dpkg -l | grep mysql
 
 
 # 🔹 Reinstalar MySQL
-```sql
+```bash
 sudo apt-get update
 sudo apt-get install mysql-server
 ```
