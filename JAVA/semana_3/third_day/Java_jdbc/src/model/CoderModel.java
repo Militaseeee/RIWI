@@ -1,8 +1,8 @@
-package Model;
+package model;
 
-import Database.CRUD;
-import Database.ConfigDB;
-import Entity.Coder;
+import database.CRUD;
+import database.ConfigDB;
+import entity.Coder;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -12,8 +12,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CoderModel implements CRUD {
+// MODEL -> TODA LA LÓGICA DE NEGOCIO
 
+public class CoderModel implements CRUD {
     @Override
     public Object insert(Object obj) {
         // Abrir conexión
@@ -34,7 +35,7 @@ public class CoderModel implements CRUD {
 
             // Ejecutar la query
             objPrepare.execute();
-            // Obtener resultados con los idgenerados
+            // Obtener resultados con los id generados
             ResultSet objRest = objPrepare.getGeneratedKeys();
 
             while (objRest.next()) {
@@ -88,9 +89,68 @@ public class CoderModel implements CRUD {
         return listCoders;
     }
 
+    // Buscar un usuario por ID
+    public Coder findById(int id) {
+        Connection objConnection = ConfigDB.openConnection();
+        Coder objCoder = null;
+
+        try {
+            String sql = "SELECT * FROM coder WHERE id = ?";
+            PreparedStatement objPrepare = objConnection.prepareStatement(sql);
+            objPrepare.setInt(1, id);
+
+            ResultSet objResult = objPrepare.executeQuery();
+            if (objResult.next()) {
+                objCoder = new Coder(); // Se debe inicializar
+                objCoder.setId(objResult.getInt("id"));
+                objCoder.setName(objResult.getString("name"));
+                objCoder.setAge(objResult.getInt("age"));
+                objCoder.setClan(objResult.getString("clan"));
+            }
+
+        } catch (SQLException error) {
+            JOptionPane.showMessageDialog(null, error.getMessage());
+        }
+        ConfigDB.closeConnection();
+        return objCoder;
+    }
+
     @Override
     public boolean update(Object obj) {
-        return false;
+
+        Coder objCoder = (Coder) obj;
+
+        Connection objConnection = ConfigDB.openConnection();
+        boolean isUpdate = false;
+
+        try {
+
+            String sql = "UPDATE coder SET name = ?, age = ?, clan = ? WHERE id = ?";
+
+            PreparedStatement objPrepare = objConnection.prepareStatement(sql);
+
+            // Setear los valores
+            objPrepare.setString(1, objCoder.getName());
+            objPrepare.setInt(2, objCoder.getAge());
+            objPrepare.setString(3, objCoder.getClan());
+            objPrepare.setInt(4, objCoder.getId());
+
+            // Ejecutar la query
+            int result = objPrepare.executeUpdate();
+
+            // Si más de una columna fue modificada (eliminada) eso significa que fue eliminada
+            if (result > 0) {
+                isUpdate = true;
+                JOptionPane.showMessageDialog(null, "Coder updated successfully");
+            }
+
+
+        } catch (SQLException error) {
+            JOptionPane.showMessageDialog(null, "Coder not found " + error.getMessage());
+        }
+        ConfigDB.closeConnection();
+
+        return isUpdate;
     }
 
     @Override
@@ -119,10 +179,6 @@ public class CoderModel implements CRUD {
                 isDeleted = true;
                 JOptionPane.showMessageDialog(null, "Coder deleted successfully");
             }
-//            else {
-//                isDeleted = false;
-//            }
-
 
         } catch (SQLException error) {
             JOptionPane.showMessageDialog(null, error.getMessage());
@@ -132,32 +188,5 @@ public class CoderModel implements CRUD {
         return isDeleted;
     }
 
-    public Coder findById(int id) {
-        Connection objConnection = ConfigDB.openConnection();
-        Coder objCoder = null;
-
-        try {
-
-            String sql = "SELECT * FROM coder WHERE id = ?";
-            PreparedStatement objPrepare = objConnection.prepareStatement(sql);
-            objPrepare.setInt(1, id);
-
-            ResultSet objResult = objPrepare.executeQuery();
-            if (objResult.next()) {
-                objCoder = new Coder(); // Se debe inicializar
-                objCoder.setId(objResult.getInt("id"));
-                objCoder.setName(objResult.getString("name"));
-                objCoder.setAge(objResult.getInt("age"));
-                objCoder.setClan(objResult.getString("clan"));
-            }
-
-        } catch (SQLException error) {
-            JOptionPane.showMessageDialog(null, error.getMessage());
-        }
-
-        ConfigDB.closeConnection();
-
-        return objCoder;
-    }
 
 }

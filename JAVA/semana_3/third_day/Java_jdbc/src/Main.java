@@ -1,6 +1,5 @@
-import Controller.CoderController;
-import Database.ConfigDB;
-import Entity.Coder;
+import controller.CoderController;
+import database.ConfigDB;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -30,6 +29,7 @@ public class Main {
                     CoderController.getAll();
                     break;
                 case "3":
+                    CoderController.update();
                     break;
                 case "4":
                     CoderController.delete();
