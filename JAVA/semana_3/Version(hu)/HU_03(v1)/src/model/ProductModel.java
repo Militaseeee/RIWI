@@ -195,27 +195,4 @@ public class ProductModel implements CRUD{
         }
         return listProducts;
     }
-
-    public Product findByNameExact(String name) {
-        String sql = "SELECT * FROM products WHERE name = ?;";
-        Product objProduct = null;
-
-        try (Connection objConnection = ConfigDB.openConnection();
-             PreparedStatement objPrepare = objConnection.prepareStatement(sql)) {
-
-            objPrepare.setString(1, name);
-            try (ResultSet objResult = objPrepare.executeQuery()) {
-                if (objResult.next()) {
-                    objProduct = new Product();
-                    objProduct.setId(objResult.getInt("id"));
-                    objProduct.setName(objResult.getString("name"));
-                    objProduct.setPrice(objResult.getDouble("price"));
-                    objProduct.setStock(objResult.getInt("stock"));
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("Error finding product by exact name: " + e.getMessage());
-        }
-        return objProduct;
-    }
 }

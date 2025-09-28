@@ -4,7 +4,6 @@ package controller;
 
 import entity.Product;
 import model.ProductModel;
-import util.Validation;
 
 import javax.swing.*;
 import java.util.List;
@@ -26,39 +25,21 @@ public class ProductController {
 
     public void createProduct() {
 
-        String productName;
-
-        while (true) {
-
-            productName = Validation.getStringInput("Type the name of the product:");
-            if (productName == null) {
-                JOptionPane.showMessageDialog(null, "Product creation cancelled.");
-                return;
-            }
-            productName = productName.toLowerCase();
-
-            // Consultamos la base de datos ANTES de continuar. Usamos un metodo específico en el modelo que busca por nombre exacto.
-            Product existingProduct = this.objProductModel.findByNameExact(productName);
-            if (existingProduct == null) {
-                break; // Si es null, el nombre está disponible. Rompemos el bucle
-            } else {
-                // Si ya existe, informamos al usuario y el bucle continuará
-                JOptionPane.showMessageDialog(null, "A product with the name '" + productName + "' already exists. Please choose another name.", "Duplicate Error", JOptionPane.ERROR_MESSAGE);
-            }
+        String productName = JOptionPane.showInputDialog("Type the name of the product:");
+        if (productName == null || productName.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Search input cannot be empty", "Error!!!", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        productName = productName.toLowerCase();
 
         try {
+            double price = Double.parseDouble(JOptionPane.showInputDialog("Type the price of the product:"));
+            int stock = Integer.parseInt(JOptionPane.showInputDialog("Type the initial stock of the product:"));
 
-            Double price = Validation.getDoubleInput("Type the price of the product:");
-            if (price == null) return;
-
-            Integer stock = Validation.getIntInput("Type the initial stock of the product:");
-            if (stock == null) return;
-
-//            if (price < 0 || stock < 0) {
-//                JOptionPane.showMessageDialog(null, "Price and stock cannot be negative", "Error!!!", JOptionPane.ERROR_MESSAGE);
-//                return;
-//            }
+            if (price < 0 || stock < 0) {
+                JOptionPane.showMessageDialog(null, "Price and stock cannot be negative", "Error!!!", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             Product objProduct = new Product();
             objProduct.setName(productName);
@@ -102,6 +83,7 @@ public class ProductController {
         textArea.setEditable(false); // Prevents the user from editing the text
         JScrollPane scrollPane = new JScrollPane(textArea); // Adds a scrollbar if the text is too long
         JOptionPane.showMessageDialog(null, scrollPane, "Product Inventory", JOptionPane.PLAIN_MESSAGE);
+
     }
 
     private String generateProductListString() {
@@ -120,27 +102,29 @@ public class ProductController {
 
         String productList = generateProductListString();
         try {
-            Integer idUpdate = Validation.getIntInput(productList + "\nEnter the ID of the product to update its price:");
-            if (idUpdate == null) return;
-
+            int idUpdate = Integer.parseInt(JOptionPane.showInputDialog(productList + "\nEnter the ID of the product to update its price:"));
             Product existingProduct = this.objProductModel.findById(idUpdate);
+
             if (existingProduct == null) {
                 JOptionPane.showMessageDialog(null, "Product with ID " + idUpdate + " not found.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            Double newPrice = Validation.getDoubleInput("Enter the new price for '" + existingProduct.getName() + "':");
-            if (newPrice == null) return;
+            double newPrice = Double.parseDouble(JOptionPane.showInputDialog("Enter the new price for '" + existingProduct.getName() + "':"));
+            if (newPrice < 0) {
+                JOptionPane.showMessageDialog(null, "Price cannot be negative.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             existingProduct.setPrice(newPrice);
             if (this.objProductModel.update(existingProduct)) {
                 this.updatesCounter++;
-                JOptionPane.showMessageDialog(null, "Price updated successfully");
+                JOptionPane.showMessageDialog(null, "Price updated successfully.");
             } else {
-                JOptionPane.showMessageDialog(null, "Could not update price", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Could not update price.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid numeric ID and price", "Input Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please enter a valid numeric ID and price.", "Input Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -148,17 +132,19 @@ public class ProductController {
 
         String productList = generateProductListString();
         try {
-            Integer idUpdate = Validation.getIntInput(productList + "\nEnter the ID of the product to update its stock:");
-            if (idUpdate == null) return;
-
+            int idUpdate = Integer.parseInt(JOptionPane.showInputDialog(productList + "\nEnter the ID of the product to update its stock:"));
             Product existingProduct = this.objProductModel.findById(idUpdate);
+
             if (existingProduct == null) {
                 JOptionPane.showMessageDialog(null, "Product with ID " + idUpdate + " not found.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            Integer newStock = Validation.getIntInput("Enter the new stock for '" + existingProduct.getName() + "':");
-            if (newStock == null) return;
+            int newStock = Integer.parseInt(JOptionPane.showInputDialog("Enter the new stock for '" + existingProduct.getName() + "':"));
+            if (newStock < 0) {
+                JOptionPane.showMessageDialog(null, "Stock cannot be negative.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             existingProduct.setStock(newStock);
             if (this.objProductModel.update(existingProduct)) {
@@ -176,10 +162,7 @@ public class ProductController {
 
         String productList = generateProductListString();
         try {
-
-            Integer idDelete = Validation.getIntInput(productList + "\nEnter the ID of the product to delete:");
-            if (idDelete == null) return;
-
+            int idDelete = Integer.parseInt(JOptionPane.showInputDialog(productList + "\nEnter the ID of the product to delete:"));
             Product tempProduct = new Product();
             tempProduct.setId(idDelete);
 
@@ -195,14 +178,11 @@ public class ProductController {
     }
 
     public void findProductByName() {
-
-        String searchName = Validation.getStringInput("Enter the name (or part of it) to search for:");
-        if (searchName == null) return;
-
-//        if (searchName == null || searchName.trim().isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "Search term cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
+        String searchName = JOptionPane.showInputDialog("Enter the name (or part of it) to search for:");
+        if (searchName == null || searchName.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Search term cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         List<Product> results = this.objProductModel.findByName(searchName.trim());
         if (results.isEmpty()) {
@@ -215,9 +195,6 @@ public class ProductController {
             resultsStr.append(product).append("\n");
         }
 
-        JTextArea textArea = new JTextArea(resultsStr.toString());
-        textArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(textArea);
         JOptionPane.showMessageDialog(null, resultsStr.toString(), "Search Results", JOptionPane.PLAIN_MESSAGE);
     }
 
