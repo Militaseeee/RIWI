@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/hu_03_generico.iml" filepath="$PROJECT_DIR$/.idea/hu_03_generico.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DAO_structure.iml" filepath="$PROJECT_DIR$/DAO_structure.iml" />
     </modules>
   </component>
 </project>
