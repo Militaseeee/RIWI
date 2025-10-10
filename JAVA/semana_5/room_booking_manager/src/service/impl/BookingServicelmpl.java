@@ -6,7 +6,9 @@ import domain.Booking;
 import domain.Room;
 import exception.*;
 import service.interfaces.BookingService;
+import util.Messages;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class BookingServicelmpl implements BookingService {
@@ -32,7 +34,7 @@ public class BookingServicelmpl implements BookingService {
         }
 
         try {
-            // REGLA: Verifica existencia y disponibilidad de la sala
+            // Verifica existencia y disponibilidad de la sala
             Room room = roomDao.findById(booking.getIdRoom())
                     .orElseThrow(() -> new NotFoundException("Room with ID " + booking.getIdRoom() + " does not exist."));
 
@@ -83,6 +85,23 @@ public class BookingServicelmpl implements BookingService {
             return bookingDao.findAll();
         } catch (DataAccessException e) {
             throw new ServiceException("A technical error occurred while listing the bookings", e);
+        }
+    }
+
+    @Override
+    public List<Booking> listBookingsByFilter(LocalDate startDate, LocalDate endDate, Integer idRoom) {
+        if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
+            throw new BadRequestException("Start date must be before or equal to end date");
+        }
+        try {
+            return bookingDao.findByFilters(startDate, endDate, idRoom);
+        } catch (DataAccessException dae) {
+            // Wrapping
+            throw new ServiceException("A technical error occurred while filtering bookings", dae);
+        } finally {
+            // finally visible (requisito del enunciado)
+            System.out.println("Finished 'listBookingsByFilter' operation attempt");
+            //Messages.showInfoMessage("Finished 'listBookingsByFilter' operation attempt.", "Info");
         }
     }
 }

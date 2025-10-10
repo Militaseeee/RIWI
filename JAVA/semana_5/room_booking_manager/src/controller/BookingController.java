@@ -26,7 +26,6 @@ public class BookingController {
         return service.listBookings();
     }
 
-    // --- MÉTODOS AÑADIDOS ---
     public void cancelBooking(int id) {
         service.cancelBooking(id);
     }
