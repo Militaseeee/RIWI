@@ -16,12 +16,54 @@ public class BookingDaoImpl implements BookingDao {
 
     @Override
     public List<Booking> findByFilters(LocalDate startDate, LocalDate endDate, Integer idRoom) throws DataAccessException {
-        return List.of();
+        // Construcción dinámica de la consulta SQL
+        StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM bookings WHERE 1=1");
+        if (startDate != null) {
+            sqlBuilder.append(" AND booking_date >= ?");
+        }
+        if (endDate != null) {
+            sqlBuilder.append(" AND booking_date <= ?");
+        }
+        if (idRoom != null) {
+            sqlBuilder.append(" AND id_room = ?");
+        }
+
+        List<Booking> bookings = new ArrayList<>();
+        try (Connection connection = DbConfig.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlBuilder.toString())) {
+
+            int paramIndex = 1; // Contador para los parámetros
+            if (startDate != null) {
+                preparedStatement.setDate(paramIndex++, Date.valueOf(startDate));
+            }
+            if (endDate != null) {
+                preparedStatement.setDate(paramIndex++, Date.valueOf(endDate));
+            }
+            if (idRoom != null) {
+                preparedStatement.setInt(paramIndex, idRoom);
+            }
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    Booking booking = new Booking();
+                    booking.setIdBooking(rs.getInt("id_booking"));
+                    booking.setIdRoom(rs.getInt("id_room"));
+                    booking.setDate(rs.getDate("booking_date").toLocalDate());
+                    booking.setStartTime(rs.getTime("start_time").toLocalTime());
+                    booking.setEndTime(rs.getTime("end_time").toLocalTime());
+                    booking.setOrganizer(rs.getString("organizer"));
+                    bookings.add(booking);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("Error filtering bookings", e);
+        }
+        return bookings;
     }
 
     @Override
     public void create(Booking object) throws DataAccessException {
-        String sql = "INSERT INTO bookings (id_room, booking_date, start_time, end_time, organizer) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO bookings (id_room, booking_date, start_time, end_time, organizer) VALUES (?, ?, ?, ?, ?)";
         try(Connection connection = DbConfig.getConnection();
             PreparedStatement preparedStatement =  connection.prepareStatement(sql);
         ){
@@ -31,12 +73,10 @@ public class BookingDaoImpl implements BookingDao {
             preparedStatement.setTime(4, Time.valueOf(object.getEndTime()));
             preparedStatement.setString(5, object.getOrganizer());
 
-            int rowsAffected =  preparedStatement.executeUpdate();
-            if(rowsAffected == 0){
-                throw new SQLException("Error creating new booking");
-            }
+            preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException("Error creating new booking", e);
         }
     }
 
@@ -53,7 +93,7 @@ public class BookingDaoImpl implements BookingDao {
 
                 Booking booking = new Booking();
                 booking.setIdBooking(objRest.getInt("id_booking"));
-                booking.setIdBooking(objRest.getInt("id_room"));
+                booking.setIdRoom(objRest.getInt("id_room"));
                 booking.setDate(objRest.getDate("date_booking").toLocalDate());
                 booking.setStartTime(objRest.getTime("start_time").toLocalTime());
                 booking.setEndTime(objRest.getTime("end_time").toLocalTime());
@@ -74,11 +114,47 @@ public class BookingDaoImpl implements BookingDao {
 
     @Override
     public void delete(int id) throws DataAccessException {
+        String sql = "DELETE FROM bookings WHERE id_booking = ?";
+        try (Connection connection = DbConfig.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
+            preparedStatement.setInt(1, id);
+            int affectedRows = preparedStatement.executeUpdate();
+
+            // Opcional: verificar si algo se borró realmente
+            if (affectedRows == 0) {
+                // Esto ayuda a detectar si se intentó borrar un ID que ya no existía
+                System.out.println("Warning: No booking found with ID " + id + " to delete.");
+            }
+
+        } catch (SQLException e) {
+            throw new DataAccessException("Error deleting booking with id: " + id, e);
+        }
     }
 
     @Override
     public Optional<Booking> findById(int id) throws DataAccessException {
+        String sql = "SELECT * FROM bookings WHERE id_booking = ?";
+
+        try (Connection objConnection = DbConfig.getConnection();
+             PreparedStatement objPrepare = objConnection.prepareStatement(sql)) {
+
+            objPrepare.setInt(1, id);
+
+            ResultSet objRest = objPrepare.executeQuery();
+            if (objRest.next()) {
+                Booking booking = new Booking();
+                booking.setIdBooking(objRest.getInt("id_booking"));
+                booking.setIdRoom(objRest.getInt("id_room"));
+                booking.setDate(objRest.getDate("booking_date").toLocalDate());
+                booking.setStartTime(objRest.getTime("start_time").toLocalTime());
+                booking.setEndTime(objRest.getTime("end_time").toLocalTime());
+                booking.setOrganizer(objRest.getString("organizer"));
+                return Optional.of(booking);
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("Error finding booking by ID: " + id, e);
+        }
         return Optional.empty();
     }
 }
