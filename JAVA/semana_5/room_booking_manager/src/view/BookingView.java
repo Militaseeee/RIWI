@@ -1,7 +1,9 @@
 package view;
 
 import controller.BookingController;
+import controller.RoomController;
 import domain.Booking;
+import domain.Room;
 import exception.*;
 import util.Inputs;
 import util.Messages;
@@ -11,13 +13,17 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookingView {
-    private final BookingController controller;
+    private final BookingController bookingController ;
+    private final RoomController roomController;
 
-    public BookingView(BookingController controller) {
-        this.controller = controller;
+    public BookingView(BookingController bookingController, RoomController roomController) {
+        this.bookingController  = bookingController;
+        this.roomController = roomController;
     }
 
     public void showMenu() {
@@ -66,21 +72,44 @@ public class BookingView {
 
     private void createBookingView() {
         try {
-            Messages.showInfoMessage("Enter the new booking details.", "New Booking");
+            // Get and display the list of rooms
+            List<Room> rooms = this.roomController.findAll();
+            if (rooms.isEmpty()) {
+                Messages.showInfoMessage("There are no rooms available to boo", "No Rooms");
+                return;
+            }
 
-            int roomId = Inputs.requestInteger("Enter Room ID:", "Input");
+            // Format rooms so that the user understands them
+            List<String> roomOptions = rooms.stream()
+                    .map(room -> String.format("Room %d (%s)",
+                            room.getIdRoom(),
+                            room.isAvailable() ? "Available" : "Out of Service"))
+                    .collect(Collectors.toList());
+
+            // Display the drop-down menu to select the room
+            String selectedRoomStr = Inputs.requestSelection("Choose a room:", "Room Selection", roomOptions);
+            if (selectedRoomStr == null) { // El usuario canceló
+                Messages.showWarningMessage("Operation cancele", "Canceled");
+                return;
+            }
+
+            // Extract the ID from the selected String
+            int roomId = Integer.parseInt(selectedRoomStr.replaceAll("[^0-9]", ""));
+            // extrae el número del texto y lo guarda como entero, lo cual es muy util cuando el texto mostrado en una interfaz (como un combo box) contiene tanto letras como numeros, pero solo necesitas el ID numerico
+
+            // Request the rest of the data
             LocalDate date = LocalDate.parse(Inputs.requestString("Enter Date (YYYY-MM-DD):", "Input"));
             LocalTime startTime = LocalTime.parse(Inputs.requestString("Enter Start Time (HH:MM):", "Input"));
             LocalTime endTime = LocalTime.parse(Inputs.requestString("Enter End Time (HH:MM):", "Input"));
             String organizer = Inputs.requestString("Enter Organizer's Name:", "Input");
 
             Booking newBooking = new Booking(0, roomId, date, startTime, endTime, organizer);
-            controller.createBooking(newBooking);
+            bookingController.createBooking(newBooking);
 
             Messages.showSuccessMessage("STATUS 201: Booking created successfully!", "Success");
 
         } catch (DateTimeParseException | NumberFormatException e) {
-            Messages.showErrorMessage("STATUS 400: Invalid date, time, or number format.", "Format Error");
+            Messages.showErrorMessage("STATUS 400: Invalid format.", "Format Error");
         } catch (BadRequestException e) {
             Messages.showErrorMessage("STATUS 400: " + e.getMessage(), "Bad Request");
         } catch (NotFoundException e) {
@@ -89,11 +118,10 @@ public class BookingView {
             Messages.showErrorMessage("STATUS 409: " + e.getMessage(), "Conflict");
         } catch (ServiceException e) {
             Messages.showErrorMessage("STATUS 500: " + e.getMessage(), "Service Error");
-            e.getCause().printStackTrace();
+            if (e.getCause() != null) e.getCause().printStackTrace();
         } catch (Exception e) {
-            // Captura el caso donde el usuario cierra una ventana de input
             if (e instanceof NullPointerException) {
-                Messages.showWarningMessage("Operation canceled.", "Canceled");
+                Messages.showWarningMessage("Operation canceled", "Canceled");
             } else {
                 Messages.showErrorMessage("An unexpected error occurred: " + e.getMessage(), "Error");
             }
@@ -103,7 +131,7 @@ public class BookingView {
     private void findBookingView() {
         try {
             int id = Inputs.requestInteger("Enter the Booking ID to search:", "Find Booking");
-            Booking booking = controller.findById(id);
+            Booking booking = bookingController.findById(id);
             String details = String.format(
                     "Booking Found:\nID: %d\nRoom ID: %d\nDate: %s\nTime: %s - %s\nOrganizer: %s",
                     booking.getIdBooking(), booking.getIdRoom(), booking.getDate(),
@@ -118,59 +146,17 @@ public class BookingView {
             Messages.showErrorMessage("STATUS 500: " + e.getMessage(), "Service Error");
         } catch (Exception e) {
             if (e instanceof NullPointerException) {
-                Messages.showWarningMessage("Search canceled.", "Canceled");
+                Messages.showWarningMessage("Search canceled", "Canceled");
             } else {
                 Messages.showErrorMessage("An unexpected error occurred: " + e.getMessage(), "Error");
             }
         }
     }
 
-    /**
-     * Muestra todas las reservas existentes en una ventana con barra de desplazamiento.
-     */
-//    private void listAllBookingsView() {
-//        try {
-//            // 1. Llama al controlador para obtener la lista de todas las reservas
-//            List<Booking> bookings = controller.li;
-//
-//            // 2. Verifica si la lista está vacía
-//            if (bookings.isEmpty()) {
-//                Messages.showInfoMessage("There are no bookings registered yet.", "All Bookings");
-//                return; // Termina el método si no hay nada que mostrar
-//            }
-//
-//            // 3. Construye un string largo con la información de todas las reservas
-//            StringBuilder sb = new StringBuilder("--- ALL BOOKINGS ---\n\n");
-//            for (Booking booking : bookings) {
-//                sb.append("ID: ").append(booking.getIdBooking())
-//                        .append(" | Room: ").append(booking.getIdRoom())
-//                        .append(" | Date: ").append(booking.getDate())
-//                        .append(" | Time: ").append(booking.getStartTime()).append("-").append(booking.getEndTime())
-//                        .append(" | Organizer: ").append(booking.getOrganizer())
-//                        .append("\n-------------------------------------------------\n");
-//            }
-//
-//            // 4. Muestra el resultado en un JTextArea dentro de un JScrollPane
-//            JTextArea textArea = new JTextArea(sb.toString());
-//            textArea.setEditable(false);
-//            JScrollPane scrollPane = new JScrollPane(textArea);
-//            scrollPane.setPreferredSize(new Dimension(500, 300)); // Ajusta el tamaño de la ventana
-//
-//            JOptionPane.showMessageDialog(null, scrollPane, "All Bookings List", JOptionPane.INFORMATION_MESSAGE);
-//
-//        } catch (ServiceException e) {
-//            Messages.showErrorMessage("STATUS 500: " + e.getMessage(), "Service Error");
-//        } catch (Exception e) {
-//            Messages.showErrorMessage("An unexpected error occurred while listing bookings: " + e.getMessage(), "Error");
-//        }
-//    }
-
-
-
     private void cancelBookingView() {
         try {
             int id = Inputs.requestInteger("Enter the Booking ID to cancel:", "Cancel Booking");
-            controller.cancelBooking(id);
+            bookingController.cancelBooking(id);
             Messages.showSuccessMessage("STATUS 200: Booking with ID " + id + " canceled successfully.", "Success");
         } catch (NumberFormatException e) {
             Messages.showErrorMessage("STATUS 400: Please enter a valid numeric ID.", "Format Error");
@@ -200,15 +186,15 @@ public class BookingView {
             String roomIdStr = Inputs.requestString("Enter Room ID or leave blank:", "Filter");
             Integer roomId = roomIdStr.isBlank() ? null : Integer.parseInt(roomIdStr);
 
-            // Llama al controlador con los filtros
-            List<Booking> bookings = controller.listByFilters(startDate, endDate, roomId);
+            // Call the controller with the filters
+            List<Booking> bookings = bookingController.listByFilters(startDate, endDate, roomId);
 
-            // Usa el mismo método de visualización que listAllBookingsView
+            // Uses the same display method as listAllBookingsView
             displayBookingList(bookings, "Filtered Bookings List");
 
         } catch (DateTimeParseException | NumberFormatException e) {
             // MULTI-CATCH
-            Messages.showErrorMessage("STATUS 400: Invalid format for date or room ID.", "Format Error");
+            Messages.showErrorMessage("STATUS 400: Invalid format for date or room ID", "Format Error");
         } catch (BadRequestException e) {
             Messages.showErrorMessage("STATUS 400: " + e.getMessage(), "Bad Request");
         } catch (ServiceException e) {
@@ -218,8 +204,7 @@ public class BookingView {
 
     private void listAllBookingsView() {
         try {
-            // CORRECCIÓN DEL TYPO: controller.li -> controller.listAll()
-            List<Booking> bookings = controller.listAll();
+            List<Booking> bookings = bookingController.listAll();
             displayBookingList(bookings, "All Bookings List");
         } catch (ServiceException e) {
             Messages.showErrorMessage("STATUS 500: " + e.getMessage(), "Service Error");
@@ -228,10 +213,10 @@ public class BookingView {
         }
     }
 
-    // Metodo auxiliar para no repetir código al mostrar listas
+    // Helper method to avoid repeating code when displaying lists
     private void displayBookingList(List<Booking> bookings, String title) {
         if (bookings.isEmpty()) {
-            Messages.showInfoMessage("No bookings found matching the criteria.", title);
+            Messages.showInfoMessage("No bookings found matching the criteria", title);
             return;
         }
 
@@ -252,5 +237,5 @@ public class BookingView {
         scrollPane.setPreferredSize(new Dimension(600, 400));
 
         JOptionPane.showMessageDialog(null, scrollPane, title, JOptionPane.INFORMATION_MESSAGE);
-}
+    }
 }

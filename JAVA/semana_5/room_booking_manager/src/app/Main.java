@@ -1,30 +1,35 @@
 package app;
 
 import controller.BookingController;
+import controller.RoomController;
 import dao.impl.BookingDaoImpl;
 import dao.impl.RoomDaoImpl;
 import dao.interfaces.BookingDao;
 import dao.interfaces.RoomDao;
 import service.impl.BookingServicelmpl;
+import service.impl.RoomServicelmpl;
 import service.interfaces.BookingService;
+import service.interfaces.RoomService;
 import view.BookingView;
 
 public class Main {
     public static void main(String[] args) {
-        // 1. Crear instancias de los DAO
+        // Crear instancias de los DAO
         BookingDao bookingDao = new BookingDaoImpl();
-        RoomDao roomDao = new RoomDaoImpl(); // Corregido el typo
+        RoomDao roomDao = new RoomDaoImpl();
 
-        // 2. Crear instancia del Servicio, inyectando los DAO
+        // Crear instancia del Servicio, inyectando los DAO
         BookingService bookingService = new BookingServicelmpl(bookingDao, roomDao); // Corregido
+        RoomService roomService = new RoomServicelmpl(roomDao);
 
-        // 3. Crear instancia del Controlador, inyectando el Servicio
+        // Crear instancia del Controlador, inyectando el Servicio
         BookingController bookingController = new BookingController(bookingService);
+        RoomController roomController = new RoomController(roomService);
 
-        // 4. Crear instancia de la Vista, inyectando el Controlador
-        BookingView bookingView = new BookingView(bookingController);
+        // Crear instancia de la Vista, inyectando el Controlador
+        BookingView bookingView = new BookingView(bookingController, roomController);
 
-        // 5. Iniciar la aplicación
+        // Iniciar la aplicación
         bookingView.showMenu();
     }
 }

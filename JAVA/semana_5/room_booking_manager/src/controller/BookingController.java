@@ -4,7 +4,7 @@ import domain.Booking;
 import service.interfaces.BookingService;
 
 import java.time.LocalDate;
-import java.util.List; // Importar List
+import java.util.List;
 
 public class BookingController {
 
