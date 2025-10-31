@@ -8,8 +8,6 @@ import com.crudActivity.camila_acosta_mobileFix.service.RepairOrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -23,48 +21,33 @@ public class RepairOrderController {
     @Autowired
     private RepairOrderService repairOrderService;
 
-    // Helper para obtener el Rol del usuario autenticado
-    private Role getRoleFromAuthentication(Authentication authentication) {
-        return authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .findFirst()
-                .map(roleName -> roleName.replace("ROLE_", "")) // Quita el prefijo "ROLE_"
-                .map(Role::valueOf) // Convierte String a enum Role
-                .orElseThrow(() -> new IllegalStateException("The user does not have a defined role"));
-    }
-
-    // GET /api/orders (user, tech, admin) -> Devuelve órdenes según el rol
+    // GET /api/orders (Devuelve todas, el front-end tendrá que filtrar por ID de usuario)
     @GetMapping
-    public ResponseEntity<List<RepairOrder>> getOrders(Authentication authentication) {
-        String username = authentication.getName();
-        Role role = getRoleFromAuthentication(authentication);
-
-        List<RepairOrder> orders = repairOrderService.findOrders(username, role);
+    public ResponseEntity<List<RepairOrder>> getOrders() {
+        // Ahora el servicio devuelve TODAS las órdenes sin filtro de rol
+        List<RepairOrder> orders = repairOrderService.findAllOrders();
         return ResponseEntity.ok(orders);
     }
 
-    // GET /api/orders/{id} (user -> si le pertenece --- tech -> si esta asignado --- admin)
+    // GET /api/orders/{id}
+    // Si necesitas verificar permisos en el front-end, también necesitarías un actorId.
     @GetMapping("/{id}")
-    public ResponseEntity<RepairOrder> getOrderById(@PathVariable Long id, Authentication authentication) {
-        String username = authentication.getName();
-        Role role = getRoleFromAuthentication(authentication);
-
-        RepairOrder order = repairOrderService.findOrderById(id, username, role);
-        return ResponseEntity.ok(order); // findOrderById ya maneja el 404 y 403
+    public ResponseEntity<RepairOrder> getOrderById(@PathVariable Long id) {
+        // findOrderById ya no necesita username y role
+        RepairOrder order = repairOrderService.findOrderById(id);
+        return ResponseEntity.ok(order);
     }
 
-    // POST /api/orders (user) -> Crea una nueva orden de reparación
-    @PostMapping
+    // POST /api/orders/{customerId} -> Crea una nueva orden. Ahora necesita el ID del cliente.
+    @PostMapping("/{customerId}")
     public ResponseEntity<RepairOrder> createOrder(
-            @Valid @RequestBody CreateOrderRequest request, // @Valid activa las validaciones del DTO
-            Authentication authentication) {
-
-        String username = authentication.getName(); // El username del USER logueado
+            @Valid @RequestBody CreateOrderRequest request,
+            @PathVariable Long customerId) { // Recibe el ID del cliente que hace la solicitud
 
         RepairOrder newOrder = repairOrderService.createOrder(
                 request.deviceId(),
                 request.issueDescription(),
-                username
+                customerId // Pasa el ID al servicio
         );
 
         // Devuelve 201 Created
@@ -72,7 +55,7 @@ public class RepairOrderController {
         return ResponseEntity.created(location).body(newOrder);
     }
 
-    // PUT /api/orders/{id}/assign/{techId} (admin) -> Asigna un técnico a una orden
+    // PUT /api/orders/{id}/assign/{techId} (admin) -> Asigna un técnico (NO CAMBIA)
     @PutMapping("/{id}/assign/{techId}")
     public ResponseEntity<RepairOrder> assignTech(
             @PathVariable Long id,
@@ -82,37 +65,30 @@ public class RepairOrderController {
         return ResponseEntity.ok(updatedOrder);
     }
 
-    // PUT /api/orders/{id}/status (tech, admin) -> Cambia el estado de una orden
-
-    @PutMapping("/{id}/status")
+    // PUT /api/orders/{id}/status/{actorId} (tech, admin) -> Cambia el estado. Necesita el ID de quien actúa.
+    @PutMapping("/{id}/status/{actorId}")
     public ResponseEntity<RepairOrder> changeStatus(
             @PathVariable Long id,
-            @Valid @RequestBody ChangeStatusRequest request,
-            Authentication authentication) {
+            @PathVariable Long actorId, // El ID del técnico o admin que hace el cambio
+            @Valid @RequestBody ChangeStatusRequest request) {
 
-        String username = authentication.getName();
-        Role role = getRoleFromAuthentication(authentication);
-
+        // Ahora el servicio maneja la validación de roles y permisos internamente usando el actorId
         RepairOrder updatedOrder = repairOrderService.changeStatus(
                 id,
                 request.status(),
                 request.techNotes(),
-                username,
-                role
+                actorId // Pasa el ID del usuario que está actuando
         );
         return ResponseEntity.ok(updatedOrder);
     }
 
-    // DELETE /api/orders/{id} (user -> si es pending y propia --- admin) -> El servicio lo cambia a cancele
-    @DeleteMapping("/{id}")
+    // DELETE /api/orders/{id}/cancel/{actorId} (user -> si es pending --- admin)
+    @DeleteMapping("/{id}/cancel/{actorId}") // La nueva ruta incluye quién cancela
     public ResponseEntity<Void> cancelOrder(
             @PathVariable Long id,
-            Authentication authentication) {
+            @PathVariable Long actorId) { // El ID del usuario (cliente o admin) que hace la acción
 
-        String username = authentication.getName();
-        Role role = getRoleFromAuthentication(authentication);
-
-        repairOrderService.deleteOrder(id, username, role);
+        repairOrderService.deleteOrder(id, actorId); // deleteOrder ahora usa el actorId
 
         return ResponseEntity.noContent().build(); // Devuelve 204 No Content
     }

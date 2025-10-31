@@ -10,21 +10,21 @@ public interface RepairOrderService {
 
     // Busca ordenes según el rol del usuario
     // ADMIN: todas --- TECH: asignadas --- USER: propias
-    List<RepairOrder> findOrders(String username, Role role);
+    List<RepairOrder> findAllOrders();
 
     // Busca una orden por ID, verificando permisos
-    RepairOrder findOrderById(Long orderId, String username, Role role);
+    RepairOrder findOrderById(Long orderId);
 
-    // USER -> crea una nueva orden
-    RepairOrder createOrder(Long deviceId, String issueDescription, String customerUsername);
+    // USER -> crea una nueva orden -> necesita el ID del cliente, no el username
+    RepairOrder createOrder(Long deviceId, String issueDescription, Long customerId);
 
     // ADMIN -> asigna un tEcnico a una orden
     RepairOrder assignTech(Long orderId, Long techId);
 
     // TECH -> actualiza el estado de una orden
-    RepairOrder changeStatus(Long orderId, Status newStatus, String techNotes, String techUsername, Role role);
+    RepairOrder changeStatus(Long orderId, Status newStatus, String techNotes, Long actorId);
 
     // USER -> cancela su orden (si PENDING)
     // ADMIN -> borra cualquier orden
-    void deleteOrder(Long orderId, String username, Role role);
+    void deleteOrder(Long orderId, Long actorId);
 }

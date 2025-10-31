@@ -29,65 +29,36 @@ public class RepairOrderServiceImpl implements RepairOrderService {
     @Autowired
     private DeviceRepository deviceRepository;
 
-    // Metodo para buscar un usuario por username (helper)
-    private User getUserByUsername(String username) {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found: " + username));
+    // Helper para buscar usuario por ID
+    private User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + id));
     }
 
-    // Mtodo para obtener ordenes según el rol
     @Override
-    public List<RepairOrder> findOrders(String username, Role role) {
-        switch (role) {
-            case ADMIN:
-                return orderRepository.findAll();
-            case TECH:
-                User tech = getUserByUsername(username);
-                return orderRepository.findByAssignedTech(tech);
-            case USER:
-                User customer = getUserByUsername(username);
-                return orderRepository.findByCustomer(customer);
-            default:
-                throw new ForbiddenAccessException("Unrecognized role");
-        }
+    public List<RepairOrder> findAllOrders() {
+        return orderRepository.findAll();
     }
 
-    // Buscar una orden por ID con validación de permisos
     @Override
-    public RepairOrder findOrderById(Long orderId, String username, Role role) {
-        RepairOrder order = orderRepository.findById(orderId)
+    public RepairOrder findOrderById(Long orderId) {
+        return orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found: " + orderId));
-
-        switch (role) {
-            case ADMIN:
-                return order; // Admin puede ver todos
-            case TECH:
-                if (order.getAssignedTech() == null || !order.getAssignedTech().getUsername().equals(username)) {
-                    throw new ForbiddenAccessException("You do not have permission to view this order");
-                }
-                return order;
-            case USER:
-                if (!order.getCustomer().getUsername().equals(username)) {
-                    throw new ForbiddenAccessException("You do not have permission to view this order");
-                }
-                return order;
-            default:
-                throw new ForbiddenAccessException("Unrecognized role");
-        }
     }
 
-    // Metodo para crear una nueva orden de reparación
+    // Metodo para crear orden -> recibe customerId
     @Override
-    public RepairOrder createOrder(Long deviceId, String issueDescription, String customerUsername) {
-        User customer = getUserByUsername(customerUsername);
+    public RepairOrder createOrder(Long deviceId, String issueDescription, Long customerId) {
+        User customer = getUserById(customerId); // Usa el nuevo helper
         Device device = deviceRepository.findById(deviceId)
                 .orElseThrow(() -> new ResourceNotFoundException("Device not found: " + deviceId));
 
+        // ... (resto del código igual) ...
         RepairOrder order = new RepairOrder();
         order.setCustomer(customer);
         order.setDevice(device);
         order.setIssueDescription(issueDescription);
-        order.setStatus(Status.PENDING); // Estado inicial
+        order.setStatus(Status.PENDING);
 
         return orderRepository.save(order);
     }
@@ -109,68 +80,95 @@ public class RepairOrderServiceImpl implements RepairOrderService {
         return orderRepository.save(order);
     }
 
-    // Metodo para cambiar el estado de una orden
+    // cambiar estado: recibe el ID del usuario (técnico/admin) que hace la acción
     @Override
-    public RepairOrder changeStatus(Long orderId, Status newStatus, String techNotes, String techUsername, Role role) {
+    public RepairOrder changeStatus(Long orderId, Status newStatus, String techNotes, Long actorId) {
         RepairOrder order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found: " + orderId));
 
-        // Solo el técnico asignado o el admin puede cambiar el estado
-        if (role == Role.TECH) {
-            if (order.getAssignedTech() == null || !order.getAssignedTech().getUsername().equals(techUsername)) {
+        User actor = getUserById(actorId);
+
+        // 1. VALIDACIÓN DE PERMISOS (Quién puede hacer el cambio)
+        if (actor.getRole() == Role.TECH) {
+            // Si es un TÉCNICO, debe ser el técnico asignado
+            if (order.getAssignedTech() == null || !Objects.equals(order.getAssignedTech().getId(), actorId)) {
+                // Se usa Objects.equals para comparar el Long (actorId) con el ID del técnico
                 throw new ForbiddenAccessException("You are not assigned to this order");
             }
+        } else if (actor.getRole() != Role.ADMIN) {
+            // Si no es TECH ni ADMIN, no puede cambiar el estado
+            throw new ForbiddenAccessException("Only assigned technicians or Admins can change the status.");
         }
 
-        // No se puede cambiar a pending o canceled desde aquí -> deleteOrder es para canceled
+        // 2. VALIDACIÓN DEL ESTADO INICIAL Y FINAL (Reglas de Flujo)
+
+        // Los estados PENDING y CANCELED no se establecen con este método
         if (newStatus == Status.PENDING || newStatus == Status.CANCELED) {
             throw new BadRequestException("The state cannot be changed to " + newStatus);
         }
 
-        // Flujo: (PENDING -> IN_PROGRESS -> READY -> DELIVERED)
-        if (order.getStatus() == Status.PENDING && newStatus != Status.IN_PROGRESS) {
-            throw new ConflictException("A PENDING order can only be moved to IN PROGRESS");
+        // Se verifica la secuencia de flujo: PENDING -> IN_PROGRESS -> READY -> DELIVERED
+        Status currentStatus = order.getStatus();
+
+        if (currentStatus == Status.PENDING && newStatus != Status.IN_PROGRESS) {
+            throw new ConflictException("A PENDING order can only be moved to IN_PROGRESS");
         }
-        if (order.getStatus() == Status.IN_PROGRESS && newStatus != Status.READY) {
-            throw new ConflictException("An order IN PROGRESS can only be moved to LIST");
+
+        if (currentStatus == Status.IN_PROGRESS && newStatus != Status.READY) {
+            throw new ConflictException("An order IN_PROGRESS can only be moved to READY");
         }
-        if (order.getStatus() == Status.READY && newStatus != Status.DELIVERED) {
+
+        if (currentStatus == Status.READY && newStatus != Status.DELIVERED) {
             throw new ConflictException("A READY order can only be moved to DELIVERED");
         }
 
+        // Si la orden ya fue DELIVERED o CANCELED, no puede ser modificada.
+        if (currentStatus == Status.DELIVERED || currentStatus == Status.CANCELED) {
+            throw new ConflictException("Cannot change the status of a " + currentStatus + " order.");
+        }
+
+        // 3. APLICACIÓN DEL CAMBIO
         order.setStatus(newStatus);
+
         if (techNotes != null && !techNotes.isBlank()) {
-            order.setTechNotes(order.getTechNotes() + "\n" + techNotes); // Añade notas
+            // Agrega las nuevas notas a las notas existentes
+            String existingNotes = order.getTechNotes() != null ? order.getTechNotes() : "";
+            order.setTechNotes(existingNotes + "\n" + techNotes);
         }
 
         return orderRepository.save(order);
     }
 
-    // Elimina una orden
+    // Elimina una orden: recibe el ID del usuario (cliente/admin) que hace la acción
     @Override
-    public void deleteOrder(Long orderId, String username, Role role) {
+    public void deleteOrder(Long orderId, Long actorId) {
         RepairOrder order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found: " + orderId));
 
-        if (role == Role.ADMIN) {
-            // Un admin puede borrarla
-            order.setStatus(Status.CANCELED); // Lo coloco como cancelado
+        User actor = getUserById(actorId);
+
+        if (actor.getRole() == Role.ADMIN) {
+            // Un admin puede 'borrarla' (cancelarla)
+            order.setStatus(Status.CANCELED);
             orderRepository.save(order);
             return;
         }
 
-        if (role == Role.USER) {
-            if (!order.getCustomer().getUsername().equals(username)) {
+        if (actor.getRole() == Role.USER) {
+            if (!Objects.equals(order.getCustomer().getId(), actorId)) {
                 throw new ForbiddenAccessException("You are not the owner of this order");
             }
+
             if (order.getStatus() != Status.PENDING) {
                 throw new ConflictException("You can only cancel orders that are PENDING");
             }
 
-            order.setStatus(Status.CANCELED); // Cambiamos estado en vez de borrar
+            order.setStatus(Status.CANCELED);
             orderRepository.save(order);
         } else {
+            // TECH no puede cancelar
             throw new ForbiddenAccessException("Technicians cannot cancel orders");
         }
     }
+
 }
