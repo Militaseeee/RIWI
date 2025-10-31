@@ -20,11 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    /**
-     * Endpoint: GET /api/users
-     * Permisos: ADMIN
-     * Lista todos los usuarios del sistema.
-     */
+    // GET /api/users (admin) -> Lista todos los usuarios del sistema
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.findAllUsers();
@@ -33,11 +29,7 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    /**
-     * Endpoint: POST /api/users
-     * Permisos: ADMIN
-     * Crea un nuevo usuario (USER, TECH, o ADMIN).
-     */
+    //POST /api/users (admin) -> Crea un nuevo usuario (user, tech, admin)
     @PostMapping
     public ResponseEntity<User> createUser(@Valid @RequestBody UserRequest request) {
         User user = new User();
@@ -55,7 +47,4 @@ public class UserController {
         URI location = URI.create("/api/users/" + newUser.getId());
         return ResponseEntity.created(location).body(newUser);
     }
-
-    // NOTA: El taller no pide PUT ni DELETE para usuarios,
-    // pero se añadirían aquí si fuera necesario.
 }

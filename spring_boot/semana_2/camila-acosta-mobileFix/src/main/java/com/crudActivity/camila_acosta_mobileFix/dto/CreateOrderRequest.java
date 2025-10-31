@@ -7,10 +7,10 @@ import jakarta.validation.constraints.Size;
 // POST /api/orders
 public record CreateOrderRequest(
 
-        @NotNull(message = "El ID del dispositivo no puede ser nulo")
+        @NotNull(message = "The device ID cannot be null")
         Long deviceId,
 
-        @NotNull(message = "La descripción no puede ser nula")
-        @Size(min = 10, message = "La descripción debe tener al menos 10 caracteres")
+        @NotNull(message = "The description cannot be null")
+        @Size(min = 10, message = "The description must be at least 10 characters long")
         String issueDescription
 ) {}

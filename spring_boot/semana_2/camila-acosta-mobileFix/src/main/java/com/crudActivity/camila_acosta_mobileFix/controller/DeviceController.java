@@ -18,30 +18,22 @@ public class DeviceController {
     @Autowired
     private DeviceService deviceService;
 
-    /**
-     * Endpoint: GET /api/devices
-     * Permisos: USER, TECH, ADMIN (Todos los autenticados)
-     * Lista todos los dispositivos del catálogo.
-     */
+    // Endpoint: GET /api/devices (funciona para todos los autenticados)
+    // Lista todos los dispositivos del catálogo
+
     @GetMapping
     public ResponseEntity<List<Device>> getAllDevices() {
         return ResponseEntity.ok(deviceService.findAllDevices());
     }
 
-    /**
-     * Endpoint: GET /api/devices/{id}
-     * Permisos: USER, TECH, ADMIN
-     */
+    // Endpoint: GET /api/devices/{id} (user, tech, admin)
     @GetMapping("/{id}")
     public ResponseEntity<Device> getDeviceById(@PathVariable Long id) {
         return ResponseEntity.ok(deviceService.findDeviceById(id)); // El servicio lanza 404 si no existe
     }
 
-    /**
-     * Endpoint: POST /api/devices
-     * Permisos: ADMIN
-     * Crea un nuevo dispositivo.
-     */
+    // Endpoint: POST /api/devices (admin) -> Crea un nuevo dispositivo
+
     @PostMapping
     public ResponseEntity<Device> createDevice(@Valid @RequestBody DeviceRequest request) {
         // Convertimos el DTO a la entidad
@@ -56,11 +48,7 @@ public class DeviceController {
         return ResponseEntity.created(location).body(newDevice);
     }
 
-    /**
-     * Endpoint: PUT /api/devices/{id}
-     * Permisos: ADMIN
-     * Actualiza un dispositivo existente.
-     */
+    // Endpoint: PUT /api/devices/{id} (admin) -> Actualiza un dispositivo existente
     @PutMapping("/{id}")
     public ResponseEntity<Device> updateDevice(
             @PathVariable Long id,
@@ -76,11 +64,7 @@ public class DeviceController {
         return ResponseEntity.ok(updatedDevice);
     }
 
-    /**
-     * Endpoint: DELETE /api/devices/{id}
-     * Permisos: ADMIN
-     * Elimina un dispositivo.
-     */
+    // Endpoint: DELETE /api/devices/{id} (admin) -> Elimina un dispositivo
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDevice(@PathVariable Long id) {
         deviceService.deleteDevice(id); // El servicio lanza 404 si no existe

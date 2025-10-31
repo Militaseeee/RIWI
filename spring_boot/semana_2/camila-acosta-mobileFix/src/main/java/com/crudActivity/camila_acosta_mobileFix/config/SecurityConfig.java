@@ -14,18 +14,20 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
 
-@Configuration
-@EnableWebSecurity
+@Configuration // Define beans de configuración para Spring
+@EnableWebSecurity // Activa la seguridad web de Spring (sin esto, no habría autenticación ni restricciones de acceso)
 public class SecurityConfig {
 
+    // Crea un bean que Spring puede usar para codificar contraseñas
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
+    // servicio de Spring que usa para cargar usuarios
     public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-        // Usuarios en memoria (como pide el taller)
+        // Usuarios en memoria
         UserDetails user = User.builder()
                 .username("user")
                 .password(encoder.encode("user123"))
@@ -42,12 +44,10 @@ public class SecurityConfig {
                 .roles("ADMIN")
                 .build();
 
-        return new InMemoryUserDetailsManager(user, tech, admin);
-
-        // NOTA: Si usas H2 para usuarios, deberías implementar tu propio UserDetailsService
-        // que consulte el UserRepository.
+        return new InMemoryUserDetailsManager(user, tech, admin); // Guarda esos usuarios en memoria RAM
     }
 
+    // Define quién puede acceder a qué rutas
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -91,6 +91,6 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF para H2 console y APIs (simplificación)
                 .headers(headers -> headers.frameOptions(frame -> frame.disable())); // Permitir H2 console en iframes
 
-        return http.build();
+        return http.build(); // Construye y devuelve la cadena de filtros de seguridad ya configurada
     }
 }

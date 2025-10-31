@@ -1,5 +1,6 @@
 package com.crudActivity.camila_acosta_mobileFix.service.impl;
 
+import com.crudActivity.camila_acosta_mobileFix.exception.ConflictException;
 import com.crudActivity.camila_acosta_mobileFix.exception.ResourceNotFoundException;
 import com.crudActivity.camila_acosta_mobileFix.model.Device;
 import com.crudActivity.camila_acosta_mobileFix.repository.DeviceRepository;
@@ -23,18 +24,27 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public Device findDeviceById(Long id) {
         return deviceRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Dispositivo no encontrado: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Device not found: " + id));
     }
 
     @Override
     public Device createDevice(Device device) {
-        // Aquí podrías agregar validaciones, ej: no duplicar serialNumber
+
+        // Validar si el serialNumber ya existe
+        if (device.getSerialNumber() != null && !device.getSerialNumber().isBlank()) {
+
+            if (deviceRepository.findBySerialNumber(device.getSerialNumber()).isPresent()) {
+
+                throw new ConflictException("A device with the serial number already exists: " + device.getSerialNumber());
+            }
+        }
+
         return deviceRepository.save(device);
     }
 
     @Override
     public Device updateDevice(Long id, Device deviceDetails) {
-        Device device = findDeviceById(id); // Reusa el método que ya lanza 404
+        Device device = findDeviceById(id); // Aca reutilizo el metodo que ya lanza 404
 
         device.setBrand(deviceDetails.getBrand());
         device.setModel(deviceDetails.getModel());
@@ -46,8 +56,6 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public void deleteDevice(Long id) {
         Device device = findDeviceById(id);
-        // Aquí deberías verificar si el dispositivo está en una orden activa
-        // (Por simplicidad del taller, lo borramos directamente)
         deviceRepository.delete(device);
     }
 }

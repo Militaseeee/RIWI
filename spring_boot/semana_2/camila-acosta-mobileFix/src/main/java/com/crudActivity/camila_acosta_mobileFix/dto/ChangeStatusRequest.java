@@ -6,8 +6,8 @@ import jakarta.validation.constraints.NotNull;
 // PUT /api/orders/{id}/status
 public record ChangeStatusRequest(
 
-        @NotNull(message = "El estado no puede ser nulo")
+        @NotNull(message = "The state cannot be null")
         Status status,
 
         String techNotes // Las notas son opcionales
-) {}
+) {} // -> eso es un cuerpo de record

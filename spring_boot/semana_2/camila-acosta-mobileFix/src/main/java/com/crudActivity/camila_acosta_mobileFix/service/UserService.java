@@ -6,5 +6,4 @@ import java.util.List;
 public interface UserService {
     List<User> findAllUsers();
     User createUser(User user);
-    // (Opcional: update, delete, etc.)
 }

@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder; // Inyectamos el de SecurityConfig
+    private PasswordEncoder passwordEncoder; // Inyecto el de SecurityConfig
 
     @Override
     public List<User> findAllUsers() {
@@ -26,13 +26,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-        // Regla: Username único
+        // Username unico
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-            throw new ConflictException("El username ya existe: " + user.getUsername());
+            throw new ConflictException("The username already exists: " + user.getUsername());
         }
 
-        // Regla: Hashear el password
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // Hashear el password
 
         return userRepository.save(user);
     }

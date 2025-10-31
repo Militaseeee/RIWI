@@ -19,25 +19,21 @@ import java.util.List;
 @RequestMapping("/api/orders") // Ruta base para todas las peticiones de este controlador
 public class RepairOrderController {
 
-    // Inyectamos la INTERFAZ, no la implementación
+    // Inyectamos la interfaz
     @Autowired
     private RepairOrderService repairOrderService;
 
-    // --- Helper para obtener el Rol del usuario autenticado ---
+    // Helper para obtener el Rol del usuario autenticado
     private Role getRoleFromAuthentication(Authentication authentication) {
         return authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .findFirst()
                 .map(roleName -> roleName.replace("ROLE_", "")) // Quita el prefijo "ROLE_"
                 .map(Role::valueOf) // Convierte String a enum Role
-                .orElseThrow(() -> new IllegalStateException("El usuario no tiene un rol definido."));
+                .orElseThrow(() -> new IllegalStateException("The user does not have a defined role"));
     }
 
-    /**
-     * Endpoint: GET /api/orders
-     * Permisos: USER, TECH, ADMIN
-     * Devuelve órdenes según el rol.
-     */
+    // GET /api/orders (user, tech, admin) -> Devuelve órdenes según el rol
     @GetMapping
     public ResponseEntity<List<RepairOrder>> getOrders(Authentication authentication) {
         String username = authentication.getName();
@@ -47,10 +43,7 @@ public class RepairOrderController {
         return ResponseEntity.ok(orders);
     }
 
-    /**
-     * Endpoint: GET /api/orders/{id}
-     * Permisos: USER (si es suya), TECH (si está asignado), ADMIN
-     */
+    // GET /api/orders/{id} (user -> si le pertenece --- tech -> si esta asignado --- admin)
     @GetMapping("/{id}")
     public ResponseEntity<RepairOrder> getOrderById(@PathVariable Long id, Authentication authentication) {
         String username = authentication.getName();
@@ -60,11 +53,7 @@ public class RepairOrderController {
         return ResponseEntity.ok(order); // findOrderById ya maneja el 404 y 403
     }
 
-    /**
-     * Endpoint: POST /api/orders
-     * Permisos: USER
-     * Crea una nueva orden de reparación.
-     */
+    // POST /api/orders (user) -> Crea una nueva orden de reparación
     @PostMapping
     public ResponseEntity<RepairOrder> createOrder(
             @Valid @RequestBody CreateOrderRequest request, // @Valid activa las validaciones del DTO
@@ -83,11 +72,7 @@ public class RepairOrderController {
         return ResponseEntity.created(location).body(newOrder);
     }
 
-    /**
-     * Endpoint: PUT /api/orders/{id}/assign/{techId}
-     * Permisos: ADMIN
-     * Asigna un técnico a una orden.
-     */
+    // PUT /api/orders/{id}/assign/{techId} (admin) -> Asigna un técnico a una orden
     @PutMapping("/{id}/assign/{techId}")
     public ResponseEntity<RepairOrder> assignTech(
             @PathVariable Long id,
@@ -97,11 +82,8 @@ public class RepairOrderController {
         return ResponseEntity.ok(updatedOrder);
     }
 
-    /**
-     * Endpoint: PUT /api/orders/{id}/status
-     * Permisos: TECH, ADMIN
-     * Cambia el estado de una orden.
-     */
+    // PUT /api/orders/{id}/status (tech, admin) -> Cambia el estado de una orden
+
     @PutMapping("/{id}/status")
     public ResponseEntity<RepairOrder> changeStatus(
             @PathVariable Long id,
@@ -121,11 +103,7 @@ public class RepairOrderController {
         return ResponseEntity.ok(updatedOrder);
     }
 
-    /**
-     * Endpoint: DELETE /api/orders/{id}
-     * Permisos: USER (si es PENDING y suya), ADMIN
-     * El servicio lo cambia a CANCELED.
-     */
+    // DELETE /api/orders/{id} (user -> si es pending y propia --- admin) -> El servicio lo cambia a cancele
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> cancelOrder(
             @PathVariable Long id,

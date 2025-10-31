@@ -5,10 +5,10 @@ import jakarta.validation.constraints.NotBlank;
 // Para POST y PUT en /api/devices
 public record DeviceRequest(
 
-        @NotBlank(message = "La marca no puede estar vacía")
+        @NotBlank(message = "The brand cannot be empty.")
         String brand,
 
-        @NotBlank(message = "El modelo no puede estar vacío")
+        @NotBlank(message = "The model cannot be empty")
         String model,
 
         String serialNumber // Opcional
