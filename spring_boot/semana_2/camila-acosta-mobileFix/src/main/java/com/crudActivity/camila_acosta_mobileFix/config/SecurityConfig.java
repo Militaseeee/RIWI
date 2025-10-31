@@ -1,0 +1,96 @@
+package com.crudActivity.camila_acosta_mobileFix.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import static org.springframework.security.config.Customizer.withDefaults;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
+        // Usuarios en memoria (como pide el taller)
+        UserDetails user = User.builder()
+                .username("user")
+                .password(encoder.encode("user123"))
+                .roles("USER")
+                .build();
+        UserDetails tech = User.builder()
+                .username("tech")
+                .password(encoder.encode("tech123"))
+                .roles("TECH")
+                .build();
+        UserDetails admin = User.builder()
+                .username("admin")
+                .password(encoder.encode("admin123"))
+                .roles("ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(user, tech, admin);
+
+        // NOTA: Si usas H2 para usuarios, deberías implementar tu propio UserDetailsService
+        // que consulte el UserRepository.
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(authz -> authz
+                        // Permitir acceso a H2 Console y estáticos (CSS/JS)
+                        .requestMatchers("/h2-console/**", "/css/**", "/js/**").permitAll()
+
+                        // --- Reglas de API REST ---
+                        // Repair Orders
+                        .requestMatchers(HttpMethod.GET, "/api/orders").hasAnyRole("USER", "TECH", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/orders").hasRole("USER")
+                        .requestMatchers(HttpMethod.PUT, "/api/orders/{id}/assign/{techId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/orders/{id}/status").hasAnyRole("TECH", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/orders/{id}").hasAnyRole("USER", "ADMIN")
+
+                        // Devices
+                        .requestMatchers(HttpMethod.GET, "/api/devices").authenticated()
+                        .requestMatchers("/api/devices/**").hasRole("ADMIN")
+
+                        // Users
+                        .requestMatchers("/api/users/**").hasRole("ADMIN")
+
+                        // --- Reglas de Vistas (JSP) ---
+                        .requestMatchers("/dashboard").authenticated()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/tech/**").hasRole("TECH")
+                        .requestMatchers("/user/**").hasRole("USER")
+
+                        // Cualquier otra petición debe estar autenticada
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login") // Define tu página de login personalizada
+                        .defaultSuccessUrl("/dashboard", true) // Redirige al dashboard tras login
+                        .permitAll() // Permite a todos ver la página de login
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll()
+                )
+                .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF para H2 console y APIs (simplificación)
+                .headers(headers -> headers.frameOptions(frame -> frame.disable())); // Permitir H2 console en iframes
+
+        return http.build();
+    }
+}
