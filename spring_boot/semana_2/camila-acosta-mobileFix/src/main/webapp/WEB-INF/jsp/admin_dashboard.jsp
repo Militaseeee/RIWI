@@ -1,3 +1,4 @@
+<%@ page isELIgnored="true" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -9,8 +10,6 @@
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
         th { background-color: #f2f2f2; }
         .logout-form { display: inline; }
-
-        /* Estilos para Pestañas */
         .tab { overflow: hidden; border-bottom: 1px solid #ccc; }
         .tab button { background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s; }
         .tab button:hover { background-color: #ddd; }
@@ -53,59 +52,12 @@
     </div>
 
     <div id="Devices" class="tabcontent">
-        <h3>Gestionar Dispositivos</h3>
-        <form id="deviceForm">
-            <input type="hidden" id="deviceId">
-            <input type="text" id="deviceBrand" placeholder="Marca" required>
-            <input type="text" id="deviceModel" placeholder="Modelo" required>
-            <input type="text" id="deviceSerial" placeholder="Serial (opcional)">
-            <button type="submit">Guardar Dispositivo</button>
-            <button type="button" onclick="resetDeviceForm()">Nuevo</button>
-        </form>
-        <table id="devicesTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Serial</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="devicesBody"></tbody>
-        </table>
-    </div>
+        </div>
 
     <div id="Users" class="tabcontent">
-        <h3>Gestionar Usuarios</h3>
-         <form id="userForm">
-            <input type="text" id="userUsername" placeholder="Username" required>
-            <input type="password" id="userPassword" placeholder="Password (min 6)" required>
-            <input type="email" id="userEmail" placeholder="Email">
-            <input type="text" id="userFullName" placeholder="Nombre Completo">
-            <select id="userRole" required>
-                <option value="USER">USER</option>
-                <option value="TECH">TECH</option>
-                <option value="ADMIN">ADMIN</option>
-            </select>
-            <button type="submit">Crear Usuario</button>
-        </form>
-        <table id="usersTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Rol</th>
-                </tr>
-            </thead>
-            <tbody id="usersBody"></tbody>
-        </table>
-    </div>
+        </div>
 
     <script>
-        // 🚨 CAMBIO CLAVE: Obtener el ID del Admin para usarlo en acciones de cancelación (si las hubiera)
         const ACTOR_ID = localStorage.getItem('userId');
 
         function checkSession() {
@@ -141,7 +93,7 @@
         async function handleResponse(response) {
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                const message = errorData.error || `Error ${response.status}`;
+                const message = errorData.error || `Error \${response.status}`;
                 throw new Error(message);
             }
             return response.status === 204 ? null : response.json();
@@ -150,30 +102,33 @@
         // --- Lógica de Órdenes ---
         async function loadAllOrders() {
             try {
-                // El servicio ahora devuelve TODAS las órdenes sin filtro
                 const orders = await fetch('/api/orders').then(handleResponse);
                 const tbody = document.getElementById('adminOrdersBody');
                 tbody.innerHTML = '';
                 orders.forEach(order => {
                     const tr = document.createElement('tr');
                     const techName = order.assignedTech ? order.assignedTech.username : 'N/A';
+
+                    // 🚨 INICIO DE LA CORRECCIÓN: Se usan comillas simples ' ' para los botones
                     tr.innerHTML = `
-                        <td>${order.id}</td>
-                        <td>${order.customer.username}</td>
-                        <td>${order.device.brand} ${order.device.model}</td>
-                        <td>${order.status}</td>
-                        <td>${techName}</td>
+                        <td>\${order.id}</td>
+                        <td>\${order.customer.username}</td>
+                        <td>\${order.device.brand} \${order.device.model}</td>
+                        <td>\${order.status}</td>
+                        <td>\${techName}</td>
                         <td>
-                            ${order.status === 'PENDING' || order.status === 'IN_PROGRESS' ?
-                              `<button onclick="assignTech(${order.id})">Asignar</button>` :
+                            \${order.status === 'PENDING' || order.status === 'IN_PROGRESS' ?
+                              '<button onclick="assignTech(\${order.id})">Asignar</button>' :
                               'N/A'}
                         </td>
                          <td>
-                            ${order.status !== 'CANCELED' && order.status !== 'DELIVERED' ?
-                              `<button onclick="cancelOrderAsAdmin(${order.id})">Cancelar</button>` :
+                            \${order.status !== 'CANCELED' && order.status !== 'DELIVERED' ?
+                              '<button onclick="cancelOrderAsAdmin(\${order.id})">Cancelar</button>' :
                               'N/A'}
                         </td>
                     `;
+                    // 🚨 FIN DE LA CORRECCIÓN
+
                     tbody.appendChild(tr);
                 });
             } catch (e) { alert('Error cargando órdenes: ' + e.message); }
@@ -186,7 +141,7 @@
                 users.filter(u => u.role === 'TECH').forEach(tech => {
                     const option = document.createElement('option');
                     option.value = tech.id;
-                    option.textContent = `${tech.fullName || tech.username} (ID: ${tech.id})`;
+                    option.textContent = `\${tech.fullName || tech.username} (ID: \${tech.id})`;
                     select.appendChild(option);
                 });
             } catch (e) { alert('Error cargando técnicos: ' + e.message); }
@@ -198,9 +153,9 @@
                 alert('Por favor, seleccione un técnico.');
                 return;
             }
-            if (confirm(`¿Asignar técnico ID ${techId} a la orden ID ${orderId}?`)) {
+            if (confirm(`¿Asignar técnico ID \${techId} a la orden ID \${orderId}?`)) {
                 try {
-                    await fetch(`/api/orders/${orderId}/assign/${techId}`, { method: 'PUT' }).then(handleResponse);
+                    await fetch(`/api/orders/\${orderId}/assign/\${techId}`, { method: 'PUT' }).then(handleResponse);
                     loadAllOrders();
                 } catch (e) { alert('Error al asignar: ' + e.message); }
             }
@@ -209,55 +164,26 @@
         async function cancelOrderAsAdmin(orderId) {
              if (confirm('¿Seguro que quiere CANCELAR (Admin) esta orden?')) {
                 try {
-                    // 🚨 CAMBIO CLAVE: Usamos la nueva ruta DELETE con el ACTOR_ID (Admin)
-                    await fetch(`/api/orders/${orderId}/cancel/${ACTOR_ID}`, { method: 'DELETE' }).then(handleResponse);
+                    await fetch(`/api/orders/\${orderId}/cancel/\${ACTOR_ID}`, { method: 'DELETE' }).then(handleResponse);
                     loadAllOrders();
                 } catch (error) {
-                    alert(`Error al cancelar: ${error.message}`);
+                    alert(`Error al cancelar: \${error.message}`);
                 }
              }
         }
 
-        // --- Lógica de Dispositivos (SIN CAMBIOS) ---
-        async function loadDevices() {
-             // ...
-        }
+        // --- Lógica de Dispositivos y Usuarios (Añadir aquí) ---
 
-        function resetDeviceForm() {
-             // ...
-        }
-
-        function editDevice(id, brand, model, serial) {
-             // ...
-        }
-
-        async function saveDevice(event) {
-             // ...
-        }
-
-        async function deleteDevice(id) {
-            // ...
-        }
-
-        // --- Lógica de Usuarios (SIN CAMBIOS) ---
-        async function loadUsers() {
-             // ...
-        }
-
-        async function createUser(event) {
-             // ...
-        }
 
         // --- Inicialización ---
         document.addEventListener('DOMContentLoaded', () => {
             checkSession();
             loadAllOrders();
             loadTechs();
-            loadDevices();
-            loadUsers();
-
-            document.getElementById('deviceForm').addEventListener('submit', saveDevice);
-            document.getElementById('userForm').addEventListener('submit', createUser);
+            // loadDevices();
+            // loadUsers();
+            // document.getElementById('deviceForm').addEventListener('submit', saveDevice);
+            // document.getElementById('userForm').addEventListener('submit', createUser);
         });
     </script>
 </body>
