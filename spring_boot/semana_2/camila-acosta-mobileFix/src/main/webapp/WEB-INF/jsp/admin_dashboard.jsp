@@ -58,133 +58,137 @@
         </div>
 
     <script>
-        const ACTOR_ID = localStorage.getItem('userId');
+            // Esta es la configuración correcta.
+            // El <%@ page isELIgnored="true" %> al inicio del archivo
+            // se encarga de que JSP no toque el código JavaScript.
 
-        function checkSession() {
-            if (!ACTOR_ID || localStorage.getItem('userRole') !== 'ADMIN') {
-                alert('Acceso no autorizado. Redirigiendo a Login.');
+            const ACTOR_ID = localStorage.getItem('userId');
+
+            function checkSession() {
+                if (!ACTOR_ID || localStorage.getItem('userRole') !== 'ADMIN') {
+                    alert('Acceso no autorizado. Redirigiendo a Login.');
+                    window.location.href = '/login';
+                }
+            }
+
+            function logout(event) {
+                event.preventDefault();
+                localStorage.removeItem('userId');
+                localStorage.removeItem('userRole');
                 window.location.href = '/login';
             }
-        }
 
-        function logout(event) {
-            event.preventDefault();
-            localStorage.removeItem('userId');
-            localStorage.removeItem('userRole');
-            window.location.href = '/login';
-        }
-
-        // --- Lógica de Pestañas ---
-        function openTab(evt, tabName) {
-            let i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-
-        // --- Helper de Fetch ---
-        async function handleResponse(response) {
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                const message = errorData.error || `Error \${response.status}`;
-                throw new Error(message);
-            }
-            return response.status === 204 ? null : response.json();
-        }
-
-        // --- Lógica de Órdenes ---
-        async function loadAllOrders() {
-            try {
-                const orders = await fetch('/api/orders').then(handleResponse);
-                const tbody = document.getElementById('adminOrdersBody');
-                tbody.innerHTML = '';
-                orders.forEach(order => {
-                    const tr = document.createElement('tr');
-                    const techName = order.assignedTech ? order.assignedTech.username : 'N/A';
-
-                    // 🚨 INICIO DE LA CORRECCIÓN: Se usan comillas simples ' ' para los botones
-                    tr.innerHTML = `
-                        <td>\${order.id}</td>
-                        <td>\${order.customer.username}</td>
-                        <td>\${order.device.brand} \${order.device.model}</td>
-                        <td>\${order.status}</td>
-                        <td>\${techName}</td>
-                        <td>
-                            \${order.status === 'PENDING' || order.status === 'IN_PROGRESS' ?
-                              '<button onclick="assignTech(\${order.id})">Asignar</button>' :
-                              'N/A'}
-                        </td>
-                         <td>
-                            \${order.status !== 'CANCELED' && order.status !== 'DELIVERED' ?
-                              '<button onclick="cancelOrderAsAdmin(\${order.id})">Cancelar</button>' :
-                              'N/A'}
-                        </td>
-                    `;
-                    // 🚨 FIN DE LA CORRECCIÓN
-
-                    tbody.appendChild(tr);
-                });
-            } catch (e) { alert('Error cargando órdenes: ' + e.message); }
-        }
-
-        async function loadTechs() {
-            try {
-                const users = await fetch('/api/users').then(handleResponse);
-                const select = document.getElementById('techSelect');
-                users.filter(u => u.role === 'TECH').forEach(tech => {
-                    const option = document.createElement('option');
-                    option.value = tech.id;
-                    option.textContent = `\${tech.fullName || tech.username} (ID: \${tech.id})`;
-                    select.appendChild(option);
-                });
-            } catch (e) { alert('Error cargando técnicos: ' + e.message); }
-        }
-
-        async function assignTech(orderId) {
-            const techId = document.getElementById('techSelect').value;
-            if (!techId) {
-                alert('Por favor, seleccione un técnico.');
-                return;
-            }
-            if (confirm(`¿Asignar técnico ID \${techId} a la orden ID \${orderId}?`)) {
-                try {
-                    await fetch(`/api/orders/\${orderId}/assign/\${techId}`, { method: 'PUT' }).then(handleResponse);
-                    loadAllOrders();
-                } catch (e) { alert('Error al asignar: ' + e.message); }
-            }
-        }
-
-        async function cancelOrderAsAdmin(orderId) {
-             if (confirm('¿Seguro que quiere CANCELAR (Admin) esta orden?')) {
-                try {
-                    await fetch(`/api/orders/\${orderId}/cancel/\${ACTOR_ID}`, { method: 'DELETE' }).then(handleResponse);
-                    loadAllOrders();
-                } catch (error) {
-                    alert(`Error al cancelar: \${error.message}`);
+            // --- Lógica de Pestañas ---
+            function openTab(evt, tabName) {
+                let i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
                 }
-             }
-        }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
 
-        // --- Lógica de Dispositivos y Usuarios (Añadir aquí) ---
+            // --- Helper de Fetch ---
+            async function handleResponse(response) {
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    const message = errorData.error || `Error ${response.status}`;
+                    throw new Error(message);
+                }
+                return response.status === 204 ? null : response.json();
+            }
+
+            // --- Lógica de Órdenes ---
+            async function loadAllOrders() {
+                try {
+                    const orders = await fetch('/api/orders').then(handleResponse);
+                    const tbody = document.getElementById('adminOrdersBody');
+                    tbody.innerHTML = '';
+                    orders.forEach(order => {
+                        const tr = document.createElement('tr');
+                        const techName = order.assignedTech ? order.assignedTech.username : 'N/A';
+
+                        tr.innerHTML = `
+                            <td>${order.id}</td>
+                            <td>${order.customer.username}</td>
+                            <td>${order.device.brand} ${order.device.model}</td>
+                            <td>${order.status}</td>
+                            <td>${techName}</td>
+                            <td>
+                                ${order.status === 'PENDING' || order.status === 'IN_PROGRESS' ?
+                                  `<button onclick="assignTech(${order.id})">Asignar</button>` :
+                                  'N/A'}
+                            </td>
+                             <td>
+                                ${order.status !== 'CANCELED' && order.status !== 'DELIVERED' ?
+                                  `<button onclick="cancelOrderAsAdmin(${order.id})">Cancelar</button>` :
+                                  'N/A'}
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } catch (e) { alert('Error cargando órdenes: ' + e.message); }
+            }
+
+            // CORREGIDO: Sin barras '\'
+            async function loadTechs() {
+                try {
+                    const users = await fetch('/api/users').then(handleResponse);
+                    const select = document.getElementById('techSelect');
+
+                    select.options.length = 1; // Limpia el select (deja el "-- Seleccionar --")
+
+                    users.filter(u => u.role === 'TECH').forEach(tech => {
+                        const option = document.createElement('option');
+                        option.value = tech.id;
+                        option.textContent = `${tech.fullName || tech.username} (ID: ${tech.id})`;
+                        select.appendChild(option);
+                    });
+                } catch (e) { alert('Error cargando técnicos: ' + e.message); }
+            }
+
+            // CORREGIDO: Sin barras '\'
+            async function assignTech(orderId) {
+                const techId = document.getElementById('techSelect').value;
+                if (!techId) {
+                    alert('Por favor, seleccione un técnico.');
+                    return;
+                }
+                if (confirm(`¿Asignar técnico ID ${techId} a la orden ID ${orderId}?`)) {
+                    try {
+                        await fetch(`/api/orders/${orderId}/assign/${techId}`, { method: 'PUT' }).then(handleResponse);
+                        loadAllOrders(); // Recargar la tabla
+                    } catch (e) { alert('Error al asignar: ' + e.message); }
+                }
+            }
+
+            // CORREGIDO: Sin barras '\'
+            async function cancelOrderAsAdmin(orderId) {
+                 if (confirm('¿Seguro que quiere CANCELAR (Admin) esta orden?')) {
+                    try {
+                        await fetch(`/api/orders/${orderId}/cancel/${ACTOR_ID}`, { method: 'DELETE' }).then(handleResponse);
+                        loadAllOrders(); // Recargar la tabla
+                    } catch (error) {
+                        alert(`Error al cancelar: ${error.message}`);
+                    }
+                 }
+            }
+
+            // --- Lógica de Dispositivos y Usuarios (Añadir aquí) ---
+            // ...
 
 
-        // --- Inicialización ---
-        document.addEventListener('DOMContentLoaded', () => {
-            checkSession();
-            loadAllOrders();
-            loadTechs();
-            // loadDevices();
-            // loadUsers();
-            // document.getElementById('deviceForm').addEventListener('submit', saveDevice);
-            // document.getElementById('userForm').addEventListener('submit', createUser);
-        });
-    </script>
+            // --- Inicialización ---
+            document.addEventListener('DOMContentLoaded', () => {
+                checkSession();
+                loadAllOrders();
+                loadTechs();
+            });
+        </script>
 </body>
 </html>
