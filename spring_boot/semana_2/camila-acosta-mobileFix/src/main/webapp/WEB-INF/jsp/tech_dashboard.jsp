@@ -60,13 +60,13 @@
     </div>
 
     <script>
-        const TECH_ID = localStorage.getItem('userId');
+       const TECH_ID = localStorage.getItem('userId');
 
         function checkSession() {
-            if (!TECH_ID || localStorage.getItem('userRole') !== 'TECH') {
-                alert('Acceso no autorizado. Redirigiendo a Login.');
-                window.location.href = '/login';
-            }
+           if (!TECH_ID || localStorage.getItem('userRole') !== 'TECH') {
+               alert('Acceso no autorizado. Redirigiendo a Login.');
+               window.location.href = '/login';
+           }
         }
 
         function logout(event) {
@@ -95,21 +95,19 @@
                 assignedOrders.forEach(order => {
                     const tr = document.createElement('tr');
 
-                    // 🚨 INICIO DE LA CORRECCIÓN: Se usan comillas simples ' ' para el botón
                     tr.innerHTML = `
-                        <td>\${order.id}</td>
-                        <td>\${order.customer.fullName || order.customer.username}</td>
-                        <td>\${order.device.brand} \${order.device.model}</td>
-                        <td>\${order.status}</td>
-                        <td>\${order.issueDescription}</td>
-                        <td>\${order.techNotes || 'N/A'}</td>
+                        <td>${order.id}</td>
+                        <td>${order.customer.fullName || order.customer.username}</td>
+                        <td>${order.device.brand} ${order.device.model}</td>
+                        <td>${order.status}</td>
+                        <td>${order.issueDescription}</td>
+                        <td>${order.techNotes || 'N/A'}</td>
                         <td>
-                            \${order.status !== 'DELIVERED' && order.status !== 'CANCELED' ?
-                              '<button onclick="openModal(\${order.id}, \'\${order.status}\')">Actualizar</button>' :
-                              'Finalizada'}
+                            ${order.status !== 'DELIVERED' && order.status !== 'CANCELED'
+                                ? `<button onclick="openModal(${order.id}, '${order.status}')">Actualizar</button>`
+                                : 'Finalizada'}
                         </td>
                     `;
-                    // 🚨 FIN DE LA CORRECCIÓN
 
                     tbody.appendChild(tr);
                 });
@@ -130,32 +128,26 @@
             }
 
             try {
-                await fetch(`/api/orders/\${orderId}/status/\${TECH_ID}`, {
+                await fetch(`/api/orders/${orderId}/status/${TECH_ID}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ status, techNotes })
                 }).then(handleResponse);
 
                 closeModal();
-                loadAssignedOrders();
-            } catch (error) {
-                alert(`Error al actualizar: \${error.message}`);
+                    loadAssignedOrders();
+                } catch (error) {
+                    alert(`Error al actualizar: \${error.message}`);
+                }
             }
-        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            checkSession();
-            loadAssignedOrders();
-            document.getElementById('statusForm').addEventListener('submit', updateStatus);
-        });
+            function openModal(orderId, currentStatus) {
+                document.getElementById('modalOrderId').textContent = `(ID: ${orderId})`;
+                    document.getElementById('modalOrderIdInput').value = orderId;
+                document.getElementById('techNotes').value = '';
 
-        function openModal(orderId, currentStatus) {
-            document.getElementById('modalOrderId').textContent = `(ID: \${orderId})`;
-            document.getElementById('modalOrderIdInput').value = orderId;
-            document.getElementById('techNotes').value = '';
-
-            const statusSelect = document.getElementById('statusSelect');
-            statusSelect.innerHTML = '';
+                const statusSelect = document.getElementById('statusSelect');
+                statusSelect.innerHTML = '';
 
             const allowedTransitions = {
                 'PENDING': ['IN_PROGRESS'],
@@ -165,7 +157,7 @@
                 'CANCELED': []
             };
 
-            const transitions = allowedTransitions[currentStatus] || [];
+            const transitions = allowedTransitions[currentStatus.trim()] || []; // .trim() para quitar el espacio
             if (transitions.length === 0) {
                  statusSelect.innerHTML = '<option value="">No hay transiciones válidas</option>';
             } else {
@@ -183,6 +175,12 @@
         function closeModal() {
             document.getElementById('statusModal').style.display = 'none';
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkSession();
+            loadAssignedOrders();
+            document.getElementById('statusForm').addEventListener('submit', updateStatus);
+        });
 
         window.onclick = function(event) {
             const modal = document.getElementById('statusModal');

@@ -23,7 +23,7 @@
 
         <div>
             <label for="username">Usuario:</label>
-            <input type.="text" id="username" placeholder="admin, tech, o user" required autofocus>
+            <input type="text" id="username" placeholder="admin, tech, o user" required autofocus>
         </div>
         <div>
             <label for="password">Contraseña:</label>
@@ -36,8 +36,9 @@
     <hr>
     <p><b>Usuarios de prueba (data.sql):</b><br>
        Usuario: admin / Pass: pass<br>
-       Usuario: tech / Pass: pass<br>
-       Usuario: user / Pass: pass
+       Usuario: cami_admin / Pass: 1234<br>
+       Usuario: tech1 / Pass: pass<br>
+       Usuario: user1 / Pass: pass
     </p>
 
     <script>

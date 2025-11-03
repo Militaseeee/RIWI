@@ -11,6 +11,44 @@
         th { background-color: #f2f2f2; }
         form { margin-bottom: 20px; }
         .logout-form { display: inline; }
+
+        /* --- NUEVOS ESTILOS PARA EL FORMULARIO --- */
+        #newOrderForm {
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f9f9f9;
+            max-width: 600px;
+        }
+        #newOrderForm div {
+            display: grid;
+            grid-template-columns: 180px 1fr; /* Columna de label | Columna de input */
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+         #newOrderForm label {
+            font-weight: bold;
+            text-align: right;
+         }
+        #newOrderForm textarea, #newOrderForm select {
+            width: 100%;
+            box-sizing: border-box; /* Para que el padding no rompa el ancho */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #newOrderForm button {
+            grid-column: 2; /* Alinear el botón con los inputs */
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #newOrderForm button:hover { background-color: #0056b3; }
+        /* --- FIN DE NUEVOS ESTILOS --- */
     </style>
 </head>
 <body>
@@ -26,13 +64,16 @@
         <div>
             <label for="deviceSelect">Dispositivo:</label>
             <select id="deviceSelect" required>
-                </select>
+                 <option value="">-- Cargando dispositivos... --</option>
+            </select>
         </div>
         <div>
             <label for="issueDescription">Descripción del Problema (min 10):</label>
-            <textarea id="issueDescription" minlength="10" required style="width: 300px; height: 60px;"></textarea>
+            <textarea id="issueDescription" minlength="10" required rows="3"></textarea>
         </div>
-        <button type="submit">Enviar Solicitud</button>
+        <div>
+            <label></label> <button type="submit">Enviar Solicitud</button>
+        </div>
     </form>
 
     <hr>
@@ -54,6 +95,10 @@
     </table>
 
     <script>
+        // Esta es la configuración correcta:
+        // 1. SIEMPRE usar <%@ page isELIgnored="true" %>
+        // 2. NUNCA usar la barra '\' en el JavaScript.
+
         const CUSTOMER_ID = localStorage.getItem('userId');
 
         function checkSession() {
@@ -73,14 +118,29 @@
         async function handleResponse(response) {
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                const message = errorData.error || `Error \${response.status}`;
+                // 🚨 CORREGIDO: Sin '\'
+                const message = errorData.error || `Error ${response.status}`;
                 throw new Error(message);
             }
             return response.status === 204 ? null : response.json();
         }
 
         async function loadDevices() {
-             // ...
+             try {
+                const devices = await fetch('/api/devices').then(handleResponse);
+                const select = document.getElementById('deviceSelect');
+                select.innerHTML = '<option value="">-- Seleccione un dispositivo --</option>'; // Limpiar
+
+                devices.forEach(device => {
+                    const option = document.createElement('option');
+                    option.value = device.id;
+                    // 🚨 CORREGIDO: Sin '\'
+                    option.textContent = `${device.brand} ${device.model} (ID: ${device.id})`;
+                    select.appendChild(option);
+                });
+             } catch (e) {
+                alert('Error cargando dispositivos: ' + e.message);
+             }
         }
 
         async function loadMyOrders() {
@@ -93,25 +153,24 @@
                 myOrders.forEach(order => {
                     const tr = document.createElement('tr');
 
-                    // 🚨 INICIO DE LA CORRECCIÓN: Se usan comillas simples ' ' para el botón
+                    // 🚨 CORREGIDO: Sin '\'
                     tr.innerHTML = `
-                        <td>\${order.id}</td>
-                        <td>\${order.device.brand} \${order.device.model}</td>
-                        <td>\${order.status}</td>
-                        <td>\${order.issueDescription}</td>
-                        <td>\${order.techNotes || 'N/A'}</td>
+                        <td>${order.id}</td>
+                        <td>${order.device.brand} ${order.device.model}</td>
+                        <td>${order.status}</td>
+                        <td>${order.issueDescription}</td>
+                        <td>${order.techNotes || 'N/A'}</td>
                         <td>
-                            \${order.status === 'PENDING' ?
-                              '<button onclick="cancelOrder(\${order.id})">Cancelar</button>' :
-                              'No disponible'}
+                            ${order.status === 'PENDING'
+                                ? `<button onclick="cancelOrder(${order.id})">Cancelar</button>`
+                                : 'No disponible'}
                         </td>
                     `;
-                    // 🚨 FIN DE LA CORRECCIÓN
 
                     tbody.appendChild(tr);
                 });
             } catch (error) {
-                alert(`Error cargando órdenes: \${error.message}`);
+                alert(`Error cargando órdenes: ${error.message}`);
             }
         }
 
@@ -120,8 +179,14 @@
             const deviceId = document.getElementById('deviceSelect').value;
             const issueDescription = document.getElementById('issueDescription').value;
 
+            if (!deviceId) {
+                alert("Por favor, seleccione un dispositivo.");
+                return;
+            }
+
             try {
-                await fetch(`/api/orders/\${CUSTOMER_ID}`, {
+                // 🚨 CORREGIDO: Sin '\'
+                await fetch(`/api/orders/${CUSTOMER_ID}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ deviceId: parseInt(deviceId), issueDescription })
@@ -130,24 +195,25 @@
                 loadMyOrders();
                 document.getElementById('newOrderForm').reset();
             } catch (error) {
-                alert(`Error al crear la orden: \${error.message}`);
+                alert(`Error al crear la orden: ${error.message}`);
             }
         }
 
         async function cancelOrder(orderId) {
              if (confirm('¿Seguro que quieres cancelar esta orden?')) {
                 try {
-                    await fetch(`/api/orders/\${orderId}/cancel/\${CUSTOMER_ID}`, { method: 'DELETE' }).then(handleResponse);
+                    // 🚨 CORREGIDO: Sin '\'
+                    await fetch(`/api/orders/${orderId}/cancel/${CUSTOMER_ID}`, { method: 'DELETE' }).then(handleResponse);
                     loadMyOrders();
                 } catch (error) {
-                    alert(`Error al cancelar: \${error.message}`);
+                    alert(`Error al cancelar: ${error.message}`);
                 }
              }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             checkSession();
-            // loadDevices();
+            loadDevices(); // Llamar a la función para cargar dispositivos
             loadMyOrders();
             document.getElementById('newOrderForm').addEventListener('submit', createOrder);
         });

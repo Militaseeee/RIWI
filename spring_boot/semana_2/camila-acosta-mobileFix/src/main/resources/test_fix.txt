@@ -1,0 +1,726 @@
+NOTAS:
+
+package com.crudActivity.camila_acosta_mobileFix.service.impl;
+
+import com.crudActivity.camila_acosta_mobileFix.exception.BadRequestException;
+import com.crudActivity.camila_acosta_mobileFix.exception.ConflictException;
+import com.crudActivity.camila_acosta_mobileFix.exception.ForbiddenAccessException;
+import com.crudActivity.camila_acosta_mobileFix.exception.ResourceNotFoundException;
+import com.crudActivity.camila_acosta_mobileFix.model.*;
+import com.crudActivity.camila_acosta_mobileFix.repository.DeviceRepository;
+import com.crudActivity.camila_acosta_mobileFix.repository.RepairOrderRepository;
+import com.crudActivity.camila_acosta_mobileFix.repository.UserRepository;
+
+// Importaciones clave para JUnit 5 y Mockito
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
+// Le decimos a JUnit 5 que use Mockito
+@ExtendWith(MockitoExtension.class)
+class RepairOrderServiceImplTest {
+
+    // 1. Creamos "Mocks" (simuladores) para las dependencias
+    @Mock
+    private RepairOrderRepository orderRepository;
+    @Mock
+    private UserRepository userRepository;
+    @Mock
+    private DeviceRepository deviceRepository;
+
+    // 2. Inyectamos esos Mocks en la clase que queremos probar
+    @InjectMocks
+    private RepairOrderServiceImpl repairOrderService; // Esta es la clase real
+
+    // --- Pruebas para createOrder (Requisito 1) ---
+    @Nested
+    @DisplayName("Pruebas del método createOrder")
+    class CreateOrderTests {
+
+        private User customer;
+        private Device device;
+
+        @BeforeEach
+        void setUp() {
+            // Preparamos un cliente y dispositivo base para estas pruebas
+            customer = new User();
+            customer.setId(100L);
+            customer.setRole(Role.USER);
+
+            device = new Device();
+            device.setId(101L);
+            device.setBrand("Samsung");
+
+            // Simulamos que el cliente y dispositivo SÍ existen
+            when(userRepository.findById(100L)).thenReturn(Optional.of(customer));
+            when(deviceRepository.findById(101L)).thenReturn(Optional.of(device));
+        }
+
+        @Test
+        @DisplayName("Debe crear una orden con estado PENDING si los datos son válidos")
+        void testCreateOrder_Valid() {
+            // Given
+            String description = "La pantalla está rota";
+            when(orderRepository.save(any(RepairOrder.class))).thenAnswer(inv -> inv.getArgument(0));
+
+            // When
+            RepairOrder nuevaOrden = repairOrderService.createOrder(101L, description, 100L);
+
+            // Then
+            assertNotNull(nuevaOrden);
+            assertEquals(Status.PENDING, nuevaOrden.getStatus());
+            assertEquals(customer, nuevaOrden.getCustomer());
+            assertEquals(device, nuevaOrden.getDevice());
+            verify(orderRepository, times(1)).save(any(RepairOrder.class));
+        }
+
+        @Test
+        @DisplayName("Debe lanzar ResourceNotFoundException si el deviceId no existe")
+        void testCreateOrder_Fails_IfDeviceNotFound() {
+            // Given
+            Long nonExistentDeviceId = 999L;
+            when(deviceRepository.findById(nonExistentDeviceId)).thenReturn(Optional.empty());
+
+            // When & Then
+            assertThrows(ResourceNotFoundException.class, () -> {
+                repairOrderService.createOrder(nonExistentDeviceId, "Pantalla rota", 100L);
+            });
+            verify(orderRepository, never()).save(any());
+        }
+
+        @Test
+        @DisplayName("Debe lanzar BadRequestException si la descripción es muy corta")
+        void testCreateOrder_Fails_IfIssueDescriptionTooShort() {
+            // Given
+            String shortDesc = "Roto"; // Menos de 10 caracteres
+
+            // When & Then
+            assertThrows(BadRequestException.class, () -> {
+                // Esta prueba fallará si no modificas tu Service para incluir la validación
+                repairOrderService.createOrder(101L, shortDesc, 100L);
+            });
+            verify(orderRepository, never()).save(any());
+        }
+    }
+
+    // --- Pruebas para assignTech (Requisito 2) ---
+    @Nested
+    @DisplayName("Pruebas del método assignTech")
+    class AssignTechTests {
+
+        @Test
+        @DisplayName("Debe asignar un técnico si el actor es ADMIN")
+        void testAssignTech_Success_IfAdmin() {
+            // Given
+            User admin = new User(); admin.setId(1L); admin.setRole(Role.ADMIN);
+            User tech = new User(); tech.setId(11L); tech.setRole(Role.TECH);
+            RepairOrder order = new RepairOrder(); order.setId(100L);
+
+            when(userRepository.findById(1L)).thenReturn(Optional.of(admin));
+            when(userRepository.findById(11L)).thenReturn(Optional.of(tech));
+            when(orderRepository.findById(100L)).thenReturn(Optional.of(order));
+
+            // When
+            // Esta prueba fallará si no modificas tu Service para incluir el adminActorId
+            repairOrderService.assignTech(100L, 11L, 1L); // orderId, techId, adminActorId
+
+            // Then
+            assertEquals(tech, order.getAssignedTech());
+            verify(orderRepository, times(1)).save(order);
+        }
+
+        @Test
+        @DisplayName("Debe lanzar ForbiddenAccessException si el actor NO es ADMIN")
+        void testAssignTech_Fails_IfActorIsNotAdmin() {
+            // Given
+            User notAdmin = new User(); notAdmin.setId(2L); notAdmin.setRole(Role.USER);
+            when(userRepository.findById(2L)).thenReturn(Optional.of(notAdmin));
+
+            // When & Then
+            assertThrows(ForbiddenAccessException.class, () -> {
+                // Esta prueba fallará si no modificas tu Service
+                repairOrderService.assignTech(100L, 11L, 2L); // orderId, techId, userActorId
+            });
+            verify(orderRepository, never()).save(any());
+        }
+    }
+
+    // --- Pruebas para changeStatus (Requisito 3) ---
+    @Nested
+    @DisplayName("Pruebas del método changeStatus")
+    class ChangeStatusTests {
+
+        private User tech;
+        private RepairOrder order;
+
+        @BeforeEach
+        void setUp() {
+            tech = new User();
+            tech.setId(11L);
+            tech.setRole(Role.TECH);
+
+            order = new RepairOrder();
+            order.setId(100L);
+            order.setStatus(Status.PENDING);
+            order.setAssignedTech(tech); // El técnico está asignado
+
+            // Simulamos que el actor (técnico) y la orden existen
+            when(userRepository.findById(11L)).thenReturn(Optional.of(tech));
+            when(orderRepository.findById(100L)).thenReturn(Optional.of(order));
+        }
+
+        @Test
+        @DisplayName("Debe cambiar de PENDING a IN_PROGRESS si la transición es válida")
+        void testChangeStatus_Success_ValidTransition() {
+            // When
+            repairOrderService.changeStatus(100L, Status.IN_PROGRESS, "Empezando", 11L);
+
+            // Then
+            assertEquals(Status.IN_PROGRESS, order.getStatus());
+            verify(orderRepository, times(1)).save(order);
+        }
+
+        @Test
+        @DisplayName("Debe lanzar ConflictException si la transición es inválida (ej. PENDING a READY)")
+        void testChangeStatus_Fails_InvalidTransition() {
+            // When & Then
+            assertThrows(ConflictException.class, () -> {
+                // Un técnico (11L) intenta saltarse IN_PROGRESS
+                repairOrderService.changeStatus(100L, Status.READY, "Saltando", 11L);
+            });
+
+            // Verificamos que el estado sigue siendo el original
+            assertEquals(Status.PENDING, order.getStatus());
+            verify(orderRepository, never()).save(any());
+        }
+    }
+    
+
+    // --- Pruebas para deleteOrder (Requisito 4) ---
+    @Nested
+    @DisplayName("Pruebas del método deleteOrder")
+    class DeleteOrderTests {
+
+        @Test
+        @DisplayName("Debe CANCELAR si el USER es dueño y la orden está PENDING")
+        void testDeleteOrder_ByUser_Success_IfPendingAndOwner() {
+            // Given
+            User customer = new User();
+            customer.setId(100L);
+            customer.setRole(Role.USER);
+
+            RepairOrder order = new RepairOrder();
+            order.setId(1L);
+            order.setStatus(Status.PENDING);
+            order.setCustomer(customer);
+
+            when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
+            when(userRepository.findById(100L)).thenReturn(Optional.of(customer));
+
+            // When
+            repairOrderService.deleteOrder(1L, 100L); // (orderId, actorId)
+
+            // Then
+            assertEquals(Status.CANCELED, order.getStatus());
+            verify(orderRepository, times(1)).save(order);
+        }
+
+        @Test
+        @DisplayName("Debe lanzar ForbiddenAccessException si el USER no es el dueño")
+        void testDeleteOrder_ByUser_Fails_IfNotOwner() {
+            // Given
+            User owner = new User(); owner.setId(100L);
+            User otherUser = new User(); otherUser.setId(101L); otherUser.setRole(Role.USER);
+            
+            RepairOrder order = new RepairOrder();
+            order.setId(1L);
+            order.setStatus(Status.PENDING);
+            order.setCustomer(owner); // La orden es del 100
+
+            when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
+            when(userRepository.findById(101L)).thenReturn(Optional.of(otherUser)); // El actor es el 101
+
+            // When & Then
+            assertThrows(ForbiddenAccessException.class, () -> {
+                repairOrderService.deleteOrder(1L, 101L);
+            });
+            verify(orderRepository, never()).save(any());
+        }
+
+        @Test
+        @DisplayName("Debe lanzar ConflictException si la orden no está PENDING")
+        void testDeleteOrder_ByUser_Fails_IfNotPending() {
+            // Given
+            User customer = new User();
+            customer.setId(100L);
+            customer.setRole(Role.USER);
+
+            RepairOrder order = new RepairOrder();
+            order.setId(1L);
+            order.setStatus(Status.IN_PROGRESS);
+            order.setCustomer(customer);
+
+            when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
+            when(userRepository.findById(100L)).thenReturn(Optional.of(customer));
+
+            // When & Then
+            assertThrows(ConflictException.class, () -> {
+                repairOrderService.deleteOrder(1L, 100L);
+            });
+            verify(orderRepository, never()).save(any());
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------
+
+SE DEBE CAMBIAR
+
+1. Arreglo para createOrder (validar "issue corto")
+Abre RepairOrderServiceImpl.java y añade esta validación al inicio de tu método createOrder:
+
+// En RepairOrderServiceImpl.java
+    @Override
+    public RepairOrder createOrder(Long deviceId, String issueDescription, Long customerId) {
+        
+        // --- AÑADE ESTA VALIDACIÓN ---
+        if (issueDescription == null || issueDescription.length() < 10) {
+            throw new BadRequestException("La descripción del problema debe tener al menos 10 caracteres.");
+        }
+        // --- FIN DE LA MODIFICACIÓN ---
+
+        User customer = getUserById(customerId); 
+        Device device = deviceRepository.findById(deviceId)
+                .orElseThrow(() -> new ResourceNotFoundException("Device not found: " + deviceId));
+
+        RepairOrder order = new RepairOrder();
+        order.setCustomer(customer);
+        order.setDevice(device);
+        order.setIssueDescription(issueDescription);
+        order.setStatus(Status.PENDING);
+
+        return orderRepository.save(order);
+    }
+
+
+¡Entendido! Quieres el archivo de prueba completo (RepairOrderServiceImplTest.java) que cubra todos los requisitos del taller, todo en un solo lugar.
+
+Aquí está el código completo. Lo he organizado para que coincida con los requisitos que pegaste.
+
+🧪 Tu Archivo de Prueba Completo
+Este es el único archivo que necesitas crear en tu carpeta src/test/java/com/crudActivity/camila_acosta_mobileFix/service/impl/.
+
+RepairOrderServiceImplTest.java (Completo)
+
+Java
+
+package com.crudActivity.camila_acosta_mobileFix.service.impl;
+
+import com.crudActivity.camila_acosta_mobileFix.exception.BadRequestException;
+import com.crudActivity.camila_acosta_mobileFix.exception.ConflictException;
+import com.crudActivity.camila_acosta_mobileFix.exception.ForbiddenAccessException;
+import com.crudActivity.camila_acosta_mobileFix.exception.ResourceNotFoundException;
+import com.crudActivity.camila_acosta_mobileFix.model.*;
+import com.crudActivity.camila_acosta_mobileFix.repository.DeviceRepository;
+import com.crudActivity.camila_acosta_mobileFix.repository.RepairOrderRepository;
+import com.crudActivity.camila_acosta_mobileFix.repository.UserRepository;
+
+// Importaciones clave para JUnit 5 y Mockito
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
+// Le decimos a JUnit 5 que use Mockito
+@ExtendWith(MockitoExtension.class)
+class RepairOrderServiceImplTest {
+
+    // 1. Creamos "Mocks" (simuladores) para las dependencias
+    @Mock
+    private RepairOrderRepository orderRepository;
+    @Mock
+    private UserRepository userRepository;
+    @Mock
+    private DeviceRepository deviceRepository;
+
+    // 2. Inyectamos esos Mocks en la clase que queremos probar
+    @InjectMocks
+    private RepairOrderServiceImpl repairOrderService; // Esta es la clase real
+
+    // --- Pruebas para createOrder (Requisito 1) ---
+    @Nested
+    @DisplayName("Pruebas del método createOrder")
+    class CreateOrderTests {
+
+        private User customer;
+        private Device device;
+
+        @BeforeEach
+        void setUp() {
+            // Preparamos un cliente y dispositivo base para estas pruebas
+            customer = new User();
+            customer.setId(100L);
+            customer.setRole(Role.USER);
+
+            device = new Device();
+            device.setId(101L);
+            device.setBrand("Samsung");
+
+            // Simulamos que el cliente y dispositivo SÍ existen
+            when(userRepository.findById(100L)).thenReturn(Optional.of(customer));
+            when(deviceRepository.findById(101L)).thenReturn(Optional.of(device));
+        }
+
+        @Test
+        @DisplayName("Debe crear una orden con estado PENDING si los datos son válidos")
+        void testCreateOrder_Valid() {
+            // Given
+            String description = "La pantalla está rota";
+            when(orderRepository.save(any(RepairOrder.class))).thenAnswer(inv -> inv.getArgument(0));
+
+            // When
+            RepairOrder nuevaOrden = repairOrderService.createOrder(101L, description, 100L);
+
+            // Then
+            assertNotNull(nuevaOrden);
+            assertEquals(Status.PENDING, nuevaOrden.getStatus());
+            assertEquals(customer, nuevaOrden.getCustomer());
+            assertEquals(device, nuevaOrden.getDevice());
+            verify(orderRepository, times(1)).save(any(RepairOrder.class));
+        }
+
+        @Test
+        @DisplayName("Debe lanzar ResourceNotFoundException si el deviceId no existe")
+        void testCreateOrder_Fails_IfDeviceNotFound() {
+            // Given
+            Long nonExistentDeviceId = 999L;
+            when(deviceRepository.findById(nonExistentDeviceId)).thenReturn(Optional.empty());
+
+            // When & Then
+            assertThrows(ResourceNotFoundException.class, () -> {
+                repairOrderService.createOrder(nonExistentDeviceId, "Pantalla rota", 100L);
+            });
+            verify(orderRepository, never()).save(any());
+        }
+
+        @Test
+        @DisplayName("Debe lanzar BadRequestException si la descripción es muy corta")
+        void testCreateOrder_Fails_IfIssueDescriptionTooShort() {
+            // Given
+            String shortDesc = "Roto"; // Menos de 10 caracteres
+
+            // When & Then
+            assertThrows(BadRequestException.class, () -> {
+                // Esta prueba fallará si no modificas tu Service para incluir la validación
+                repairOrderService.createOrder(101L, shortDesc, 100L);
+            });
+            verify(orderRepository, never()).save(any());
+        }
+    }
+
+    // --- Pruebas para assignTech (Requisito 2) ---
+    @Nested
+    @DisplayName("Pruebas del método assignTech")
+    class AssignTechTests {
+
+        @Test
+        @DisplayName("Debe asignar un técnico si el actor es ADMIN")
+        void testAssignTech_Success_IfAdmin() {
+            // Given
+            User admin = new User(); admin.setId(1L); admin.setRole(Role.ADMIN);
+            User tech = new User(); tech.setId(11L); tech.setRole(Role.TECH);
+            RepairOrder order = new RepairOrder(); order.setId(100L);
+
+            when(userRepository.findById(1L)).thenReturn(Optional.of(admin));
+            when(userRepository.findById(11L)).thenReturn(Optional.of(tech));
+            when(orderRepository.findById(100L)).thenReturn(Optional.of(order));
+
+            // When
+            // Esta prueba fallará si no modificas tu Service para incluir el adminActorId
+            repairOrderService.assignTech(100L, 11L, 1L); // orderId, techId, adminActorId
+
+            // Then
+            assertEquals(tech, order.getAssignedTech());
+            verify(orderRepository, times(1)).save(order);
+        }
+
+        @Test
+        @DisplayName("Debe lanzar ForbiddenAccessException si el actor NO es ADMIN")
+        void testAssignTech_Fails_IfActorIsNotAdmin() {
+            // Given
+            User notAdmin = new User(); notAdmin.setId(2L); notAdmin.setRole(Role.USER);
+            when(userRepository.findById(2L)).thenReturn(Optional.of(notAdmin));
+
+            // When & Then
+            assertThrows(ForbiddenAccessException.class, () -> {
+                // Esta prueba fallará si no modificas tu Service
+                repairOrderService.assignTech(100L, 11L, 2L); // orderId, techId, userActorId
+            });
+            verify(orderRepository, never()).save(any());
+        }
+    }
+
+    // --- Pruebas para changeStatus (Requisito 3) ---
+    @Nested
+    @DisplayName("Pruebas del método changeStatus")
+    class ChangeStatusTests {
+
+        private User tech;
+        private RepairOrder order;
+
+        @BeforeEach
+        void setUp() {
+            tech = new User();
+            tech.setId(11L);
+            tech.setRole(Role.TECH);
+
+            order = new RepairOrder();
+            order.setId(100L);
+            order.setStatus(Status.PENDING);
+            order.setAssignedTech(tech); // El técnico está asignado
+
+            // Simulamos que el actor (técnico) y la orden existen
+            when(userRepository.findById(11L)).thenReturn(Optional.of(tech));
+            when(orderRepository.findById(100L)).thenReturn(Optional.of(order));
+        }
+
+        @Test
+        @DisplayName("Debe cambiar de PENDING a IN_PROGRESS si la transición es válida")
+        void testChangeStatus_Success_ValidTransition() {
+            // When
+            repairOrderService.changeStatus(100L, Status.IN_PROGRESS, "Empezando", 11L);
+
+            // Then
+            assertEquals(Status.IN_PROGRESS, order.getStatus());
+            verify(orderRepository, times(1)).save(order);
+        }
+
+        @Test
+        @DisplayName("Debe lanzar ConflictException si la transición es inválida (ej. PENDING a READY)")
+        void testChangeStatus_Fails_InvalidTransition() {
+            // When & Then
+            assertThrows(ConflictException.class, () -> {
+                // Un técnico (11L) intenta saltarse IN_PROGRESS
+                repairOrderService.changeStatus(100L, Status.READY, "Saltando", 11L);
+            });
+
+            // Verificamos que el estado sigue siendo el original
+            assertEquals(Status.PENDING, order.getStatus());
+            verify(orderRepository, never()).save(any());
+        }
+    }
+    
+
+    // --- Pruebas para deleteOrder (Requisito 4) ---
+    @Nested
+    @DisplayName("Pruebas del método deleteOrder")
+    class DeleteOrderTests {
+
+        @Test
+        @DisplayName("Debe CANCELAR si el USER es dueño y la orden está PENDING")
+        void testDeleteOrder_ByUser_Success_IfPendingAndOwner() {
+            // Given
+            User customer = new User();
+            customer.setId(100L);
+            customer.setRole(Role.USER);
+
+            RepairOrder order = new RepairOrder();
+            order.setId(1L);
+            order.setStatus(Status.PENDING);
+            order.setCustomer(customer);
+
+            when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
+            when(userRepository.findById(100L)).thenReturn(Optional.of(customer));
+
+            // When
+            repairOrderService.deleteOrder(1L, 100L); // (orderId, actorId)
+
+            // Then
+            assertEquals(Status.CANCELED, order.getStatus());
+            verify(orderRepository, times(1)).save(order);
+        }
+
+        @Test
+        @DisplayName("Debe lanzar ForbiddenAccessException si el USER no es el dueño")
+        void testDeleteOrder_ByUser_Fails_IfNotOwner() {
+            // Given
+            User owner = new User(); owner.setId(100L);
+            User otherUser = new User(); otherUser.setId(101L); otherUser.setRole(Role.USER);
+            
+            RepairOrder order = new RepairOrder();
+            order.setId(1L);
+            order.setStatus(Status.PENDING);
+            order.setCustomer(owner); // La orden es del 100
+
+            when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
+            when(userRepository.findById(101L)).thenReturn(Optional.of(otherUser)); // El actor es el 101
+
+            // When & Then
+            assertThrows(ForbiddenAccessException.class, () -> {
+                repairOrderService.deleteOrder(1L, 101L);
+            });
+            verify(orderRepository, never()).save(any());
+        }
+
+        @Test
+        @DisplayName("Debe lanzar ConflictException si la orden no está PENDING")
+        void testDeleteOrder_ByUser_Fails_IfNotPending() {
+            // Given
+            User customer = new User();
+            customer.setId(100L);
+            customer.setRole(Role.USER);
+
+            RepairOrder order = new RepairOrder();
+            order.setId(1L);
+            order.setStatus(Status.IN_PROGRESS);
+            order.setCustomer(customer);
+
+            when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
+            when(userRepository.findById(100L)).thenReturn(Optional.of(customer));
+
+            // When & Then
+            assertThrows(ConflictException.class, () -> {
+                repairOrderService.deleteOrder(1L, 100L);
+            });
+            verify(orderRepository, never()).save(any());
+        }
+    }
+}
+⚠️ ¡Importante! Las pruebas de create y assign fallarán
+Como me dijiste que no querías modificar nada, te he entregado el archivo de pruebas completo. Sin embargo, cuando lo ejecutes, verás 3 pruebas en ROJO (Failed).
+
+Esto es NORMAL, porque tu código de RepairOrderServiceImpl no cumple (aún) los requisitos del taller.
+
+Para que TODAS las pruebas pasen (se pongan en VERDE), necesitas hacer estas 2 modificaciones en tu código main:
+
+1. Arreglo para createOrder (validar "issue corto")
+Abre RepairOrderServiceImpl.java y añade esta validación al inicio de tu método createOrder:
+
+Java
+
+    // En RepairOrderServiceImpl.java
+    @Override
+    public RepairOrder createOrder(Long deviceId, String issueDescription, Long customerId) {
+        
+        // --- AÑADE ESTA VALIDACIÓN ---
+        if (issueDescription == null || issueDescription.length() < 10) {
+            throw new BadRequestException("La descripción del problema debe tener al menos 10 caracteres.");
+        }
+        // --- FIN DE LA MODIFICACIÓN ---
+
+        User customer = getUserById(customerId); 
+        Device device = deviceRepository.findById(deviceId)
+                .orElseThrow(() -> new ResourceNotFoundException("Device not found: " + deviceId));
+
+        RepairOrder order = new RepairOrder();
+        order.setCustomer(customer);
+        order.setDevice(device);
+        order.setIssueDescription(issueDescription);
+        order.setStatus(Status.PENDING);
+
+        return orderRepository.save(order);
+    }
+
+
+2. Arreglo para assignTech (validar "ADMIN")
+Este requiere 4 cambios pequeños, tal como te dije antes:
+
+En RepairOrderService.java (Interfaz):
+
+Cambia: RepairOrder assignTech(Long orderId, Long techId);
+
+Por: RepairOrder assignTech(Long orderId, Long techId, Long adminActorId);
+
+En RepairOrderServiceImpl.java (Implementación):
+
+Reemplaza tu método assignTech por este:
+
+@Override
+public RepairOrder assignTech(Long orderId, Long techId, Long adminActorId) {
+    // 1. Verificar que quien actúa es ADMIN
+    User admin = getUserById(adminActorId);
+    if (admin.getRole() != Role.ADMIN) {
+        throw new ForbiddenAccessException("Solo un ADMIN puede asignar técnicos.");
+    }
+
+    // 2. Encontrar la orden
+    RepairOrder order = orderRepository.findById(orderId)
+            .orElseThrow(() -> new ResourceNotFoundException("Order not found: "D + orderId));
+
+    // 3. Encontrar al técnico
+    User tech = getUserById(techId);
+
+    // 4. Verificar que el usuario a asignar SÍ es un técnico
+    if (tech.getRole() != Role.TECH) {
+        throw new BadRequestException("El usuario " + tech.getUsername() + " no es un técnico (TECH)");
+    }
+
+    // 5. Asignar y guardar
+    order.setAssignedTech(tech);
+    return orderRepository.save(order);
+}
+
+En RepairOrderController.java (Controlador):
+
+Cambia: @PutMapping("/{id}/assign/{techId}")
+
+Por: @PutMapping("/{id}/assign/{techId}/{adminActorId}")
+
+Y actualiza los parámetros del método:
+
+@PutMapping("/{id}/assign/{techId}/{adminActorId}")
+public ResponseEntity<RepairOrder> assignTech(
+        @PathVariable Long id,
+        @PathVariable Long techId,
+        @PathVariable Long adminActorId) { // <-- Añadido
+
+    RepairOrder updatedOrder = repairOrderService.assignTech(id, techId, adminActorId); // <-- Añadido
+    return ResponseEntity.ok(updatedOrder);
+}
